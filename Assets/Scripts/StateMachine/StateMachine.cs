@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class StateMachine
 {
-    public EntityState currentState;
+    public PlayerState currentState;
 
-    public void Initialize(EntityState initialState)
+    public void Initialize(PlayerState initialState)
     {
         currentState = initialState;
         currentState.Enter();
     }
 
-    public void ChangeState(EntityState newState)
+    public void ChangeState(PlayerState newState)
     {
         currentState.Exit();
 
