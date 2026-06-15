@@ -17,9 +17,13 @@ public class Player_MoveState : PlayerState
 
         Vector2 moveInputWithSpeed = player.MoveInput * player.MoveSpeed;
 
-        if (player.Input.Player.Run.IsPressed())
+        if (player.Input.Player.Run.IsPressed() && stateMachine.currentState != player.CrouchState)
         {
-            moveInputWithSpeed *= player.RunSpeedMultiplier;
+            player.SetMoveSpeedMultiplier(player.RunSpeedMultiplier);
+        }
+        else if (stateMachine.currentState != player.CrouchState)
+        {
+            player.ResetMoveSpeedMultiplier();
         }
 
         Vector3 moveVertical = player.transform.forward * moveInputWithSpeed.y;

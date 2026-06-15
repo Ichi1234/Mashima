@@ -9,7 +9,6 @@ public abstract class PlayerState
 
     protected Player player;
 
-
     protected PlayerState(Player player, StateMachine stateMachine)
     {
         this.player = player;
@@ -24,6 +23,11 @@ public abstract class PlayerState
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
+
+        if (player.Input.Player.Crouch.WasPerformedThisFrame())
+        {
+            stateMachine.ChangeState(player.CrouchState);
+        }
 
     }
 

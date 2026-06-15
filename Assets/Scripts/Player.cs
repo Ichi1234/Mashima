@@ -3,19 +3,28 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterController charController;
+
+    [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
     [SerializeField] private float runSpeedMultiplier = 1.25f;
+    [SerializeField] private float crouchSpeedMultiplier = 0.5f;
+    [SerializeField] private float crouchCameraPosition = -0.82f;
+    [SerializeField] private Camera playerCamera;
 
+    private float moveSpeedMultiplier = 1;
     private StateMachine stateMachine;
 
     public Player_IdleState IdleState { get; private set; }
     public Player_MoveState MoveState { get; private set; }
+    public Player_CrouchState CrouchState { get; private set; }
 
     public PlayerInputSet Input { get; private set; }
 
     public Vector2 MoveInput { get; private set; }
     public float MoveSpeed => moveSpeed;
     public float RunSpeedMultiplier => runSpeedMultiplier;
+    public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
+    public float CrouchCameraPosition => crouchCameraPosition;
 
 
     private void Awake()
@@ -26,6 +35,7 @@ public class Player : MonoBehaviour
 
         IdleState = new Player_IdleState(this, stateMachine);
         MoveState = new Player_MoveState(this, stateMachine);
+        CrouchState = new Player_CrouchState(this, stateMachine);
 
         stateMachine.Initialize(IdleState);
 
@@ -39,7 +49,11 @@ public class Player : MonoBehaviour
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
     }
 
-    private void Update() => stateMachine.CallUpdateCurrentState();
+    private void Update()
+    {
+        Debug.Log(moveSpeedMultiplier);
+        stateMachine.CallUpdateCurrentState();
+    }
 
     private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
 
@@ -48,8 +62,15 @@ public class Player : MonoBehaviour
         Input.Disable();
     }
 
-    public void MoveCharacter(Vector3 moveDir)
-    {
-        charController.Move(moveDir * Time.deltaTime);
-    }
+    public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
+
+    public void SetMoveSpeedMultiplier(float newMultiplier) => moveSpeedMultiplier = newMultiplier;
+
+    public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
+
+    public void MoveCamera(Vector2 newPosition) => playerCamera.transform.localPosition = newPosition;
+   
+    public void ResetCameraPos() => playerCamera.transform.localPosition = new Vector2(0, 0);
+
+    public void RotateCamera(Quaternion newAngle) => playerCamera.transform.localRotation = newAngle;
 }
