@@ -3,12 +3,18 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private CharacterController charController;
+    [SerializeField] private float gravity = 0.98f;
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
     [SerializeField] private float runSpeedMultiplier = 1.25f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
+    [SerializeField] private float crouchHitboxRadius = 0.2f;
+    [SerializeField] private float crouchHitboxHeight = 0.1f;
+    [SerializeField] private float crouchHitboxCenter = -0.72f;
+    [SerializeField] private float defaultHitboxRadius = 0.5f;
+    [SerializeField] private float defaultHitboxHeight = 2;
     [SerializeField] private Camera playerCamera;
 
     private float moveSpeedMultiplier = 1;
@@ -21,6 +27,7 @@ public class Player : MonoBehaviour
     public PlayerInputSet Input { get; private set; }
 
     public Vector2 MoveInput { get; private set; }
+
     public float MoveSpeed => moveSpeed;
     public float RunSpeedMultiplier => runSpeedMultiplier;
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
@@ -51,7 +58,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(moveSpeedMultiplier);
+        charController.Move(Vector3.down * gravity * Time.deltaTime);
         stateMachine.CallUpdateCurrentState();
     }
 
@@ -73,4 +80,18 @@ public class Player : MonoBehaviour
     public void ResetCameraPos() => playerCamera.transform.localPosition = new Vector2(0, 0);
 
     public void RotateCamera(Quaternion newAngle) => playerCamera.transform.localRotation = newAngle;
+
+    public void Crouching()
+    {
+        charController.height = crouchHitboxHeight;
+        charController.radius = crouchHitboxRadius;
+        charController.center = new Vector3(0, crouchHitboxCenter, 0);
+    }
+
+    public void UnCrouch()
+    {
+        charController.height = defaultHitboxHeight;
+        charController.radius = defaultHitboxRadius;
+        charController.center = new Vector3(0, 0, 0);
+    }
 }

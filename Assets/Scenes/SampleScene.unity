@@ -682,7 +682,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -701,10 +701,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   charController: {fileID: 550008755}
+  gravity: 0.98
   moveSpeed: 4.4
   runSpeedMultiplier: 1.25
   crouchSpeedMultiplier: 0.4
   crouchCameraPosition: -0.82
+  crouchHitboxRadius: 0.2
+  crouchHitboxHeight: 0.1
+  defaultHitboxRadius: 0.5
+  defaultHitboxHeight: 2
   playerCamera: {fileID: 330585545}
 --- !u!23 &550008758
 MeshRenderer:

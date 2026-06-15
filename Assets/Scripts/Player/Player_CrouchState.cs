@@ -14,6 +14,7 @@ public class Player_CrouchState : Player_MoveState
 
         player.MoveCamera(new Vector2(0, player.CrouchCameraPosition));
         player.SetMoveSpeedMultiplier(player.CrouchSpeedMultiplier);
+        player.Crouching();
     }
 
     public override void Update()
@@ -30,6 +31,8 @@ public class Player_CrouchState : Player_MoveState
     public override void Exit()
     {
         base.Exit();
+
+        player.UnCrouch();
         player.ResetMoveSpeedMultiplier();
         player.ResetCameraPos();
     }
