@@ -2,22 +2,26 @@ using UnityEngine;
 
 public class StateMachine
 {
-    public EntityState currentState;
+    public PlayerState currentState;
+    public bool CanChangeState { get; private set; } = true;
 
-    public void Initialize(EntityState initialState)
+
+    public void Initialize(PlayerState initialState)
     {
         currentState = initialState;
         currentState.Enter();
     }
 
-    public void ChangeState(EntityState newState)
+    public void ChangeState(PlayerState newState)
     {
-        currentState.Exit();
+        if (CanChangeState)
+        {
+            currentState.Exit();
 
-        currentState = newState;
+            currentState = newState;
 
-        currentState.Enter();
-
+            currentState.Enter();
+        }
     }
 
     public void CallUpdateCurrentState()
@@ -29,4 +33,7 @@ public class StateMachine
     {
         currentState.FixedUpdate();
     }
+
+    public void lockedState() => CanChangeState = false;
+    public void unLockedState() => CanChangeState = true;
 }
