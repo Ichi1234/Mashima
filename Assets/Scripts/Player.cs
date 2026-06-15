@@ -81,14 +81,14 @@ public class Player : MonoBehaviour
 
     public void RotateCamera(Quaternion newAngle) => playerCamera.transform.localRotation = newAngle;
 
-    public void Crouching()
+    public void SetCrouchHitbox()
     {
         charController.height = crouchHitboxHeight;
         charController.radius = crouchHitboxRadius;
         charController.center = new Vector3(0, crouchHitboxCenter, 0);
     }
 
-    public void UnCrouch()
+    public void SetDefaultHitbox()
     {
         charController.height = defaultHitboxHeight;
         charController.radius = defaultHitboxRadius;

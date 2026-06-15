@@ -17,7 +17,7 @@ public class Player_MoveState : PlayerState
 
         Vector2 moveInputWithSpeed = player.MoveInput * player.MoveSpeed;
 
-        if (player.Input.Player.Run.IsPressed() && stateMachine.currentState != player.CrouchState)
+        if (player.Input.Player.Run.IsPressed() && stateMachine.CanChangeState)
         {
             player.SetMoveSpeedMultiplier(player.RunSpeedMultiplier);
         }

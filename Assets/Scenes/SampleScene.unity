@@ -705,9 +705,10 @@ MonoBehaviour:
   moveSpeed: 4.4
   runSpeedMultiplier: 1.25
   crouchSpeedMultiplier: 0.4
-  crouchCameraPosition: -0.82
+  crouchCameraPosition: -0.66
   crouchHitboxRadius: 0.2
   crouchHitboxHeight: 0.1
+  crouchHitboxCenter: -0.72
   defaultHitboxRadius: 0.5
   defaultHitboxHeight: 2
   playerCamera: {fileID: 330585545}

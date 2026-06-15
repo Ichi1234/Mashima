@@ -3,7 +3,8 @@ using UnityEngine;
 public class StateMachine
 {
     public PlayerState currentState;
-    private bool canChangeState = true;
+    public bool CanChangeState { get; private set; } = true;
+
 
     public void Initialize(PlayerState initialState)
     {
@@ -13,7 +14,7 @@ public class StateMachine
 
     public void ChangeState(PlayerState newState)
     {
-        if (canChangeState)
+        if (CanChangeState)
         {
             currentState.Exit();
 
@@ -33,6 +34,6 @@ public class StateMachine
         currentState.FixedUpdate();
     }
 
-    public void lockedState() => canChangeState = false;
-    public void unLockedState() => canChangeState = true;
+    public void lockedState() => CanChangeState = false;
+    public void unLockedState() => CanChangeState = true;
 }
