@@ -7,9 +7,12 @@ public abstract class PlayerState
 
     protected float stateTimer;
 
+    protected Player player;
 
-    protected PlayerState(Player Player, StateMachine stateMachine)
+
+    protected PlayerState(Player player, StateMachine stateMachine)
     {
+        this.player = player;
         this.stateMachine = stateMachine;
     }
 

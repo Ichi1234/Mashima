@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player_IdleState : PlayerState
 {
-    public Player_IdleState(Player Player, StateMachine stateMachine) : base(Player, stateMachine)
+    public Player_IdleState(Player player, StateMachine stateMachine) : base(player, stateMachine)
     {
     }
 
@@ -17,6 +17,16 @@ public class Player_IdleState : PlayerState
     {
         base.Update();
 
-        Debug.Log("test");
+        if (player.MoveInput != Vector2.zero)
+        {
+            stateMachine.ChangeState(player.MoveState);
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        Debug.Log("I'm exit");
     }
 }
