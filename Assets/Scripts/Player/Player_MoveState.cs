@@ -10,6 +10,11 @@ public class Player_MoveState : PlayerState
     {
         base.Update();
 
+        if (player.MoveInput == Vector2.zero)
+        {
+            stateMachine.ChangeState(player.IdleState);
+        }
+
         Vector2 moveInputWithSpeed = player.MoveInput * player.MoveSpeed;
 
         if (player.Input.Player.Run.IsPressed())
@@ -17,7 +22,10 @@ public class Player_MoveState : PlayerState
             moveInputWithSpeed *= player.RunSpeedMultiplier;
         }
 
-        player.MoveCharacter(new Vector3(moveInputWithSpeed.x, 0, moveInputWithSpeed.y));
+        Vector3 moveVertical = player.transform.forward * moveInputWithSpeed.y;
+        Vector3 moveHorizontal = player.transform.right * moveInputWithSpeed.x;
+
+        player.MoveCharacter(moveVertical + moveHorizontal);
         
     }
 }
