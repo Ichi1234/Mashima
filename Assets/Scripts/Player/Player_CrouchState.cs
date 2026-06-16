@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Player;
 
 public class Player_CrouchState : Player_MoveState
 {
@@ -11,10 +12,11 @@ public class Player_CrouchState : Player_MoveState
         base.Enter();
 
         stateMachine.lockedState();
-
-        player.MoveCamera(new Vector2(0, player.CrouchCameraPosition));
-        player.SetMoveSpeedMultiplier(player.CrouchSpeedMultiplier);
         player.SetCrouchHitbox();
+        player.SetMoveSpeedMultiplier(player.CrouchSpeedMultiplier);
+
+        if (player.PlayerMode == PlayerModes.Desktop)
+            player.MoveCamera(new Vector2(0, player.CrouchCameraPosition));
     }
 
     public override void Update()
@@ -34,6 +36,8 @@ public class Player_CrouchState : Player_MoveState
 
         player.SetDefaultHitbox();
         player.ResetMoveSpeedMultiplier();
-        player.ResetCameraPos();
+
+        if (player.PlayerMode == PlayerModes.Desktop)
+            player.ResetCameraPos();
     }
 }

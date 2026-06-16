@@ -196,6 +196,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""5c8d8c9e-9f7e-48cb-9f84-8c96262d2099"",
+                    ""path"": ""<XRController>/thumbstick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";VR Controller"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4bd00d6f-2cde-4479-8081-a7e102e6a340"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -218,11 +229,33 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ef609ff2-370c-4439-81be-6f325feb31f5"",
+                    ""path"": ""<XRController>{LeftHand}/thumbstickClicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";VR Controller"",
+                    ""action"": ""Run"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d6996038-f788-4581-850f-28195878811a"",
                     ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cc6eeb5-7d77-4372-a991-34489b1a0c4d"",
+                    ""path"": ""<XRController>{RightHand}/thumbstickClicked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";VR Controller"",
                     ""action"": ""Crouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -281,6 +314,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""VR Controller"",
+            ""bindingGroup"": ""VR Controller"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<XRController>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -622,6 +666,19 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
         {
             if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard & Mouse");
             return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+        }
+    }
+    private int m_VRControllerSchemeIndex = -1;
+    /// <summary>
+    /// Provides access to the input control scheme.
+    /// </summary>
+    /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
+    public InputControlScheme VRControllerScheme
+    {
+        get
+        {
+            if (m_VRControllerSchemeIndex == -1) m_VRControllerSchemeIndex = asset.FindControlSchemeIndex("VR Controller");
+            return asset.controlSchemes[m_VRControllerSchemeIndex];
         }
     }
     /// <summary>
