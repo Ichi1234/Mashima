@@ -1,7 +1,14 @@
+using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Player : MonoBehaviour
 {
+    [Header("Play Mode")]
+    [SerializeField] private PlayerModes playerMode;
+    public enum PlayerModes { Desktop, VR }
+    [Space]
+
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
 
@@ -15,7 +22,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float crouchHitboxCenter = -0.72f;
     [SerializeField] private float defaultHitboxRadius = 0.5f;
     [SerializeField] private float defaultHitboxHeight = 2;
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform cameraOffset;
+    public PlayerInputSet Input { get; private set; }
+    public Vector2 MoveInput { get; private set; }
 
     private float moveSpeedMultiplier = 1;
     private StateMachine stateMachine;
@@ -24,14 +33,11 @@ public class Player : MonoBehaviour
     public Player_MoveState MoveState { get; private set; }
     public Player_CrouchState CrouchState { get; private set; }
 
-    public PlayerInputSet Input { get; private set; }
-
-    public Vector2 MoveInput { get; private set; }
-
     public float MoveSpeed => moveSpeed;
     public float RunSpeedMultiplier => runSpeedMultiplier;
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
+    public PlayerModes PlayerMode => playerMode;
 
 
     private void Awake()
@@ -57,7 +63,7 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    {
+    { 
         charController.Move(Vector3.down * gravity * Time.deltaTime);
         stateMachine.CallUpdateCurrentState();
     }
@@ -75,11 +81,11 @@ public class Player : MonoBehaviour
 
     public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
 
-    public void MoveCamera(Vector2 newPosition) => playerCamera.transform.localPosition = newPosition;
-   
-    public void ResetCameraPos() => playerCamera.transform.localPosition = new Vector2(0, 0);
+    public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
 
-    public void RotateCamera(Quaternion newAngle) => playerCamera.transform.localRotation = newAngle;
+    public void ResetCameraPos() => cameraOffset.localPosition = Vector3.zero;
+
+    public void RotateCamera(Quaternion newAngle) => cameraOffset.transform.localRotation = newAngle;
 
     public void SetCrouchHitbox()
     {
@@ -93,5 +99,19 @@ public class Player : MonoBehaviour
         charController.height = defaultHitboxHeight;
         charController.radius = defaultHitboxRadius;
         charController.center = new Vector3(0, 0, 0);
+    }
+
+    public Vector3 HMDForwardFlat()
+    {
+        Vector3 forward = cameraOffset.transform.forward;
+        forward.y = 0;
+        return forward.normalized;
+    }
+
+    public Vector3 HMDRightFlat()
+    {
+        Vector3 right = cameraOffset.transform.right;
+        right.y = 0;
+        return right.normalized;
     }
 }

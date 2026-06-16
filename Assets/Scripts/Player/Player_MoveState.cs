@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Player;
 
 public class Player_MoveState : PlayerState
 {
@@ -26,8 +27,16 @@ public class Player_MoveState : PlayerState
             player.ResetMoveSpeedMultiplier();
         }
 
-        Vector3 moveVertical = player.transform.forward * moveInputWithSpeed.y;
-        Vector3 moveHorizontal = player.transform.right * moveInputWithSpeed.x;
+        Vector3 forward = player.PlayerMode == PlayerModes.VR
+            ? player.HMDForwardFlat()
+            : player.transform.forward;
+
+        Vector3 right = player.PlayerMode == PlayerModes.VR
+            ? player.HMDRightFlat()
+            : player.transform.right;
+
+        Vector3 moveVertical = forward * moveInputWithSpeed.y;
+        Vector3 moveHorizontal = right * moveInputWithSpeed.x;
 
         player.MoveCharacter(moveVertical + moveHorizontal);
         
