@@ -9,8 +9,11 @@ public class Player : MonoBehaviour
     public enum PlayerModes { Desktop, VR }
     [Space]
 
+    [Header("General Details")]
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
+    [SerializeField] private Transform cameraOffset;
+    [SerializeField] private float interactDistance;
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -22,7 +25,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float crouchHitboxCenter = -0.72f;
     [SerializeField] private float defaultHitboxRadius = 0.5f;
     [SerializeField] private float defaultHitboxHeight = 2;
-    [SerializeField] private Transform cameraOffset;
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
@@ -73,6 +75,12 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         Input.Disable();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(cameraOffset.transform.position, cameraOffset.transform.position + transform.forward * interactDistance);
     }
 
     public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
