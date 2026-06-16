@@ -197,7 +197,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5c8d8c9e-9f7e-48cb-9f84-8c96262d2099"",
-                    ""path"": ""<XRController>/thumbstick"",
+                    ""path"": ""<XRController>{LeftHand}/thumbstick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";VR Controller"",

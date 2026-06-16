@@ -15,8 +15,7 @@ public class Player_CrouchState : Player_MoveState
         player.SetCrouchHitbox();
         player.SetMoveSpeedMultiplier(player.CrouchSpeedMultiplier);
 
-        if (player.PlayerMode == PlayerModes.Desktop)
-            player.MoveCamera(new Vector2(0, player.CrouchCameraPosition));
+        player.MoveCamera(new Vector2(0, player.CrouchCameraPosition));
     }
 
     public override void Update()
@@ -37,7 +36,6 @@ public class Player_CrouchState : Player_MoveState
         player.SetDefaultHitbox();
         player.ResetMoveSpeedMultiplier();
 
-        if (player.PlayerMode == PlayerModes.Desktop)
-            player.ResetCameraPos();
+        player.ResetCameraPos();
     }
 }
