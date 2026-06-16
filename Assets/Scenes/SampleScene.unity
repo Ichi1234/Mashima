@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 29985992}
   - component: {fileID: 29985991}
   - component: {fileID: 29985990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 29985989}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.79798, y: 1.7, z: 0.2}
+  m_LocalPosition: {x: 1.79798, y: 1.16, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -712,11 +712,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8743643}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!20 &1661430156 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6386165755437298839, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-  m_PrefabInstance: {fileID: 3252023692706392617}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1797337715
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,40 +988,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Desktop Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2677788333356744135, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3651797817643312083, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: m_Name
-      value: Player Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: playerMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: cameraOffset
-      value: 
-      objectReference: {fileID: 3252023692706392618}
-    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: playerCamera
-      value: 
-      objectReference: {fileID: 1661430156}
     - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: interactDistance
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
---- !u!4 &3252023692706392618 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5572369875170210663, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-  m_PrefabInstance: {fileID: 3252023692706392617}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6910413425498244425
 PrefabInstance:
   m_ObjectHideFlags: 0

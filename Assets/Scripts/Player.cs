@@ -13,7 +13,11 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
     [SerializeField] private Transform cameraOffset;
+
+    [Header("Interact Details")]
     [SerializeField] private float interactDistance;
+    [SerializeField] private LayerMask interactLayer;
+    public bool Interactable { get; private set; }
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -65,9 +69,21 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    { 
+    {
+
         charController.Move(Vector3.down * gravity * Time.deltaTime);
+
+        CameraInteractRaycast();
+
         stateMachine.CallUpdateCurrentState();
+    }
+
+    private void CameraInteractRaycast()
+    {
+        Interactable =  Physics.Raycast(
+            cameraOffset.transform.position,
+            cameraOffset.transform.forward, interactDistance, interactLayer
+        );
     }
 
     private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
@@ -80,7 +96,10 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(cameraOffset.transform.position, cameraOffset.transform.position + transform.forward * interactDistance);
+        Gizmos.DrawLine(
+            cameraOffset.transform.position,
+            cameraOffset.transform.position + cameraOffset.transform.forward * interactDistance
+        );
     }
 
     public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;

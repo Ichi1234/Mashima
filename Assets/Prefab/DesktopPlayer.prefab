@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1764218847462955253
 Transform:
   m_ObjectHideFlags: 0
@@ -109,6 +109,11 @@ MonoBehaviour:
   playerMode: 0
   charController: {fileID: 8531872007019292223}
   gravity: 0.98
+  cameraOffset: {fileID: 5572369875170210663}
+  interactDistance: 1.5
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 64
   moveSpeed: 4.4
   runSpeedMultiplier: 1.25
   crouchSpeedMultiplier: 0.4
@@ -118,7 +123,6 @@ MonoBehaviour:
   crouchHitboxCenter: -0.72
   defaultHitboxRadius: 0.5
   defaultHitboxHeight: 2
-  cameraOffset: {fileID: 0}
 --- !u!114 &1250462709908620671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +176,7 @@ GameObject:
   - component: {fileID: 6217029600154706680}
   - component: {fileID: 3605447154806762447}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
