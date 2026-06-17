@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
     [SerializeField] private LayerMask interactLayer;
-    public bool Interactable { get; private set; }
+    public bool isInteractabled { get; private set; }
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -70,20 +70,36 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        RaycastHit hit = CameraInteractRaycast();
 
-        charController.Move(Vector3.down * gravity * Time.deltaTime);
+        if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
+        {
+            hit.transform.GetComponent<Item>().Interact();
+        }
 
-        CameraInteractRaycast();
+        ApplyGravity();
+
 
         stateMachine.CallUpdateCurrentState();
     }
 
-    private void CameraInteractRaycast()
+    private void ApplyGravity()
     {
-        Interactable =  Physics.Raycast(
+        charController.Move(Vector3.down * gravity * Time.deltaTime);
+    }
+
+    private RaycastHit CameraInteractRaycast()
+    {
+        isInteractabled = Physics.Raycast
+        (
             cameraOffset.transform.position,
-            cameraOffset.transform.forward, interactDistance, interactLayer
-        );
+            cameraOffset.transform.forward,
+            out RaycastHit hit,
+            interactDistance,
+            interactLayer
+         );
+
+        return hit;
     }
 
     private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();

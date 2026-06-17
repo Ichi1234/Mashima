@@ -10,13 +10,13 @@ public class Backpack : MonoBehaviour
         backpack = new Dictionary<string, int>();
     }
 
-    public int GetItem(string itemName) => backpack[itemName];
+    public int GetItem(Item item) => backpack[item.ItemData.name];
 
     public Dictionary<string, int> GetAllItems() => backpack;
 
     public void StoreItem(Item newItem)
     {
-        if (!backpack.ContainsKey(newItem.name))
+        if (!backpack.ContainsKey(newItem.ItemData.name))
         {
             backpack.Add(newItem.ItemData.name, 1);
         }

@@ -1,7 +1,14 @@
 using UnityEngine;
 
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IInteractable
 {
-    private ItemData itemData;
+    [SerializeField] private ItemData itemData;
     public ItemData ItemData => itemData;
+
+    public void Interact()
+    {
+        ItemManager.Instance.StoreItem(this);
+
+        Destroy(gameObject);
+    }
 }
