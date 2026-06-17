@@ -3,6 +3,7 @@ using UnityEngine;
 public class Indicator : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer sprite;
+    private Camera mainCamera;
 
     private Transform player;
 
@@ -21,6 +22,11 @@ public class Indicator : MonoBehaviour
         sprite.enabled = false;
     }
 
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void Update()
     {
         if (player == null || !sprite.enabled)
@@ -29,5 +35,13 @@ public class Indicator : MonoBehaviour
         float distance =
             Vector3.Distance(player.position, transform.position);
 
+    }
+
+    private void LateUpdate()
+    {
+        if (mainCamera == null || !sprite.enabled)
+            return;
+
+        transform.forward = mainCamera.transform.forward;
     }
 }
