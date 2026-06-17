@@ -1,8 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item")]
-public class Item : ScriptableObject
+public class Item : MonoBehaviour
 {
-    public string itemType;
-    public Sprite icon;
+    private ItemData itemData;
+    public ItemData ItemData => itemData;
 }

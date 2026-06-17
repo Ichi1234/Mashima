@@ -18,22 +18,22 @@ public class Backpack : MonoBehaviour
     {
         if (!backpack.ContainsKey(newItem.name))
         {
-            backpack.Add(newItem.name, 1);
+            backpack.Add(newItem.ItemData.name, 1);
         }
 
         else
         {
-            backpack[newItem.name] += 1;
+            backpack[newItem.ItemData.name] += 1;
         }
     }
     public void RemoveItem(Item removeItem)
     {
-        if (!backpack.ContainsKey(removeItem.name))
+        if (!backpack.ContainsKey(removeItem.ItemData.name))
         {
             return;
         }
 
-        backpack[removeItem.name] -= 1;
+        backpack[removeItem.ItemData.name] -= 1;
     }
 }
 
