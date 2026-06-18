@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
         {
-            hit.transform.GetComponent<Item>().Interact();
+            hit.transform.GetComponent<IInteractable>()?.Interact();
         }
 
         ApplyGravity();
