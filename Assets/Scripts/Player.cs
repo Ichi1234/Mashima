@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
     [SerializeField] private Transform cameraOffset;
+    [SerializeField] private float playerPushForce = 10;
 
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
@@ -116,6 +117,15 @@ public class Player : MonoBehaviour
             cameraOffset.transform.position,
             cameraOffset.transform.position + cameraOffset.transform.forward * interactDistance
         );
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic) return;
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.AddForceAtPosition(pushDir * playerPushForce, hit.point);
     }
 
     public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
