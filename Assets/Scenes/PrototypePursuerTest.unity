@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pursuer
   moveSpeed: 4.6
   chaseSpeedMultiplier: 1.25
-  player: {fileID: 1098487542}
+  runSpeedMultiplier: 1.5
   agent: {fileID: 541080138}
 --- !u!1 &754023707
 GameObject:
@@ -549,10 +549,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DesktopPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-      propertyPath: gravity
-      value: 9.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -670,11 +666,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -32.32, y: -180, z: 0}
---- !u!4 &1098487542 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1764218847462955253, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
-  m_PrefabInstance: {fileID: 951528998}
+--- !u!1 &1208457537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1208457538}
+  - component: {fileID: 1208457539}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1208457538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208457537}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.07853, y: -0, z: -17.48137}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1208457539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208457537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b3f20f16dcaf754a99571dcbb58d89a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  appoximateNoise: 8
 --- !u!1 &1557369139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,3 +1140,4 @@ SceneRoots:
   - {fileID: 819832147}
   - {fileID: 754023711}
   - {fileID: 993877447}
+  - {fileID: 1208457538}

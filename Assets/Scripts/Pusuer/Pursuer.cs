@@ -29,12 +29,12 @@ public class Pursuer : Entity
     {
         base.Update();
 
-        if (agent.remainingDistance <= 0.02f)
+        if (!agent.pathPending && agent.remainingDistance <= 0.02f)
         {
             OnReachedTheDesitnation?.Invoke();
         }
+       
     }
 
     public void UpdateDestination(Vector3 newDestination) => agent.destination = newDestination;
-  
 }
