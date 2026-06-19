@@ -2,7 +2,7 @@ using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("Play Mode")]
     [SerializeField] private PlayerModes playerMode;

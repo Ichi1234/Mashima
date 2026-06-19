@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static Player;
 
 public abstract class PlayerState
 {
