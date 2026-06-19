@@ -10,30 +10,41 @@ public class Backpack : MonoBehaviour
         backpack = new Dictionary<string, int>();
     }
 
-    public int GetItem(Item item) => backpack[item.ItemData.name];
-
+    public int GetItem(ItemData item)
+    {
+        if (!backpack.ContainsKey(item.name))
+        {
+            return 0;
+        }
+        return backpack[item.name];
+    }
     public Dictionary<string, int> GetAllItems() => backpack;
 
-    public void StoreItem(Item newItem)
+    public void StoreItem(ItemData newItem)
     {
-        if (!backpack.ContainsKey(newItem.ItemData.name))
+        if (!backpack.ContainsKey(newItem.name))
         {
-            backpack.Add(newItem.ItemData.name, 1);
+            backpack.Add(newItem.name, 1);
         }
 
         else
         {
-            backpack[newItem.ItemData.name] += 1;
+            backpack[newItem.name] += 1;
         }
+
+        Debug.Log("Amount of " + newItem.name + " are " + backpack[newItem.name]);
+
     }
-    public void RemoveItem(Item removeItem)
+    public void RemoveItem(ItemData removeItem, int amount = 1)
     {
-        if (!backpack.ContainsKey(removeItem.ItemData.name))
+        if (!backpack.ContainsKey(removeItem.name))
         {
             return;
         }
 
-        backpack[removeItem.ItemData.name] -= 1;
+        backpack[removeItem.name] -= amount;
+
+        Debug.Log("OH Nyo we lost some item " + backpack[removeItem.name]);
     }
 }
 

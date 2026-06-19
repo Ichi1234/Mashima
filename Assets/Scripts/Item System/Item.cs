@@ -7,8 +7,8 @@ public class Item : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        ItemManager.Instance.StoreItem(this);
+        ItemManager.Instance.StoreItem(itemData);
 
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }
