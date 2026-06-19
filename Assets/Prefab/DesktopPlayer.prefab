@@ -15,7 +15,8 @@ GameObject:
   - component: {fileID: 4454736847557045732}
   - component: {fileID: 1250462709908620671}
   - component: {fileID: 8531872007019292223}
-  m_Layer: 0
+  - component: {fileID: 1191605082050752116}
+  m_Layer: 3
   m_Name: DesktopPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -112,10 +113,12 @@ MonoBehaviour:
   charController: {fileID: 8531872007019292223}
   gravity: 0.98
   cameraOffset: {fileID: 5572369875170210663}
+  playerPushForce: 10
   interactDistance: 1
   interactLayer:
     serializedVersion: 2
     m_Bits: 64
+  sphereRadius: 0.3
   moveSpeed: 4.4
   runSpeedMultiplier: 1.25
   crouchSpeedMultiplier: 0.4
@@ -150,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MouseController
   player: {fileID: 6199080006645217704}
-  playerCamera: {fileID: 6386165755437298839}
+  playerCameraOffset: {fileID: 5572369875170210663}
   mouseSensitivity: 1
 --- !u!143 &8531872007019292223
 CharacterController:
@@ -177,6 +180,33 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1191605082050752116
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677788333356744135}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3651797817643312083
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +387,7 @@ GameObject:
   - component: {fileID: 3271766278232914525}
   - component: {fileID: 6616573337205472981}
   - component: {fileID: 3731846860704281049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IndicatorDetector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
