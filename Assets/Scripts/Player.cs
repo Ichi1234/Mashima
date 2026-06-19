@@ -9,8 +9,17 @@ public class Player : MonoBehaviour
     public enum PlayerModes { Desktop, VR }
     [Space]
 
+    [Header("General Details")]
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
+    [SerializeField] private Transform cameraOffset;
+    [SerializeField] private float playerPushForce = 10;
+
+    [Header("Interact Details")]
+    [SerializeField] private float interactDistance;
+    [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private float sphereRadius = 0.3f;
+    public bool isInteractabled { get; private set; }
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -22,7 +31,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float crouchHitboxCenter = -0.72f;
     [SerializeField] private float defaultHitboxRadius = 0.5f;
     [SerializeField] private float defaultHitboxHeight = 2;
-    [SerializeField] private Transform cameraOffset;
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
@@ -63,9 +71,38 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    { 
-        charController.Move(Vector3.down * gravity * Time.deltaTime);
+    {
+        RaycastHit hit = CameraInteractRaycast();
+
+        if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
+        {
+            hit.transform.GetComponent<IInteractable>()?.Interact();
+        }
+
+        ApplyGravity();
+
+
         stateMachine.CallUpdateCurrentState();
+    }
+
+    private void ApplyGravity()
+    {
+        charController.Move(Vector3.down * gravity * Time.deltaTime);
+    }
+
+    private RaycastHit CameraInteractRaycast()
+    {
+        isInteractabled = Physics.SphereCast
+(
+            cameraOffset.transform.position,
+            sphereRadius,
+            cameraOffset.transform.forward,
+            out RaycastHit hit,
+            interactDistance,
+            interactLayer
+        );
+
+        return hit;
     }
 
     private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
@@ -73,6 +110,26 @@ public class Player : MonoBehaviour
     private void OnDisable()
     {
         Input.Disable();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        Vector3 start = cameraOffset.transform.position;
+        Vector3 end = start + cameraOffset.transform.forward * interactDistance;
+
+        Gizmos.DrawLine(start, end);
+        Gizmos.DrawWireSphere(start, sphereRadius);
+        Gizmos.DrawWireSphere(end, sphereRadius);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body == null || body.isKinematic) return;
+
+        Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+        body.AddForceAtPosition(pushDir * playerPushForce, hit.point);
     }
 
     public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;

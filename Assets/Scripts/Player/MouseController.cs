@@ -3,7 +3,7 @@ using UnityEngine;
 public class MouseController : MonoBehaviour
 {
     [SerializeField] private Player player;
-    [SerializeField] private Camera playerCamera;
+    [SerializeField] private Transform playerCameraOffset;
     [SerializeField] private float mouseSensitivity = 1;
 
     private float pitch = 0;
@@ -15,7 +15,7 @@ public class MouseController : MonoBehaviour
         Cursor.visible = false;
 
         pitch = 0;
-        playerCamera.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        playerCameraOffset.localRotation = Quaternion.Euler(0, 0, 0);
 
     }
 
@@ -53,7 +53,7 @@ public class MouseController : MonoBehaviour
 
         pitch = Mathf.Clamp(pitch, -75, 75);
 
-        playerCamera.transform.localRotation = Quaternion.Euler(pitch, 0, 0);
+        playerCameraOffset.localRotation = Quaternion.Euler(pitch, 0, 0);
         player.transform.localRotation = Quaternion.Euler(0, yaw, 0);
     }
 }

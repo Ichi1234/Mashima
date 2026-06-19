@@ -12,15 +12,16 @@ GameObject:
   - component: {fileID: 2558458109231119978}
   - component: {fileID: 1427668840223762433}
   - component: {fileID: 6199080006645217704}
+  - component: {fileID: 4454736847557045732}
   - component: {fileID: 1250462709908620671}
   - component: {fileID: 8531872007019292223}
   m_Layer: 0
   m_Name: DesktopPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1764218847462955253
 Transform:
   m_ObjectHideFlags: 0
@@ -35,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5572369875170210663}
+  - {fileID: 3271766278232914525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2558458109231119978
@@ -109,6 +111,11 @@ MonoBehaviour:
   playerMode: 0
   charController: {fileID: 8531872007019292223}
   gravity: 0.98
+  cameraOffset: {fileID: 5572369875170210663}
+  interactDistance: 1
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 64
   moveSpeed: 4.4
   runSpeedMultiplier: 1.25
   crouchSpeedMultiplier: 0.4
@@ -118,7 +125,18 @@ MonoBehaviour:
   crouchHitboxCenter: -0.72
   defaultHitboxRadius: 0.5
   defaultHitboxHeight: 2
-  cameraOffset: {fileID: 0}
+--- !u!114 &4454736847557045732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2677788333356744135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c494e326ed1aef44997233a7d7d3750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Backpack
 --- !u!114 &1250462709908620671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +190,7 @@ GameObject:
   - component: {fileID: 6217029600154706680}
   - component: {fileID: 3605447154806762447}
   m_Layer: 0
-  m_Name: PlayerCamera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,3 +346,71 @@ Transform:
   - {fileID: 3199094948700300869}
   m_Father: {fileID: 1764218847462955253}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7050668708165273580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3271766278232914525}
+  - component: {fileID: 6616573337205472981}
+  - component: {fileID: 3731846860704281049}
+  m_Layer: 0
+  m_Name: IndicatorDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3271766278232914525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050668708165273580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1764218847462955253}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6616573337205472981
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050668708165273580}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.7
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &3731846860704281049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7050668708165273580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c37be9d02d184a80ed30ecbcbdad0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionDetector
