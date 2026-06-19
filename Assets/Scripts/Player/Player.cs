@@ -51,6 +51,7 @@ public class Player : Entity
 
         Input = new PlayerInputSet();
 
+        GameManager.Instance.InitializePlayer(this);
 
         IdleState = new Player_IdleState(this, stateMachine);
         MoveState = new Player_MoveState(this, stateMachine);
