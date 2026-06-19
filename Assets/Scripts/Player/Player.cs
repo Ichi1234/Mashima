@@ -24,6 +24,8 @@ public class Player : Entity
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
     [SerializeField] private float runSpeedMultiplier = 1.25f;
+    
+    [Header("Crouch Details")]
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
     [SerializeField] private float crouchHitboxRadius = 0.2f;
@@ -31,6 +33,12 @@ public class Player : Entity
     [SerializeField] private float crouchHitboxCenter = -0.72f;
     [SerializeField] private float defaultHitboxRadius = 0.5f;
     [SerializeField] private float defaultHitboxHeight = 2;
+    [Space]
+    // For Enemy Detection
+    [SerializeField] private CapsuleCollider detectionCollider;
+    [SerializeField] private float crouchDetectionHitboxHeight = 1.5f;
+    [SerializeField] private float crouchDetectionHitboxPos = -0.33f;
+
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
@@ -140,6 +148,9 @@ public class Player : Entity
         charController.height = crouchHitboxHeight;
         charController.radius = crouchHitboxRadius;
         charController.center = new Vector3(0, crouchHitboxCenter, 0);
+
+        detectionCollider.height = crouchDetectionHitboxHeight;
+        detectionCollider.center = new Vector3(0, crouchDetectionHitboxPos, 0);
     }
 
     public void SetDefaultHitbox()

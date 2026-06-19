@@ -279,6 +279,7 @@ MonoBehaviour:
   horizontalAngle: 31.6
   verticalAngle: 24.6
   agent: {fileID: 541080138}
+  IsSeeingPlayer: 0
 --- !u!1 &611614941
 GameObject:
   m_ObjectHideFlags: 0

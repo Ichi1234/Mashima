@@ -18,6 +18,8 @@ public class Pursuer : Entity
 
     public Action OnReachedTheDesitnation;
 
+    public bool IsSeeingPlayer = false;
+
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
 
@@ -46,6 +48,13 @@ public class Pursuer : Entity
         }
        
     }
+
+    //private ColliderHit PlayerDetection()
+    //{
+    //    Transform player = GameManager.Instance.GetPlayerTransform();
+
+    //    player.
+    //}
 
     private void OnDrawGizmos()
     {
