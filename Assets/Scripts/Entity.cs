@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected StateMachine stateMachine;
+    protected float moveSpeedMultiplier = 1;
+
+    protected virtual void Awake()
     {
-        
+        stateMachine = new StateMachine();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
-        
+        stateMachine.CallUpdateCurrentState();
     }
+
+    protected virtual void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
+
+    public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
+    public void SetMoveSpeedMultiplier(float newMultiplier) => moveSpeedMultiplier = newMultiplier;
 }

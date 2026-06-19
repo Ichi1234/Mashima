@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   playerMode: 0
   charController: {fileID: 8531872007019292223}
-  gravity: 0.98
+  gravity: 9.8
   cameraOffset: {fileID: 5572369875170210663}
   playerPushForce: 10
   interactDistance: 1

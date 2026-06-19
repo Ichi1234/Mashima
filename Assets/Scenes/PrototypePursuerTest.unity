@@ -269,8 +269,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d324a84090135845b1ddc4984c8e92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pursuer
+  moveSpeed: 4.6
+  chaseSpeedMultiplier: 1.25
   player: {fileID: 1098487542}
-  agent: {fileID: 0}
+  agent: {fileID: 541080138}
 --- !u!1 &754023707
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +548,10 @@ PrefabInstance:
     - target: {fileID: 2677788333356744135, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_Name
       value: DesktopPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: gravity
+      value: 9.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

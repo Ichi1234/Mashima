@@ -34,9 +34,6 @@ public class Player : Entity
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
-    private float moveSpeedMultiplier = 1;
-    private StateMachine stateMachine;
-
     public Player_IdleState IdleState { get; private set; }
     public Player_MoveState MoveState { get; private set; }
     public Player_CrouchState CrouchState { get; private set; }
@@ -48,18 +45,18 @@ public class Player : Entity
     public PlayerModes PlayerMode => playerMode;
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         Input = new PlayerInputSet();
 
-        stateMachine = new StateMachine();
 
         IdleState = new Player_IdleState(this, stateMachine);
         MoveState = new Player_MoveState(this, stateMachine);
         CrouchState = new Player_CrouchState(this, stateMachine);
 
         stateMachine.Initialize(IdleState);
-
     }
 
     private void OnEnable()
@@ -70,7 +67,7 @@ public class Player : Entity
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
     }
 
-    private void Update()
+    protected override void Update()
     {
         RaycastHit hit = CameraInteractRaycast();
 
@@ -81,8 +78,7 @@ public class Player : Entity
 
         ApplyGravity();
 
-
-        stateMachine.CallUpdateCurrentState();
+        base.Update();
     }
 
     private void ApplyGravity()
@@ -104,8 +100,6 @@ public class Player : Entity
 
         return hit;
     }
-
-    private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
 
     private void OnDisable()
     {
@@ -131,10 +125,6 @@ public class Player : Entity
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.AddForceAtPosition(pushDir * playerPushForce, hit.point);
     }
-
-    public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
-
-    public void SetMoveSpeedMultiplier(float newMultiplier) => moveSpeedMultiplier = newMultiplier;
 
     public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
 
