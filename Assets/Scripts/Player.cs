@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
     [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private float sphereRadius = 0.3f;
     public bool isInteractabled { get; private set; }
 
     [Header("Movement Details")]
@@ -91,14 +92,15 @@ public class Player : MonoBehaviour
 
     private RaycastHit CameraInteractRaycast()
     {
-        isInteractabled = Physics.Raycast
-        (
+        isInteractabled = Physics.SphereCast
+(
             cameraOffset.transform.position,
+            sphereRadius,
             cameraOffset.transform.forward,
             out RaycastHit hit,
             interactDistance,
             interactLayer
-         );
+        );
 
         return hit;
     }
@@ -113,10 +115,12 @@ public class Player : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(
-            cameraOffset.transform.position,
-            cameraOffset.transform.position + cameraOffset.transform.forward * interactDistance
-        );
+        Vector3 start = cameraOffset.transform.position;
+        Vector3 end = start + cameraOffset.transform.forward * interactDistance;
+
+        Gizmos.DrawLine(start, end);
+        Gizmos.DrawWireSphere(start, sphereRadius);
+        Gizmos.DrawWireSphere(end, sphereRadius);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
