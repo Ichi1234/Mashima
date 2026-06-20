@@ -11,6 +11,7 @@ public class Pursuer : Entity
     [SerializeField] private float playerDetectionRange;
     [SerializeField] private LayerMask detectionRaycastMask;
     [SerializeField] private Transform pursuerEyes;
+    [SerializeField] private float eyesRotationSpeed = 6f;
     [SerializeField] private float horizontalAngle = 90f;
     [SerializeField] private float verticalAngle = 60f;
 
@@ -23,6 +24,7 @@ public class Pursuer : Entity
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
     public Pursuer_ChaseState ChaseState { get; private set; }
+    public Pursuer_losePlayerState LosePlayerState { get; private set; }
 
     public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
     public float RunSpeedMultiplier => runSpeedMultiplier;
@@ -36,6 +38,8 @@ public class Pursuer : Entity
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
+        ChaseState = new Pursuer_ChaseState(this, stateMachine);
+        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
 
 
     }
@@ -151,6 +155,17 @@ public class Pursuer : Entity
         Gizmos.DrawLine(origin + bottomLeft * rayRange, origin + topLeft * rayRange);
     }
 
+    public void LookAtPlayer()
+    {
+        CapsuleCollider playerCollider = GameManager.Instance.GetPlayerDetectionCollider();
+        Vector3 playerHead =
+           playerCollider.bounds.center +
+           Vector3.up * playerCollider.bounds.extents.y;
+
+        Vector3 direction = (playerHead - pursuerEyes.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        pursuerEyes.rotation = Quaternion.Slerp(pursuerEyes.rotation, targetRotation, Time.deltaTime * eyesRotationSpeed);
+    }
 
     public void UpdateDestination(Vector3 newDestination) => agent.destination = newDestination;
 }

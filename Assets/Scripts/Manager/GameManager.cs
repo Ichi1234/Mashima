@@ -3,15 +3,21 @@ using UnityEngine.AI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private float appoximateNoise = 8f;
+    [SerializeField] private float defaultAppoximateNoise = 8f;
+
+    private float appoximateNoise;
 
     private Player player;
 
     public static GameManager Instance;
 
+    public float DefaultNoise => defaultAppoximateNoise;
+
     private void Awake()
     {
         Instance = this;
+
+        appoximateNoise = defaultAppoximateNoise;
     }
 
     public void InitializePlayer(Player player) => this.player = player;
@@ -29,11 +35,15 @@ public class GameManager : MonoBehaviour
             player.transform.position.z + noiseZ
         );
 
-        if (NavMesh.SamplePosition(rawPoint, out NavMeshHit hit, appoximateNoise / 2, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(rawPoint, out NavMeshHit hit, defaultAppoximateNoise / 2, NavMesh.AllAreas))
             return hit.position;
 
         return player.transform.position;
     }
 
     public CapsuleCollider GetPlayerDetectionCollider() => player.DetectionCollider;
-}
+
+    public void SetAppoximateNoise(float noise) => appoximateNoise = noise;
+
+    public void ResetAppoximateNoise() => appoximateNoise = defaultAppoximateNoise;
+} 

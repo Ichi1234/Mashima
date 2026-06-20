@@ -14,6 +14,8 @@ public class StateMachine
 
     public void ChangeState(EntityState newState)
     {
+        if (currentState == newState) return;
+
         if (CanChangeState)
         {
             currentState.Exit();
