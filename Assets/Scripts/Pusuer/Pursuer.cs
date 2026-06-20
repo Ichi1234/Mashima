@@ -71,7 +71,6 @@ public class Pursuer : Entity
 
         if (Vector3.Distance(playerPos, transform.position) < 1.5f)
         {
-            gameObject.SetActive(false);
             GameManager.Instance.OnPlayerDeath?.Invoke();
         }
 

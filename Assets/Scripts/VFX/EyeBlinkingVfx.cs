@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class DeathVfx : MonoBehaviour
+public class EyeBlinkingVfx : MonoBehaviour
 {
     [SerializeField] private RectTransform eyeTop;
     [SerializeField] private RectTransform eyeBottom;
@@ -50,7 +50,7 @@ public class DeathVfx : MonoBehaviour
 
         deathCo = StartCoroutine(PlayBlinkAnimationCo());
 
-        
+
     }
 
     private IEnumerator PlayBlinkAnimationCo()
@@ -61,41 +61,41 @@ public class DeathVfx : MonoBehaviour
         yield return StartCoroutine(OpenEyeCo());
     }
 
-    private IEnumerator CloseEyeCo()
+    private IEnumerator EyeAnimation(float targetTopPos, float targetBottomPos)
     {
+        float originalTopEyePos = curTopEyePos;
+        float originalBottomEyePos = curBottomEyePos;
+
         float elapsed = 0f;
         while (elapsed < animationDuration)
         {
             elapsed += Time.deltaTime;
-            float t = elapsed / closeEyeDuration; 
-            float eased = t * t * t; 
+            float t = elapsed / animationDuration;
+            float eased = t * t * t;
 
-            curTopEyePos = Mathf.Lerp(defaultTopPos.y, 0, eased);
-            curBottomEyePos = Mathf.Lerp(defaultBottomPos.y, 0, eased);
+            curTopEyePos = Mathf.Lerp(originalTopEyePos, targetTopPos, eased);
+            curBottomEyePos = Mathf.Lerp(originalBottomEyePos, targetBottomPos, eased);
 
-            yield return null; 
+            yield return null;
         }
 
-        curTopEyePos = 0;
-        curBottomEyePos = 0;
+        curTopEyePos = targetTopPos;
+        curBottomEyePos = targetBottomPos;
     }
 
+    private IEnumerator CloseEyeCo()
+    {
+        yield return EyeAnimation(0, 0);
+
+    }
+
+    private IEnumerator BrieftlyOpenEyeCo()
+    {
+        yield return EyeAnimation(defaultTopPos.y / 2, defaultBottomPos.y / 2);
+
+    }
     private IEnumerator OpenEyeCo()
     {
-        float elapsed = 0f;
-        while (elapsed < animationDuration)
-        {
-            elapsed += Time.deltaTime;
-            float t = elapsed / closeEyeDuration; 
-            float eased = t * t * t; 
-
-            curTopEyePos = Mathf.Lerp(0, defaultTopPos.y, eased);
-            curBottomEyePos = Mathf.Lerp(0, defaultBottomPos.y, eased);
-
-            yield return null; 
-        }
-
-        curTopEyePos = defaultTopPos.y;
-        curBottomEyePos = defaultBottomPos.y;
+        yield return EyeAnimation(defaultTopPos.y, defaultBottomPos.y);
     }
 }

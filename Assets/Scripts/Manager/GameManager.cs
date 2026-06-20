@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
-    [SerializeField] private DeathVfx deathVfx;
+    [SerializeField] private EyeBlinkingVfx deathVfx;
 
     private float appoximateNoise;
 
