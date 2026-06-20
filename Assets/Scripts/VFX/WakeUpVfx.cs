@@ -1,13 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class EyeBlinkingVfx : MonoBehaviour
+public class WakeUpVfx : MonoBehaviour
 {
     [SerializeField] private RectTransform eyeTop;
     [SerializeField] private RectTransform eyeBottom;
     [SerializeField] private RectTransform blurEffect;
-    [SerializeField] private float animationDuration = 2.5f;
+    [SerializeField] private float animationDuration = 1f;
     [SerializeField] private float closeEyeDuration = 0.5f;
+    [SerializeField] private float openBrieflyDuration = 0.25f;
 
     private Coroutine deathCo;
 
@@ -21,12 +22,10 @@ public class EyeBlinkingVfx : MonoBehaviour
     {
         defaultTopPos = eyeTop.anchoredPosition;
         defaultBottomPos = eyeBottom.anchoredPosition;
-    }
 
-    private void Start()
-    {
         curTopEyePos = defaultTopPos.y;
         curBottomEyePos = defaultBottomPos.y;
+
     }
 
     private void Update()
@@ -48,14 +47,22 @@ public class EyeBlinkingVfx : MonoBehaviour
             StopCoroutine(deathCo);
         }
 
-        deathCo = StartCoroutine(PlayBlinkAnimationCo());
+        curTopEyePos = 0;
+        curBottomEyePos = 0;
 
-
+        deathCo = StartCoroutine(PlayWakeUpAnimationCo());
     }
 
-    private IEnumerator PlayBlinkAnimationCo()
+    private IEnumerator PlayWakeUpAnimationCo()
     {
         blurEffect.gameObject.SetActive(true);
+
+        yield return StartCoroutine(BrieftlyOpenEyeCo());
+        yield return new WaitForSeconds(openBrieflyDuration);
+        yield return StartCoroutine(CloseEyeCo());
+        yield return new WaitForSeconds(openBrieflyDuration);
+        yield return StartCoroutine(BrieftlyOpenEyeCo());
+        yield return new WaitForSeconds(openBrieflyDuration);
         yield return StartCoroutine(CloseEyeCo());
         yield return new WaitForSeconds(closeEyeDuration);
         yield return StartCoroutine(OpenEyeCo());

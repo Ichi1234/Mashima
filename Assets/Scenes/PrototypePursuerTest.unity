@@ -1541,14 +1541,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1938231270}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b6b6318cf7b98244a9e534f22e845b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 60dcb33489d0a0f4a91bcb77c25d9d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeathVfx
   eyeTop: {fileID: 2147180664}
   eyeBottom: {fileID: 1147952126}
   blurEffect: {fileID: 734760934}
-  animationDuration: 1
+  animationDuration: 1.2
   closeEyeDuration: 0.5
+  openBrieflyDuration: 0.25
 --- !u!1 &2105636450
 GameObject:
   m_ObjectHideFlags: 0
