@@ -29,6 +29,8 @@ public class Pursuer : Entity
     public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
     public float RunSpeedMultiplier => runSpeedMultiplier;
 
+    private CapsuleCollider playerDetectionCollider;
+
     protected override void Awake()
     {
         base.Awake();
@@ -38,14 +40,14 @@ public class Pursuer : Entity
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
-        ChaseState = new Pursuer_ChaseState(this, stateMachine);
         LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
-
 
     }
 
     private void Start()
     {
+        playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
+
         stateMachine.Initialize(PatrolState);
     }
 
@@ -63,13 +65,23 @@ public class Pursuer : Entity
         IsSeeingPlayer = PlayerDetection(out RaycastHit hit);
 
         Debug.Log(IsSeeingPlayer);
+
+
+        Vector3 playerPos = playerDetectionCollider.transform.position;
+
+        if (Vector3.Distance(playerPos, transform.position) < 1.5f)
+        {
+            gameObject.SetActive(false);
+            GameManager.Instance.OnPlayerDeath?.Invoke();
+        }
+
+        Debug.Log(Vector3.Distance(playerPos, transform.position));
+
     }
 
     private bool PlayerDetection(out RaycastHit hit)
     {
         hit = default;
-
-        CapsuleCollider playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
 
         Vector3 playerHead =
             playerDetectionCollider.bounds.center +
@@ -157,10 +169,9 @@ public class Pursuer : Entity
 
     public void LookAtPlayer()
     {
-        CapsuleCollider playerCollider = GameManager.Instance.GetPlayerDetectionCollider();
         Vector3 playerHead =
-           playerCollider.bounds.center +
-           Vector3.up * playerCollider.bounds.extents.y;
+           playerDetectionCollider.bounds.center +
+           Vector3.up * playerDetectionCollider.bounds.extents.y;
 
         Vector3 direction = (playerHead - pursuerEyes.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(direction);

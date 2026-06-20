@@ -1,15 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
+    [SerializeField] private DeathVfx deathVfx;
 
     private float appoximateNoise;
 
     private Player player;
 
+    private Vector3 playerSpawnPos;
+
     public static GameManager Instance;
+
+    public System.Action OnPlayerDeath;
 
     public float DefaultNoise => defaultAppoximateNoise;
 
@@ -20,7 +26,22 @@ public class GameManager : MonoBehaviour
         appoximateNoise = defaultAppoximateNoise;
     }
 
-    public void InitializePlayer(Player player) => this.player = player;
+    private void OnEnable() => OnPlayerDeath += PlayerDeath;
+
+    private void OnDisable() => OnPlayerDeath -= PlayerDeath;
+
+    public void InitializePlayer(Player player)
+    {
+        this.player = player;
+
+        playerSpawnPos = player.transform.position;
+    }
+
+    public void PlayerDeath()
+    {
+        deathVfx.Play();
+        player.transform.position = playerSpawnPos;
+    }
 
     public Vector3 PlayerAppoximatedLocation()
     {
