@@ -8,4 +8,14 @@ public class PursuerState : EntityState
     {
         this.pursuer = pursuer;
     }
+
+    public override void Update()
+    {
+        base.Update();
+
+        if (pursuer.IsSeeingPlayer)
+        {
+            stateMachine.ChangeState(pursuer.ChaseState);
+        }
+    }
 }

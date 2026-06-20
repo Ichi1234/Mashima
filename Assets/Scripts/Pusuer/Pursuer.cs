@@ -9,8 +9,8 @@ public class Pursuer : Entity
     [SerializeField] private float runSpeedMultiplier = 1.5f;
 
     [SerializeField] private float playerDetectionRange;
+    [SerializeField] private LayerMask detectionRaycastMask;
     [SerializeField] private Transform pursuerEyes;
-    [SerializeField] private float fovAngle = 90;
     [SerializeField] private float horizontalAngle = 90f;
     [SerializeField] private float verticalAngle = 60f;
 
@@ -22,6 +22,10 @@ public class Pursuer : Entity
 
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
+    public Pursuer_ChaseState ChaseState { get; private set; }
+
+    public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
+    public float RunSpeedMultiplier => runSpeedMultiplier;
 
     protected override void Awake()
     {
@@ -31,9 +35,14 @@ public class Pursuer : Entity
        
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
+        ChaseState = new Pursuer_ChaseState(this, stateMachine);
 
+
+    }
+
+    private void Start()
+    {
         stateMachine.Initialize(PatrolState);
-
     }
 
     protected override void Update()
@@ -46,15 +55,73 @@ public class Pursuer : Entity
         {
             OnReachedTheDesitnation?.Invoke();
         }
-       
+
+        IsSeeingPlayer = PlayerDetection(out RaycastHit hit);
+
+        Debug.Log(IsSeeingPlayer);
     }
 
-    //private ColliderHit PlayerDetection()
-    //{
-    //    Transform player = GameManager.Instance.GetPlayerTransform();
+    private bool PlayerDetection(out RaycastHit hit)
+    {
+        hit = default;
 
-    //    player.
-    //}
+        CapsuleCollider playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
+
+        Vector3 playerHead =
+            playerDetectionCollider.bounds.center +
+            Vector3.up * playerDetectionCollider.bounds.extents.y;
+        
+        Vector3 directionToPlayer = (playerHead - pursuerEyes.position).normalized;
+        
+        float distanceToPlayer = Vector3.Distance(pursuerEyes.position, playerHead);
+
+        if (distanceToPlayer > playerDetectionRange)
+        {
+            return false;
+        }
+
+        // Horizontal angle check (flatten Y)
+        Vector3 forwardFlat = new Vector3(pursuerEyes.forward.x, 0, pursuerEyes.forward.z).normalized;
+        Vector3 dirToPlayerFlat = new Vector3(directionToPlayer.x, 0, directionToPlayer.z).normalized;
+        float horizontalAngleToPlayer = Vector3.Angle(forwardFlat, dirToPlayerFlat);
+
+        if (horizontalAngleToPlayer > horizontalAngle / 2f)
+        {
+            return false;
+        }
+
+        // Vertical angle check
+        Vector3 forwardVertical = 
+            Vector3.ProjectOnPlane(pursuerEyes.forward, Vector3.right).normalized;
+
+        Vector3 dirToPlayerVertical =
+            Vector3.ProjectOnPlane(directionToPlayer, Vector3.right).normalized;
+
+        float verticalAngleToPlayer =
+            Vector3.Angle(forwardVertical, dirToPlayerVertical);
+        
+        
+        if (verticalAngleToPlayer > verticalAngle / 2f)
+        {
+            return false;
+
+        }
+
+        // CHECK IS SMTH BLOCK PLAYER!?!?!?
+        if (Physics.Raycast(
+                pursuerEyes.position,
+                directionToPlayer,
+                out hit,
+                distanceToPlayer,
+                detectionRaycastMask)
+            )
+        {
+            return hit.collider == playerDetectionCollider;
+        }
+
+        return false;
+
+    }
 
     private void OnDrawGizmos()
     {

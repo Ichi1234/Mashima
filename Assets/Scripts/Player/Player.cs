@@ -48,6 +48,7 @@ public class Player : Entity
 
     public float MoveSpeed => moveSpeed;
     public float RunSpeedMultiplier => runSpeedMultiplier;
+    public CapsuleCollider DetectionCollider => detectionCollider;
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
     public PlayerModes PlayerMode => playerMode;
@@ -59,13 +60,17 @@ public class Player : Entity
 
         Input = new PlayerInputSet();
 
-        GameManager.Instance.InitializePlayer(this);
-
         IdleState = new Player_IdleState(this, stateMachine);
         MoveState = new Player_MoveState(this, stateMachine);
         CrouchState = new Player_CrouchState(this, stateMachine);
 
         stateMachine.Initialize(IdleState);
+
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.InitializePlayer(this);
     }
 
     private void OnEnable()
