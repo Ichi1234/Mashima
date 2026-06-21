@@ -1,14 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class WakeUpVfx : MonoBehaviour
 {
     [SerializeField] private RectTransform eyeTop;
     [SerializeField] private RectTransform eyeBottom;
-    [SerializeField] private RectTransform blurEffect;
     [SerializeField] private float animationDuration = 1f;
     [SerializeField] private float closeEyeDuration = 0.5f;
     [SerializeField] private float openBrieflyDuration = 0.25f;
+    [SerializeField] private Volume blurEffect;
+    [SerializeField] private float blurDuration = 1f;
+    [SerializeField] private float targetFocusDistance = 50f;
+
+    private DepthOfField depthOfField;
+
+
 
     private Coroutine deathCo;
 
@@ -26,6 +34,7 @@ public class WakeUpVfx : MonoBehaviour
         curTopEyePos = defaultTopPos.y;
         curBottomEyePos = defaultBottomPos.y;
 
+        blurEffect.profile.TryGet(out depthOfField);
     }
 
     private void Update()
@@ -35,7 +44,7 @@ public class WakeUpVfx : MonoBehaviour
 
         if (curTopEyePos == defaultTopPos.y)
         {
-            blurEffect.gameObject.SetActive(false);
+            //blurEffect.weight = 0;
         }
     }
 
@@ -53,9 +62,28 @@ public class WakeUpVfx : MonoBehaviour
         deathCo = StartCoroutine(PlayWakeUpAnimationCo());
     }
 
+    private IEnumerator BlurFocusCo()
+    {
+        float startValue = 0.1f;
+        float elapsed = 0f;
+
+        while (elapsed < blurDuration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / blurDuration;
+            depthOfField.focusDistance.value = Mathf.Lerp(startValue, targetFocusDistance, t);
+            yield return null;
+        }
+
+        depthOfField.focusDistance.value = targetFocusDistance;
+        blurEffect.weight = 0;
+
+    }
+
     private IEnumerator PlayWakeUpAnimationCo()
     {
-        blurEffect.gameObject.SetActive(true);
+        depthOfField.focusDistance.value = 0.1f;
+        blurEffect.weight = 1;
 
         yield return StartCoroutine(BrieftlyOpenEyeCo());
         yield return new WaitForSeconds(openBrieflyDuration);
@@ -66,7 +94,12 @@ public class WakeUpVfx : MonoBehaviour
         yield return StartCoroutine(CloseEyeCo());
         yield return new WaitForSeconds(closeEyeDuration);
         yield return StartCoroutine(OpenEyeCo());
+        yield return StartCoroutine(BlurFocusCo()); 
+
+        blurEffect.weight = 0;
+
     }
+
 
     private IEnumerator EyeAnimation(float targetTopPos, float targetBottomPos)
     {
