@@ -2,7 +2,7 @@ using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [Header("Play Mode")]
     [SerializeField] private PlayerModes playerMode;
@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
     [SerializeField] private float runSpeedMultiplier = 1.25f;
+    
+    [Header("Crouch Details")]
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
     [SerializeField] private float crouchHitboxRadius = 0.2f;
@@ -31,11 +33,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float crouchHitboxCenter = -0.72f;
     [SerializeField] private float defaultHitboxRadius = 0.5f;
     [SerializeField] private float defaultHitboxHeight = 2;
+    [Space]
+    // For Enemy Detection
+    [SerializeField] private CapsuleCollider detectionCollider;
+    [SerializeField] private float crouchDetectionHitboxHeight = 1.5f;
+    [SerializeField] private float crouchDetectionHitboxPos = -0.33f;
+
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
-
-    private float moveSpeedMultiplier = 1;
-    private StateMachine stateMachine;
 
     public Player_IdleState IdleState { get; private set; }
     public Player_MoveState MoveState { get; private set; }
@@ -43,16 +48,17 @@ public class Player : MonoBehaviour
 
     public float MoveSpeed => moveSpeed;
     public float RunSpeedMultiplier => runSpeedMultiplier;
+    public CapsuleCollider DetectionCollider => detectionCollider;
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
     public PlayerModes PlayerMode => playerMode;
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        Input = new PlayerInputSet();
+        base.Awake();
 
-        stateMachine = new StateMachine();
+        Input = new PlayerInputSet();
 
         IdleState = new Player_IdleState(this, stateMachine);
         MoveState = new Player_MoveState(this, stateMachine);
@@ -60,6 +66,11 @@ public class Player : MonoBehaviour
 
         stateMachine.Initialize(IdleState);
 
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.InitializePlayer(this);
     }
 
     private void OnEnable()
@@ -70,7 +81,7 @@ public class Player : MonoBehaviour
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
     }
 
-    private void Update()
+    protected override void Update()
     {
         RaycastHit hit = CameraInteractRaycast();
 
@@ -81,8 +92,7 @@ public class Player : MonoBehaviour
 
         ApplyGravity();
 
-
-        stateMachine.CallUpdateCurrentState();
+        base.Update();
     }
 
     private void ApplyGravity()
@@ -104,8 +114,6 @@ public class Player : MonoBehaviour
 
         return hit;
     }
-
-    private void FixedUpdate() => stateMachine.CallFixedUpdateCurrentState();
 
     private void OnDisable()
     {
@@ -132,10 +140,6 @@ public class Player : MonoBehaviour
         body.AddForceAtPosition(pushDir * playerPushForce, hit.point);
     }
 
-    public void ResetMoveSpeedMultiplier() => moveSpeedMultiplier = 1;
-
-    public void SetMoveSpeedMultiplier(float newMultiplier) => moveSpeedMultiplier = newMultiplier;
-
     public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
 
     public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
@@ -149,6 +153,9 @@ public class Player : MonoBehaviour
         charController.height = crouchHitboxHeight;
         charController.radius = crouchHitboxRadius;
         charController.center = new Vector3(0, crouchHitboxCenter, 0);
+
+        detectionCollider.height = crouchDetectionHitboxHeight;
+        detectionCollider.center = new Vector3(0, crouchDetectionHitboxPos, 0);
     }
 
     public void SetDefaultHitbox()

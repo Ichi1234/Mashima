@@ -10,7 +10,6 @@ public class Player_IdleState : PlayerState
     {
         base.Enter();
 
-        Debug.Log("I'm enter");
     }
 
     public override void Update()
@@ -27,6 +26,5 @@ public class Player_IdleState : PlayerState
     {
         base.Exit();
 
-        Debug.Log("I'm exit");
     }
 }

@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class StateMachine
 {
-    public PlayerState currentState;
+    public EntityState currentState;
     public bool CanChangeState { get; private set; } = true;
 
 
-    public void Initialize(PlayerState initialState)
+    public void Initialize(EntityState initialState)
     {
         currentState = initialState;
         currentState.Enter();
     }
 
-    public void ChangeState(PlayerState newState)
+    public void ChangeState(EntityState newState)
     {
+        if (currentState == newState) return;
+
         if (CanChangeState)
         {
             currentState.Exit();
