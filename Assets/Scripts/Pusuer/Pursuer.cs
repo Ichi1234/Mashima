@@ -46,6 +46,11 @@ public class Pursuer : Entity
 
     private void Start()
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.Log("How tf I am null");
+        }
+
         playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
 
         stateMachine.Initialize(PatrolState);
@@ -73,8 +78,6 @@ public class Pursuer : Entity
         {
             GameManager.Instance.OnPlayerDeath?.Invoke();
         }
-
-        Debug.Log(Vector3.Distance(playerPos, transform.position));
 
     }
 

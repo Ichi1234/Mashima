@@ -130,8 +130,8 @@ MonoBehaviour:
   defaultHitboxRadius: 0.5
   defaultHitboxHeight: 2
   detectionCollider: {fileID: 2303581702243427208}
-  crouchDetectionHitboxHeight: 1.5
-  crouchDetectionHitboxPos: -0.33
+  crouchDetectionHitboxHeight: 1.1
+  crouchDetectionHitboxPos: -0.69
 --- !u!114 &4454736847557045732
 MonoBehaviour:
   m_ObjectHideFlags: 0

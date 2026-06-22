@@ -66,11 +66,8 @@ public class Player : Entity
 
         stateMachine.Initialize(IdleState);
 
-    }
-
-    private void Start()
-    {
         GameManager.Instance.InitializePlayer(this);
+
     }
 
     private void OnEnable()
