@@ -31,6 +31,8 @@ public class Pursuer : Entity
 
     private CapsuleCollider playerDetectionCollider;
 
+    private Vector3 initialPos;
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,10 +44,18 @@ public class Pursuer : Entity
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
         LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
 
+        initialPos = transform.position;
+
     }
+    private void OnEnable() => GameManager.Instance.OnPlayerDeath += PlayerDeath;
 
     private void Start()
     {
+        if (GameManager.Instance == null)
+        {
+            Debug.Log("How tf I am null");
+        }
+
         playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
 
         stateMachine.Initialize(PatrolState);
@@ -74,9 +84,11 @@ public class Pursuer : Entity
             GameManager.Instance.OnPlayerDeath?.Invoke();
         }
 
-        Debug.Log(Vector3.Distance(playerPos, transform.position));
-
     }
+
+    private void OnDisable() => GameManager.Instance.OnPlayerDeath -= PlayerDeath;
+
+    private void PlayerDeath() => transform.position = initialPos;
 
     private bool PlayerDetection(out RaycastHit hit)
     {

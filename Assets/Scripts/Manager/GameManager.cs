@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
+[DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
@@ -56,13 +57,27 @@ public class GameManager : MonoBehaviour
             player.transform.position.z + noiseZ
         );
 
-        if (NavMesh.SamplePosition(rawPoint, out NavMeshHit hit, defaultAppoximateNoise / 2, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(rawPoint, out NavMeshHit hit, appoximateNoise / 2, NavMesh.AllAreas))
             return hit.position;
 
-        return player.transform.position;
+        NavMesh.SamplePosition(player.transform.position, out NavMeshHit fallbackHit, 12f, NavMesh.AllAreas);
+        return fallbackHit.position;
     }
 
-    public CapsuleCollider GetPlayerDetectionCollider() => player.DetectionCollider;
+    public CapsuleCollider GetPlayerDetectionCollider()
+    {
+        if (player == null)
+        {
+            Debug.Log("Player is null");
+        }
+
+        else if (player.DetectionCollider == null)
+        {
+            Debug.Log("HOW TF YOU ARE NULL PLAYER COLLIDER");
+        }
+
+        return player.DetectionCollider;
+    }
 
     public void SetAppoximateNoise(float noise) => appoximateNoise = noise;
 
