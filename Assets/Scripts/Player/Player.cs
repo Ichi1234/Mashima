@@ -10,6 +10,7 @@ public class Player : Entity
     [Space]
 
     [Header("General Details")]
+    [SerializeField] private Light flashLight;
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
     [SerializeField] private Transform cameraOffset;
@@ -85,6 +86,11 @@ public class Player : Entity
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
         {
             hit.transform.GetComponent<IInteractable>()?.Interact();
+        }
+
+        if (Input.Player.Flashlight.WasPerformedThisFrame())
+        {
+            flashLight.enabled = !flashLight.enabled;
         }
 
         ApplyGravity();
