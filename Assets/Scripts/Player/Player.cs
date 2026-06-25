@@ -40,6 +40,8 @@ public class Player : Entity
     [SerializeField] private float crouchDetectionHitboxHeight = 1.5f;
     [SerializeField] private float crouchDetectionHitboxPos = -0.33f;
 
+    private Vector3 initialCameraPos;
+
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
 
@@ -68,6 +70,8 @@ public class Player : Entity
         stateMachine.Initialize(IdleState);
 
         GameManager.Instance.InitializePlayer(this);
+
+        initialCameraPos = cameraOffset.localPosition;
 
     }
 
@@ -147,7 +151,7 @@ public class Player : Entity
 
     public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
 
-    public void ResetCameraPos() => cameraOffset.localPosition = Vector3.zero;
+    public void ResetCameraPos() => cameraOffset.localPosition = initialCameraPos;
 
     public void RotateCamera(Quaternion newAngle) => cameraOffset.transform.localRotation = newAngle;
 
