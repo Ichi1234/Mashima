@@ -10,6 +10,7 @@ public class Player : Entity
     [Space]
 
     [Header("General Details")]
+    [SerializeField] private Light flashLight;
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
     [SerializeField] private Transform cameraOffset;
@@ -38,6 +39,8 @@ public class Player : Entity
     [SerializeField] private CapsuleCollider detectionCollider;
     [SerializeField] private float crouchDetectionHitboxHeight = 1.5f;
     [SerializeField] private float crouchDetectionHitboxPos = -0.33f;
+
+    private Vector3 initialCameraPos;
 
     public PlayerInputSet Input { get; private set; }
     public Vector2 MoveInput { get; private set; }
@@ -68,6 +71,8 @@ public class Player : Entity
 
         GameManager.Instance.InitializePlayer(this);
 
+        initialCameraPos = cameraOffset.localPosition;
+
     }
 
     private void OnEnable()
@@ -85,6 +90,11 @@ public class Player : Entity
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
         {
             hit.transform.GetComponent<IInteractable>()?.Interact();
+        }
+
+        if (Input.Player.Flashlight.WasPerformedThisFrame())
+        {
+            flashLight.enabled = !flashLight.enabled;
         }
 
         ApplyGravity();
@@ -141,7 +151,7 @@ public class Player : Entity
 
     public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
 
-    public void ResetCameraPos() => cameraOffset.localPosition = Vector3.zero;
+    public void ResetCameraPos() => cameraOffset.localPosition = initialCameraPos;
 
     public void RotateCamera(Quaternion newAngle) => cameraOffset.transform.localRotation = newAngle;
 
