@@ -44,7 +44,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
             if (itemInInventory <= 0) continue;
 
-            ItemManager.Instance.RemoveItem(item.itemData, 1);
+            ItemManager.Instance.RemoveItem(item.itemData, Mathf.Min(1, item.requiredAmount));
             itemsCurAmount[item.itemData] += 1;
 
             Debug.Log($"Placed 1x {item.itemData.name} ({itemsCurAmount[item.itemData]}/{item.requiredAmount})");

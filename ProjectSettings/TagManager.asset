@@ -16,7 +16,7 @@ TagManager:
   - IndicatorDetector
   - PlayerDetectionHitbox
   - CollisionOnlyPlayer
-  - 
+  - Ground
   - 
   - 
   - 
