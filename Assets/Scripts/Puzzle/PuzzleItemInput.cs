@@ -4,15 +4,12 @@ using UnityEngine;
 public class PuzzleItemInput : MonoBehaviour, IInteractable
 {
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
-
     private Dictionary<ItemData, int> itemsCurAmount;
-
     private bool isPuzzleCompleted = false;
 
     private void Awake()
     {
         itemsCurAmount = new Dictionary<ItemData, int>();
-
         foreach (var item in requiredItems)
         {
             itemsCurAmount.Add(item.itemData, 0);
@@ -25,7 +22,6 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         {
             if (!item.requirementMet) return false;
         }
-
         return true;
     }
 
@@ -39,23 +35,22 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
             int itemInInventory = ItemManager.Instance.GetItem(item.itemData);
 
-            int puzzleCurAmountItem = itemsCurAmount[item.itemData];
+            if (itemInInventory <= 0) continue;
 
-            Debug.Log("Interact " + itemInInventory);
+            ItemManager.Instance.RemoveItem(item.itemData, 1);
+            itemsCurAmount[item.itemData] += 1;
 
-            int remaining = item.requiredAmount - puzzleCurAmountItem;
+            Debug.Log($"Placed 1x {item.itemData.name} ({itemsCurAmount[item.itemData]}/{item.requiredAmount})");
 
-            int amountToDeposit = Mathf.Min(itemInInventory, remaining);
-
-            ItemManager.Instance.RemoveItem(item.itemData, amountToDeposit);
-            itemsCurAmount[item.itemData] += amountToDeposit;
-
-            if (itemsCurAmount[item.itemData] == item.requiredAmount)
+            if (itemsCurAmount[item.itemData] >= item.requiredAmount)
             {
                 item.requirementMet = true;
             }
+
+            break;
         }
 
         isPuzzleCompleted = CheckedIsCompleted();
+        if (isPuzzleCompleted) Debug.Log("Owatta!");
     }
 }
