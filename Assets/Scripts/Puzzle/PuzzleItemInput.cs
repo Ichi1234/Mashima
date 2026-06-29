@@ -3,14 +3,21 @@ using UnityEngine;
 
 public class PuzzleItemInput : MonoBehaviour, IInteractable
 {
+    [SerializeField] private MonoBehaviour puzzleReactorObject; 
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
+    
+    private IPuzzleReactable puzzleReactor; 
+
     private Dictionary<ItemData, int> itemsCurAmount;
     private bool isPuzzleCompleted = false;
 
     private void Awake()
     {
         itemsCurAmount = new Dictionary<ItemData, int>();
-        foreach (var item in requiredItems)
+
+        puzzleReactor = puzzleReactorObject as IPuzzleReactable;
+
+        foreach (PuzzleItemRequirement item in requiredItems)
         {
             itemsCurAmount.Add(item.itemData, 0);
         }
@@ -18,7 +25,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
     private bool CheckedIsCompleted()
     {
-        foreach (var item in requiredItems)
+        foreach (PuzzleItemRequirement item in requiredItems)
         {
             if (!item.requirementMet) return false;
         }
@@ -29,7 +36,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
     {
         if (isPuzzleCompleted) return;
 
-        foreach (var item in requiredItems)
+        foreach (PuzzleItemRequirement item in requiredItems)
         {
             if (item.requirementMet) continue;
 
@@ -46,6 +53,8 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
             {
                 item.requirementMet = true;
             }
+
+            puzzleReactor?.OnItemDeposited(item.itemData.itemPrefab);
 
             break;
         }

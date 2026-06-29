@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
+
 
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
