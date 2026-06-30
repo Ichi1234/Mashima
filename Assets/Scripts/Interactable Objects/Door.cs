@@ -12,6 +12,8 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Debug.Log("I am door and I am reacting");
+
         bool currentlyOpen = Mathf.Abs(hinge.angle) > openThreshold;
         targetAngle = currentlyOpen ? 0f : 90f;
 
