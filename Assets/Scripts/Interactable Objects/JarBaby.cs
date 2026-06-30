@@ -29,8 +29,5 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
         mask.EnableInteract();
         maskRB.isKinematic = false;
         maskRB.useGravity = true;
-
-        tearBottle.isKinematic = false;
-        tearBottle.useGravity = true;
     }
 }
