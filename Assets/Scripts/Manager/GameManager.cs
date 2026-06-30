@@ -18,7 +18,10 @@ public class GameManager : MonoBehaviour
 
     public System.Action OnPlayerDeath;
 
+    public System.Action OnElectricRepaired;
+
     public float DefaultNoise => defaultAppoximateNoise;
+    public PlayerMode CurPlayerMode => player.CurPlayerMode;
 
     private void Awake()
     {

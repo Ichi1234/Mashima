@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class SlidingDoor : MonoBehaviour
@@ -14,6 +15,12 @@ public class SlidingDoor : MonoBehaviour
     private void Awake()
     {
         doorAnimator.SetFloat(openValueParam, 0f);
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.OnElectricRepaired += OnElectricRepaired;
+
     }
 
     private void Update()
@@ -43,11 +50,21 @@ public class SlidingDoor : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        GameManager.Instance.OnElectricRepaired -= OnElectricRepaired;
+    }
+
     [ContextMenu("Test Open")]
     private void TestOpen() => SetDoorOpen(true);
 
     [ContextMenu("Test Close")]
     private void TestClose() => SetDoorOpen(false);
+
+    private void OnElectricRepaired()
+    {
+        hasElectricity = true;
+    }
 
     private void SetDoorOpen(bool open)
     {

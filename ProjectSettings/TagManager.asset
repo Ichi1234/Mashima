@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Indicator
+  - Item
   layers:
   - Default
   - TransparentFX

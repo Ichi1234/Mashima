@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 6133958822851047441}
   m_Layer: 6
   m_Name: Flame of Freedom
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
   itemData: {fileID: 11400000, guid: 30ee707dbfd346e4c90edd98c4c5cc52, type: 2}
-  isInteractable: 0
+  isInteractable: 1
 --- !u!33 &2406598565821334494
 MeshFilter:
   m_ObjectHideFlags: 0

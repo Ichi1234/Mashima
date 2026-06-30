@@ -16,6 +16,11 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
 
     public void OnItemDeposited(GameObject itemPrefab)
     {
+        return;
+    }
+
+    public void OnPuzzleCompleted()
+    {
         jarGlass.SetActive(false);
 
         baby.isKinematic = false;
