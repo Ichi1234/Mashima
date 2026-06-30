@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Indicator
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - Interactable
   - IndicatorDetector
   - PlayerDetectionHitbox
-  - 
-  - 
+  - CollisionOnlyPlayer
+  - Ground
   - 
   - 
   - 

@@ -5,8 +5,7 @@ using UnityEngine.XR;
 public class Player : Entity
 {
     [Header("Play Mode")]
-    [SerializeField] private PlayerModes playerMode;
-    public enum PlayerModes { Desktop, VR }
+    [SerializeField] private PlayerMode playerMode;
     [Space]
 
     [Header("General Details")]
@@ -54,7 +53,7 @@ public class Player : Entity
     public CapsuleCollider DetectionCollider => detectionCollider;
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
-    public PlayerModes PlayerMode => playerMode;
+    public PlayerMode CurPlayerMode => playerMode;
 
 
     protected override void Awake()

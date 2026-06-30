@@ -27,11 +27,11 @@ public class Player_MoveState : PlayerState
             player.ResetMoveSpeedMultiplier();
         }
 
-        Vector3 forward = player.PlayerMode == PlayerModes.VR
+        Vector3 forward = player.CurPlayerMode == PlayerMode.VR
             ? player.HMDForwardFlat()
             : player.transform.forward;
 
-        Vector3 right = player.PlayerMode == PlayerModes.VR
+        Vector3 right = player.CurPlayerMode == PlayerMode.VR
             ? player.HMDRightFlat()
             : player.transform.right;
 
