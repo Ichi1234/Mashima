@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
     [SerializeField] private WakeUpVfx deathVfx;
+    [SerializeField] private float doorSlamForce = 300;
 
     private float appoximateNoise;
 
@@ -19,6 +20,8 @@ public class GameManager : MonoBehaviour
     public System.Action OnPlayerDeath;
 
     public System.Action OnElectricRepaired;
+
+    public float DoorSlamForce => doorSlamForce;
 
     public float DefaultNoise => defaultAppoximateNoise;
     public PlayerMode CurPlayerMode => player.CurPlayerMode;

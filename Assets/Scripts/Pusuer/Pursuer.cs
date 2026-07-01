@@ -75,6 +75,8 @@ public class Pursuer : Entity
     {
         base.Update();
 
+        SlamTheDoorOpen();
+
         agent.speed = moveSpeed * moveSpeedMultiplier;
 
         if (!agent.pathPending && agent.remainingDistance <= 0.02f)
@@ -94,6 +96,18 @@ public class Pursuer : Entity
             GameManager.Instance.OnPlayerDeath?.Invoke();
         }
 
+    }
+
+    private void SlamTheDoorOpen()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.5f))
+        {
+            Door door = hit.transform.GetComponent<Door>();
+            if (door != null && !door.IsOpen)
+            {
+                door.OpenWithForce(GameManager.Instance.DoorSlamForce);
+            }
+        }
     }
 
     private void OnDisable() => GameManager.Instance.OnPlayerDeath -= PlayerDeath;

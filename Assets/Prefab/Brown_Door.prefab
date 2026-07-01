@@ -158,6 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 336854779066953452}
   - component: {fileID: 6243705353018985437}
+  - component: {fileID: 2630763775376425807}
   m_Layer: 0
   m_Name: SM_AbandonedBuilding_05
   m_TagString: Untagged
@@ -203,6 +204,31 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: abc00000000011635922831086589640, type: 3}
+--- !u!114 &2630763775376425807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2881956955873500950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eeb5dc026fdf4b488bc7ae0138ab719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshLink
+  m_SerializedVersion: 1
+  m_AgentTypeID: 0
+  m_StartPoint: {x: 0.78, y: 0, z: 0}
+  m_EndPoint: {x: -0.78, y: 0, z: 0}
+  m_StartTransform: {fileID: 0}
+  m_EndTransform: {fileID: 0}
+  m_Activated: 1
+  m_Width: 0
+  m_CostModifier: 0
+  m_IsOverridingCost: 0
+  m_Bidirectional: 1
+  m_AutoUpdatePosition: 1
+  m_Area: 0
 --- !u!1 &4637462411153515772
 GameObject:
   m_ObjectHideFlags: 0
