@@ -4,10 +4,12 @@ using UnityEngine.AI;
 
 public class Pursuer : Entity
 {
+    [Header("Pursuer MoveSpeed")]
     [SerializeField] private float moveSpeed = 4.6f;
     [SerializeField] private float chaseSpeedMultiplier = 1.25f;
     [SerializeField] private float runSpeedMultiplier = 1.5f;
 
+    [Header("Pursuer Eyes")]
     [SerializeField] private float playerDetectionRange;
     [SerializeField] private LayerMask detectionRaycastMask;
     [SerializeField] private Transform pursuerEyes;
@@ -17,17 +19,23 @@ public class Pursuer : Entity
 
     [SerializeField] private NavMeshAgent agent;
 
+    [Header("Animation")]
+    [SerializeField] private PursuerAnimationController animController;
+
     public Action OnReachedTheDesitnation;
 
     public bool IsSeeingPlayer = false;
+
 
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
     public Pursuer_ChaseState ChaseState { get; private set; }
     public Pursuer_losePlayerState LosePlayerState { get; private set; }
+    public Pursuer_RoarState RoarState { get; private set; }
 
     public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
     public float RunSpeedMultiplier => runSpeedMultiplier;
+    public PursuerAnimationController Animation => animController;
 
     private CapsuleCollider playerDetectionCollider;
 
@@ -43,10 +51,12 @@ public class Pursuer : Entity
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
         LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
+        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
+        RoarState = new Pursuer_RoarState(this, stateMachine);
 
         initialPos = transform.position;
-
     }
+
     private void OnEnable() => GameManager.Instance.OnPlayerDeath += PlayerDeath;
 
     private void Start()
@@ -190,4 +200,8 @@ public class Pursuer : Entity
     }
 
     public void UpdateDestination(Vector3 newDestination) => agent.destination = newDestination;
+
+    public void StopMovement() => agent.isStopped = true;
+    public void ResumeMovement() => agent.isStopped = false;
+
 }

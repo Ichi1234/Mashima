@@ -15,6 +15,8 @@ public class Pursuer_ChaseState : PursuerState
         pursuer.SetMoveSpeedMultiplier(pursuer.ChaseSpeedMultiplier);
         GameManager.Instance.SetAppoximateNoise(0);
 
+        pursuer.Animation.SetRunning(true);
+
     }
 
     public override void Update()
@@ -41,5 +43,8 @@ public class Pursuer_ChaseState : PursuerState
 
         GameManager.Instance.ResetAppoximateNoise();
         pursuer.ResetMoveSpeedMultiplier();
+
+        pursuer.Animation.SetRunning(false);
+
     }
 }

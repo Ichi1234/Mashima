@@ -17,6 +17,8 @@ public class Pursuer_losePlayerState : PursuerState
         GameManager.Instance.SetAppoximateNoise(I_KNOW_YOU_ARE_NERE_HAHAHAHA);
         
         stateTimer = curStateTime;
+
+        pursuer.Animation.SetRunning(true);
     }
 
     public override void Update()
@@ -25,17 +27,20 @@ public class Pursuer_losePlayerState : PursuerState
 
         if (stateTimer <= 0)
         {
-            stateMachine.ChangeState(pursuer.IdleState);
+            stateMachine.ChangeState(pursuer.RoarState);
         }
 
         pursuer.UpdateDestination(GameManager.Instance.PlayerAppoximatedLocation());
 
     }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Exit()
+        {
+            base.Exit();
 
-        GameManager.Instance.ResetAppoximateNoise();
-    }
+            GameManager.Instance.ResetAppoximateNoise();
+
+            pursuer.Animation.SetRunning(false);
+
+        }
 }
