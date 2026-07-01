@@ -112,7 +112,7 @@ public class Pursuer : Entity
 
     private void OnDisable() => GameManager.Instance.OnPlayerDeath -= PlayerDeath;
 
-    private void PlayerDeath() => transform.position = initialPos;
+    private void PlayerDeath() => agent.Warp(initialPos);
 
     private bool PlayerDetection(out RaycastHit hit)
     {

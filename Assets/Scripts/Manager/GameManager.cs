@@ -48,6 +48,8 @@ public class GameManager : MonoBehaviour
     {
         deathVfx.Play();
         player.transform.position = playerSpawnPos;
+
+        ResetAppoximateNoise();
     }
 
     public Vector3 PlayerAppoximatedLocation()
