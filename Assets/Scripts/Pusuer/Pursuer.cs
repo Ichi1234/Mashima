@@ -147,10 +147,10 @@ public class Pursuer : Entity
 
         // Vertical angle check
         Vector3 forwardVertical = 
-            Vector3.ProjectOnPlane(pursuerEyes.forward, Vector3.right).normalized;
+            Vector3.ProjectOnPlane(pursuerEyes.forward, pursuerEyes.right).normalized;
 
         Vector3 dirToPlayerVertical =
-            Vector3.ProjectOnPlane(directionToPlayer, Vector3.right).normalized;
+            Vector3.ProjectOnPlane(directionToPlayer, pursuerEyes.right).normalized;
 
         float verticalAngleToPlayer =
             Vector3.Angle(forwardVertical, dirToPlayerVertical);
@@ -180,30 +180,46 @@ public class Pursuer : Entity
 
     private void OnDrawGizmos()
     {
+        if (pursuerEyes == null)
+            return;
+
         Gizmos.color = Color.red;
 
-        float rayRange = playerDetectionRange;
-        float halfHorizontalFOV = horizontalAngle / 2.0f;
-        float halfVerticalFOV = verticalAngle / 2.0f;
-
-        Vector3 forward = pursuerEyes.forward;
-
-        Vector3 topLeft = Quaternion.Euler(-halfVerticalFOV, -halfHorizontalFOV, 0) * forward;
-        Vector3 topRight = Quaternion.Euler(-halfVerticalFOV, halfHorizontalFOV, 0) * forward;
-        Vector3 bottomLeft = Quaternion.Euler(halfVerticalFOV, -halfHorizontalFOV, 0) * forward;
-        Vector3 bottomRight = Quaternion.Euler(halfVerticalFOV, halfHorizontalFOV, 0) * forward;
+        float halfHorizontal = horizontalAngle * 0.5f;
+        float halfVertical = verticalAngle * 0.5f;
 
         Vector3 origin = pursuerEyes.position;
 
-        Gizmos.DrawRay(origin, topLeft * rayRange);
-        Gizmos.DrawRay(origin, topRight * rayRange);
-        Gizmos.DrawRay(origin, bottomLeft * rayRange);
-        Gizmos.DrawRay(origin, bottomRight * rayRange);
+        Quaternion topLeftRot =
+            Quaternion.AngleAxis(-halfHorizontal, pursuerEyes.up) *
+            Quaternion.AngleAxis(-halfVertical, pursuerEyes.right);
 
-        Gizmos.DrawLine(origin + topLeft * rayRange, origin + topRight * rayRange);
-        Gizmos.DrawLine(origin + topRight * rayRange, origin + bottomRight * rayRange);
-        Gizmos.DrawLine(origin + bottomRight * rayRange, origin + bottomLeft * rayRange);
-        Gizmos.DrawLine(origin + bottomLeft * rayRange, origin + topLeft * rayRange);
+        Quaternion topRightRot =
+            Quaternion.AngleAxis(halfHorizontal, pursuerEyes.up) *
+            Quaternion.AngleAxis(-halfVertical, pursuerEyes.right);
+
+        Quaternion bottomLeftRot =
+            Quaternion.AngleAxis(-halfHorizontal, pursuerEyes.up) *
+            Quaternion.AngleAxis(halfVertical, pursuerEyes.right);
+
+        Quaternion bottomRightRot =
+            Quaternion.AngleAxis(halfHorizontal, pursuerEyes.up) *
+            Quaternion.AngleAxis(halfVertical, pursuerEyes.right);
+
+        Vector3 topLeft = topLeftRot * pursuerEyes.forward;
+        Vector3 topRight = topRightRot * pursuerEyes.forward;
+        Vector3 bottomLeft = bottomLeftRot * pursuerEyes.forward;
+        Vector3 bottomRight = bottomRightRot * pursuerEyes.forward;
+
+        Gizmos.DrawRay(origin, topLeft * playerDetectionRange);
+        Gizmos.DrawRay(origin, topRight * playerDetectionRange);
+        Gizmos.DrawRay(origin, bottomLeft * playerDetectionRange);
+        Gizmos.DrawRay(origin, bottomRight * playerDetectionRange);
+
+        Gizmos.DrawLine(origin + topLeft * playerDetectionRange, origin + topRight * playerDetectionRange);
+        Gizmos.DrawLine(origin + topRight * playerDetectionRange, origin + bottomRight * playerDetectionRange);
+        Gizmos.DrawLine(origin + bottomRight * playerDetectionRange, origin + bottomLeft * playerDetectionRange);
+        Gizmos.DrawLine(origin + bottomLeft * playerDetectionRange, origin + topLeft * playerDetectionRange);
     }
 
     public void LookAtPlayer()
