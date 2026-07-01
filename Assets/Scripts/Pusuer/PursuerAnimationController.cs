@@ -13,7 +13,6 @@ public class PursuerAnimationController : MonoBehaviour
     [SerializeField] private string attackParam = "attack";
     [SerializeField] private string nextAttackParam = "nextAttack";
     [SerializeField] private string roar = "roar";
-    [SerializeField] private string roaringParam = "roaring";
 
     public Action OnAnimationFinished;
 
@@ -35,11 +34,6 @@ public class PursuerAnimationController : MonoBehaviour
     public void SetWalkHeadDirection(float value)
     {
         animator.SetFloat(walkHeadDir, value);
-    }
-
-    public void RoarStart()
-    {
-        animator.SetBool(roaringParam, true);
     }
 
 
