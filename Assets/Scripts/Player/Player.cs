@@ -13,7 +13,8 @@ public class Player : Entity
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
     [SerializeField] private Transform cameraOffset;
-    [SerializeField] private float playerPushForce = 10;
+    [SerializeField] private float defaultPlayerPushForce = 10;
+    private float playerPushForce;
 
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
@@ -71,6 +72,8 @@ public class Player : Entity
         GameManager.Instance.InitializePlayer(this);
 
         initialCameraPos = cameraOffset.localPosition;
+
+        playerPushForce = defaultPlayerPushForce;
 
     }
 
@@ -184,4 +187,7 @@ public class Player : Entity
         right.y = 0;
         return right.normalized;
     }
+
+    public void SetPlayerPushForce(float newForce) => playerPushForce = newForce;
+    public void ResetPlayerPushForce() => playerPushForce = defaultPlayerPushForce;
 }

@@ -14,6 +14,9 @@ public class Pursuer_IdleState : PursuerState
         base.Enter();
 
         stateTimer = Random.Range(minWaitingTime, maxWaitingTime);
+
+        pursuer.Animation.SetIdle(true);
+
     }
 
     public override void Update()
@@ -26,4 +29,10 @@ public class Pursuer_IdleState : PursuerState
         }
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+
+        pursuer.Animation.SetIdle(false);
+    }
 }

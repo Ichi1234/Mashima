@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6438717905243415131}
   - component: {fileID: 2259095154541984600}
   - component: {fileID: 6263312588315356025}
+  - component: {fileID: 5550805267959786186}
   m_Layer: 6
   m_Name: Hospital Door 1
   m_TagString: Untagged
@@ -115,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
   hinge: {fileID: 6438717905243415131}
-  motorForce: 50
+  motorForce: 90
   openThreshold: 10
   angleTolerance: 2
 --- !u!64 &6263312588315356025
@@ -140,6 +141,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: abc00000000010382218814841574628, type: 3}
+--- !u!208 &5550805267959786186
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638674960675390277}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &5353808913276234769
 GameObject:
   m_ObjectHideFlags: 0

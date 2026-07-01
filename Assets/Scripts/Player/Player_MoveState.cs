@@ -21,10 +21,12 @@ public class Player_MoveState : PlayerState
         if (player.Input.Player.Run.IsPressed() && stateMachine.CanChangeState)
         {
             player.SetMoveSpeedMultiplier(player.RunSpeedMultiplier);
+            player.SetPlayerPushForce(GameManager.Instance.DoorSlamForce);
         }
         else if (stateMachine.currentState != player.CrouchState)
         {
             player.ResetMoveSpeedMultiplier();
+            player.ResetPlayerPushForce();
         }
 
         Vector3 forward = player.CurPlayerMode == PlayerMode.VR
