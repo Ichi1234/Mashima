@@ -45,6 +45,7 @@ public class Pursuer_ChaseState : PursuerState
         pursuer.ResetMoveSpeedMultiplier();
 
         pursuer.Animation.SetRunning(false);
+        pursuer.ResetLook();
 
     }
 }

@@ -112,7 +112,11 @@ public class Pursuer : Entity
 
     private void OnDisable() => GameManager.Instance.OnPlayerDeath -= PlayerDeath;
 
-    private void PlayerDeath() => agent.Warp(initialPos);
+    private void PlayerDeath()
+    {
+        stateMachine.ChangeState(PatrolState);
+        agent.Warp(initialPos);
+    }
 
     private bool PlayerDetection(out RaycastHit hit)
     {
@@ -212,6 +216,8 @@ public class Pursuer : Entity
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         pursuerEyes.rotation = Quaternion.Slerp(pursuerEyes.rotation, targetRotation, Time.deltaTime * eyesRotationSpeed);
     }
+
+    public void ResetLook() => pursuerEyes.rotation = transform.rotation;
 
     public void UpdateDestination(Vector3 newDestination) => agent.destination = newDestination;
 
