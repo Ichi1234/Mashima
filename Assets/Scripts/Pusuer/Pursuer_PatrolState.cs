@@ -16,6 +16,12 @@ public class Pursuer_PatrolState : PursuerState
         pursuer.Animation.SetWalking(true);
     }
 
+    public override void Update()
+    {
+        base.Update();
+
+    }
+
     public override void Exit()
     {
         base.Exit();

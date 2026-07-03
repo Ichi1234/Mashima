@@ -28,6 +28,6 @@ public class Pursuer_RoarState : PursuerState
     {
         pursuer.ResumeMovement();
 
-        stateMachine.ChangeState(pursuer.IdleState);
+        stateMachine.ChangeState(pursuer.PatrolState);
     }
 }

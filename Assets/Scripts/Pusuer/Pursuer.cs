@@ -22,6 +22,10 @@ public class Pursuer : Entity
     [Header("Animation")]
     [SerializeField] private PursuerAnimationController animController;
 
+    [Header("General")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private string footStepName = "pursuer-footstep";
+
     public Action OnReachedTheDesitnation;
 
     public bool IsSeeingPlayer = false;
@@ -30,16 +34,17 @@ public class Pursuer : Entity
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
     public Pursuer_ChaseState ChaseState { get; private set; }
-    public Pursuer_losePlayerState LosePlayerState { get; private set; }
+    public Pursuer_LosePlayerState LosePlayerState { get; private set; }
     public Pursuer_RoarState RoarState { get; private set; }
-
-    public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
-    public float RunSpeedMultiplier => runSpeedMultiplier;
-    public PursuerAnimationController Animation => animController;
 
     private CapsuleCollider playerDetectionCollider;
 
     private Vector3 initialPos;
+    public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
+    public float RunSpeedMultiplier => runSpeedMultiplier;
+    public PursuerAnimationController Animation => animController;
+    public AudioSource AudioSource => audioSource;
+
 
     protected override void Awake()
     {
@@ -50,14 +55,19 @@ public class Pursuer : Entity
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
-        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
-        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
+        LosePlayerState = new Pursuer_LosePlayerState(this, stateMachine);
+        LosePlayerState = new Pursuer_LosePlayerState(this, stateMachine);
         RoarState = new Pursuer_RoarState(this, stateMachine);
 
         initialPos = transform.position;
     }
 
-    private void OnEnable() => GameManager.Instance.OnPlayerDeath += PlayerDeath;
+    private void OnEnable()
+    {
+        GameManager.Instance.OnPlayerDeath += PlayerDeath;
+
+        animController.OnFootSteped += PlayFootStepSound;
+    }
 
     private void Start()
     {
@@ -68,7 +78,7 @@ public class Pursuer : Entity
 
         playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
 
-        stateMachine.Initialize(PatrolState);
+        stateMachine.Initialize(IdleState);
     }
 
     protected override void Update()
@@ -114,7 +124,7 @@ public class Pursuer : Entity
 
     private void PlayerDeath()
     {
-        stateMachine.ChangeState(PatrolState);
+        stateMachine.ChangeState(IdleState);
         agent.Warp(initialPos);
     }
 
@@ -240,4 +250,5 @@ public class Pursuer : Entity
     public void StopMovement() => agent.isStopped = true;
     public void ResumeMovement() => agent.isStopped = false;
 
+    public void PlayFootStepSound() => AudioManager.Instance.PlaySFX(footStepName, audioSource);
 }
