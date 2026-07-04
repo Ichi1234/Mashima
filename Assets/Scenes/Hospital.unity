@@ -17038,8 +17038,28 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1389100536}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: footStepName
+      value: player-footstep
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: playerCamera
+      value: 
+      objectReference: {fileID: 1177768422}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: fovChangeDuration
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: defaultPlayerPushForce
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6386165755437298839, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: Loop
@@ -17060,6 +17080,10 @@ PrefabInstance:
     - target: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
@@ -61975,6 +61999,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7209490602586178248, guid: 263a55f2e2948c54999000656fa4ff48, type: 3}
   m_PrefabInstance: {fileID: 582340790}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1177768422 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6386165755437298839, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+  m_PrefabInstance: {fileID: 257153221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1179480590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1030972412, guid: abc00000000001457242194066488754, type: 3}
@@ -71623,6 +71652,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1392240412}
   m_Mesh: {fileID: 4300000, guid: 92e94bedf87decc4bab0193195407561, type: 3}
+--- !u!82 &1389100536 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+  m_PrefabInstance: {fileID: 257153221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &1389852526
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -181218,7 +181252,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7809537281170813354, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

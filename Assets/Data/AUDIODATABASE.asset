@@ -15,7 +15,7 @@ MonoBehaviour:
   player:
   - audioName: player-footstep
     clip: {fileID: 8300000, guid: 4ee871f4310417a45b8d46bf366696b5, type: 3}
-    maxVolume: 1
+    maxVolume: 0.1
     spread: 0
     minDistance: 1
     maxDistance: 20

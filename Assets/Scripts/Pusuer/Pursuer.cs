@@ -26,8 +26,6 @@ public class Pursuer : Entity
     [SerializeField] private PursuerAnimationController animController;
 
     [Header("General")]
-    [SerializeField] private AudioSource audioSource;
-    [SerializeField] private string footStepName = "pursuer-footstep";
     [SerializeField] private string screechName = "pursuer-screech";
 
     public Action OnReachedTheDesitnation;
@@ -307,8 +305,5 @@ public class Pursuer : Entity
 
     public void StopMovement() => agent.isStopped = true;
     public void ResumeMovement() => agent.isStopped = false;
-
-    public void PlayFootStepSound() => AudioManager.Instance.PlaySFX(footStepName, audioSource, true);
-
     public void PlayScreechSound() => AudioManager.Instance.PlaySFX(screechName, audioSource);
 }
