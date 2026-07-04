@@ -12,7 +12,7 @@ public class Pursuer_LosePlayerState : PursuerState
     {
         base.Enter();
 
-        float I_KNOW_YOU_ARE_NERE_HAHAHAHA = 10;
+        float I_KNOW_YOU_ARE_NERE_HAHAHAHA = GameManager.Instance.DefaultNoise / 2;
 
         GameManager.Instance.SetAppoximateNoise(I_KNOW_YOU_ARE_NERE_HAHAHAHA);
         

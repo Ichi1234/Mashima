@@ -11,6 +11,7 @@ public class Pursuer_RoarState : PursuerState
         base.Enter();
 
         pursuer.Animation.PlayRoar();
+        pursuer.PlayScreechSound();
 
         pursuer.StopMovement();
 

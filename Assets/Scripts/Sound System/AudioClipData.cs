@@ -11,4 +11,5 @@ public class AudioClipData
     [Range(0f, 360f)] public float spread = 0;
     public float minDistance = 1;
     public float maxDistance = 20;
+    public float pitch = 1;
 }

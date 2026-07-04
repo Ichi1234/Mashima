@@ -12,19 +12,18 @@ public class AudioManager : MonoBehaviour
         Instance = this;
     }
 
-    public void PlaySFX(string soundName, AudioSource sfxSource)
+    public void PlaySFX(string soundName, AudioSource sfxSource, bool randomPitch = false)
     {
         AudioClipData data = audioDB.GetAudio(soundName);
         if (data == null) return;
         if (data.clip == null) return;
-        //if (sfxSource.isPlaying) return;
-        sfxSource.clip = data.clip;
-        sfxSource.pitch = Random.Range(0.95f, 1.1f);
-        sfxSource.volume = data.maxVolume;
+
+        sfxSource.pitch = randomPitch ? Random.Range(0.95f, 1.1f) : data.pitch;
         sfxSource.spread = data.spread;
         sfxSource.maxDistance = data.maxDistance;
         sfxSource.minDistance = data.minDistance;
-        sfxSource.Play();
+
+        sfxSource.PlayOneShot(data.clip, data.maxVolume);
     }
 
 }
