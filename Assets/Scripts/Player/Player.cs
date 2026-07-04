@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.XR;
@@ -12,9 +13,15 @@ public class Player : Entity
     [SerializeField] private Light flashLight;
     [SerializeField] private CharacterController charController;
     [SerializeField] private float gravity = 0.98f;
-    [SerializeField] private Transform cameraOffset;
     [SerializeField] private float defaultPlayerPushForce = 10;
     private float playerPushForce;
+
+    [Header("Camera")]
+    [SerializeField] private Transform cameraOffset;
+    [SerializeField] private Camera playerCamera;
+    [SerializeField] private float fovChangeDuration = 2;
+    private Coroutine fovCoroutine;
+    public float DefaultFov { get; private set; }
 
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
@@ -75,6 +82,7 @@ public class Player : Entity
 
         playerPushForce = defaultPlayerPushForce;
 
+        DefaultFov = playerCamera.fieldOfView;
     }
 
     private void OnEnable()
@@ -142,6 +150,10 @@ public class Player : Entity
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        IImpactReceiver impactReceiver = hit.collider.GetComponentInParent<IImpactReceiver>();
+
+        impactReceiver?.ReceiveImpact(IsRunning());
+
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body == null || body.isKinematic) return;
 
@@ -190,4 +202,39 @@ public class Player : Entity
 
     public void SetPlayerPushForce(float newForce) => playerPushForce = newForce;
     public void ResetPlayerPushForce() => playerPushForce = defaultPlayerPushForce;
+    public bool IsRunning() => Input.Player.Run.IsPressed();
+
+    public void SetFOV(float targetFov)
+    {
+        if (fovCoroutine != null)
+            StopCoroutine(fovCoroutine);
+
+        fovCoroutine = StartCoroutine(FOVRoutine(targetFov));
+    }
+
+    private IEnumerator FOVRoutine(float targetFov)
+    {
+        float startFov = playerCamera.fieldOfView;
+        float elapsed = 0f;
+
+        while (elapsed < fovChangeDuration)
+        {
+            elapsed += Time.deltaTime;
+
+            playerCamera.fieldOfView = Mathf.Lerp(
+                startFov,
+                targetFov,
+                elapsed / fovChangeDuration);
+
+            yield return null;
+        }
+
+        playerCamera.fieldOfView = targetFov;
+        fovCoroutine = null;
+    }
+
+    public void ResetFOV()
+    {
+        SetFOV(DefaultFov);
+    }
 }

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public System.Action OnElectricRepaired;
 
+    public bool PlayerIsRunning => player.IsRunning();
     public float DoorSlamForce => doorSlamForce;
 
     public float DefaultNoise => defaultAppoximateNoise;

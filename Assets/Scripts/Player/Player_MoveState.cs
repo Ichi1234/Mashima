@@ -1,8 +1,13 @@
 using UnityEngine;
-using static Player;
+
 
 public class Player_MoveState : PlayerState
 {
+    private float walkInterval = 0.5f;
+    private float runInterval = 0.3f;
+    private float footStepTimer = 0;
+    private bool wasRunning = false;
+
     public Player_MoveState(Player player, StateMachine stateMachine) : base(player, stateMachine)
     {
     }
@@ -16,9 +21,12 @@ public class Player_MoveState : PlayerState
             stateMachine.ChangeState(player.IdleState);
         }
 
+        bool isRunning = player.Input.Player.Run.IsPressed() && stateMachine.CanChangeState;
+        ChangeFovToRunning(isRunning);
+
         Vector2 moveInputWithSpeed = player.MoveInput * player.MoveSpeed;
 
-        if (player.Input.Player.Run.IsPressed() && stateMachine.CanChangeState)
+        if (isRunning)
         {
             player.SetMoveSpeedMultiplier(player.RunSpeedMultiplier);
             player.SetPlayerPushForce(GameManager.Instance.DoorSlamForce);
@@ -41,6 +49,39 @@ public class Player_MoveState : PlayerState
         Vector3 moveHorizontal = right * moveInputWithSpeed.x;
 
         player.MoveCharacter(moveVertical + moveHorizontal);
-        
+
+        PlayFootStepSound(isRunning);
+
     }
+
+    private void ChangeFovToRunning(bool isRunning)
+    {
+        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        {
+            return;
+        }
+
+        if (isRunning != wasRunning)
+        {
+            if (isRunning)
+                player.SetFOV(player.DefaultFov + 10);
+            else
+                player.ResetFOV();
+
+            wasRunning = isRunning;
+        }
+    }
+
+    private void PlayFootStepSound(bool isRunning)
+    {
+        if (footStepTimer <= 0)
+        {
+            player.PlayFootStepSound();
+
+            footStepTimer = isRunning ? runInterval : walkInterval;
+        }
+
+        footStepTimer -= Time.deltaTime;
+    }
+
 }

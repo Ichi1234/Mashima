@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Pursuer_losePlayerState : PursuerState
+public class Pursuer_LosePlayerState : PursuerState
 {
 
     private float curStateTime = 10;
-    public Pursuer_losePlayerState(Pursuer pursuer, StateMachine stateMachine) : base(pursuer, stateMachine)
+    public Pursuer_LosePlayerState(Pursuer pursuer, StateMachine stateMachine) : base(pursuer, stateMachine)
     {
     }
 
@@ -18,7 +18,6 @@ public class Pursuer_losePlayerState : PursuerState
         
         stateTimer = curStateTime;
 
-        pursuer.Animation.SetRunning(true);
     }
 
     public override void Update()
@@ -34,7 +33,7 @@ public class Pursuer_losePlayerState : PursuerState
 
     }
 
-        public override void Exit()
+    public override void Exit()
         {
             base.Exit();
 

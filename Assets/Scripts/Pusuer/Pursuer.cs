@@ -8,6 +8,9 @@ public class Pursuer : Entity
     [SerializeField] private float moveSpeed = 4.6f;
     [SerializeField] private float chaseSpeedMultiplier = 1.25f;
     [SerializeField] private float runSpeedMultiplier = 1.5f;
+    [SerializeField] private float slowDownMultiplier = 0.55f;
+    [SerializeField] private float partialSlowDownMultiplier = 0.85f;
+    [SerializeField] private float slowDownDuration = 2;
 
     [Header("Pursuer Eyes")]
     [SerializeField] private float playerDetectionRange;
@@ -22,24 +25,30 @@ public class Pursuer : Entity
     [Header("Animation")]
     [SerializeField] private PursuerAnimationController animController;
 
+    [Header("General")]
+    [SerializeField] private string screechName = "pursuer-screech";
+
     public Action OnReachedTheDesitnation;
 
     public bool IsSeeingPlayer = false;
 
+    private float slowdownTimer;
+    private bool isSlowing = false;
 
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
     public Pursuer_ChaseState ChaseState { get; private set; }
-    public Pursuer_losePlayerState LosePlayerState { get; private set; }
+    public Pursuer_LosePlayerState LosePlayerState { get; private set; }
     public Pursuer_RoarState RoarState { get; private set; }
-
-    public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
-    public float RunSpeedMultiplier => runSpeedMultiplier;
-    public PursuerAnimationController Animation => animController;
 
     private CapsuleCollider playerDetectionCollider;
 
     private Vector3 initialPos;
+    public float ChaseSpeedMultiplier => chaseSpeedMultiplier;
+    public float RunSpeedMultiplier => runSpeedMultiplier;
+    public PursuerAnimationController Animation => animController;
+    public AudioSource AudioSource => audioSource;
+
 
     protected override void Awake()
     {
@@ -50,14 +59,19 @@ public class Pursuer : Entity
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
-        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
-        LosePlayerState = new Pursuer_losePlayerState(this, stateMachine);
+        LosePlayerState = new Pursuer_LosePlayerState(this, stateMachine);
+        LosePlayerState = new Pursuer_LosePlayerState(this, stateMachine);
         RoarState = new Pursuer_RoarState(this, stateMachine);
 
         initialPos = transform.position;
     }
 
-    private void OnEnable() => GameManager.Instance.OnPlayerDeath += PlayerDeath;
+    private void OnEnable()
+    {
+        GameManager.Instance.OnPlayerDeath += PlayerDeath;
+
+        animController.OnFootSteped += PlayFootStepSound;
+    }
 
     private void Start()
     {
@@ -68,7 +82,7 @@ public class Pursuer : Entity
 
         playerDetectionCollider = GameManager.Instance.GetPlayerDetectionCollider();
 
-        stateMachine.Initialize(PatrolState);
+        stateMachine.Initialize(IdleState);
     }
 
     protected override void Update()
@@ -76,6 +90,8 @@ public class Pursuer : Entity
         base.Update();
 
         SlamTheDoorOpen();
+
+        RecoverFromSlowdown();
 
         agent.speed = moveSpeed * moveSpeedMultiplier;
 
@@ -98,14 +114,64 @@ public class Pursuer : Entity
 
     }
 
+    private void RecoverFromSlowdown()
+    {
+        if (isSlowing && slowdownTimer <= 0)
+        {
+            switch (stateMachine.currentState)
+            {
+                case Pursuer_PatrolState:
+                    ResetMoveSpeedMultiplier();
+                    break;
+                case Pursuer_ChaseState:
+                    SetMoveSpeedMultiplier(ChaseSpeedMultiplier);
+                    break;
+                case Pursuer_LosePlayerState:
+                    ResetMoveSpeedMultiplier();
+                    break;
+                default:
+                    ResetMoveSpeedMultiplier();
+                    break;
+            }
+
+            isSlowing = false;
+        }
+
+        slowdownTimer -= Time.deltaTime;
+    }
+
     private void SlamTheDoorOpen()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.5f))
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out RaycastHit hit, 1.5f))
         {
             Door door = hit.transform.GetComponent<Door>();
-            if (door != null && !door.IsOpen)
+            if (door == null) return;
+
+            bool wasFullyShut = !door.IsOpen && !door.IsPartiallyOpen;
+            bool wasPartiallyOpen = door.IsPartiallyOpen;
+            bool needToOpen = !door.IsOpen || door.IsPartiallyOpen;
+
+            if (needToOpen)
             {
                 door.OpenWithForce(GameManager.Instance.DoorSlamForce);
+
+
+                if (!isSlowing)
+                {
+                    if (wasFullyShut)
+                    {
+                        SetMoveSpeedMultiplier(slowDownMultiplier);
+                       
+                    }
+                    else if (wasPartiallyOpen)
+                    {
+                        SetMoveSpeedMultiplier(partialSlowDownMultiplier); 
+                        
+                    }
+
+                    slowdownTimer = slowDownDuration;
+                    isSlowing = true;
+                }
             }
         }
     }
@@ -114,7 +180,7 @@ public class Pursuer : Entity
 
     private void PlayerDeath()
     {
-        stateMachine.ChangeState(PatrolState);
+        stateMachine.ChangeState(IdleState);
         agent.Warp(initialPos);
     }
 
@@ -239,5 +305,5 @@ public class Pursuer : Entity
 
     public void StopMovement() => agent.isStopped = true;
     public void ResumeMovement() => agent.isStopped = false;
-
+    public void PlayScreechSound() => AudioManager.Instance.PlaySFX(screechName, audioSource);
 }

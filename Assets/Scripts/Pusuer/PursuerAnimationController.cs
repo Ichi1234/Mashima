@@ -15,6 +15,7 @@ public class PursuerAnimationController : MonoBehaviour
     [SerializeField] private string roar = "roar";
 
     public Action OnAnimationFinished;
+    public Action OnFootSteped;
 
     public void SetIdle(bool value)
     {
@@ -36,7 +37,7 @@ public class PursuerAnimationController : MonoBehaviour
         animator.SetFloat(walkHeadDir, value);
     }
 
-
+    private void OnFootStep() => OnFootSteped?.Invoke();
     private void OnRoarFinished() => OnAnimationFinished?.Invoke();
 
     public void PlayAttack()

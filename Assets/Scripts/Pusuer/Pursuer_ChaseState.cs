@@ -44,7 +44,6 @@ public class Pursuer_ChaseState : PursuerState
         GameManager.Instance.ResetAppoximateNoise();
         pursuer.ResetMoveSpeedMultiplier();
 
-        pursuer.Animation.SetRunning(false);
         pursuer.ResetLook();
 
     }

@@ -11,6 +11,7 @@ public class Pursuer_RoarState : PursuerState
         base.Enter();
 
         pursuer.Animation.PlayRoar();
+        pursuer.PlayScreechSound();
 
         pursuer.StopMovement();
 
@@ -28,6 +29,6 @@ public class Pursuer_RoarState : PursuerState
     {
         pursuer.ResumeMovement();
 
-        stateMachine.ChangeState(pursuer.IdleState);
+        stateMachine.ChangeState(pursuer.PatrolState);
     }
 }
