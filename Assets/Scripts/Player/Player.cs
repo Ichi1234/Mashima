@@ -142,6 +142,10 @@ public class Player : Entity
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        IImpactReceiver impactReceiver = hit.collider.GetComponentInParent<IImpactReceiver>();
+
+        impactReceiver?.ReceiveImpact(IsRunning());
+
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body == null || body.isKinematic) return;
 
@@ -190,4 +194,6 @@ public class Player : Entity
 
     public void SetPlayerPushForce(float newForce) => playerPushForce = newForce;
     public void ResetPlayerPushForce() => playerPushForce = defaultPlayerPushForce;
+
+    public bool IsRunning() => Input.Player.Run.IsPressed();
 }

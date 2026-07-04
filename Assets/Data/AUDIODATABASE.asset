@@ -38,15 +38,22 @@ MonoBehaviour:
   env:
   - audioName: door-open
     clip: {fileID: 8300000, guid: 59fe452a139f5b04c8a5a72263f5dc05, type: 3}
-    maxVolume: 0
+    maxVolume: 1
     spread: 0
-    minDistance: 0
-    maxDistance: 0
-    pitch: 0
+    minDistance: 1
+    maxDistance: 1.1
+    pitch: 1
   - audioName: door-close
     clip: {fileID: 8300000, guid: f8580b531deed534eb91b1ae53341576, type: 3}
-    maxVolume: 0
+    maxVolume: 1
     spread: 0
-    minDistance: 0
-    maxDistance: 0
-    pitch: 0
+    minDistance: 1
+    maxDistance: 1.1
+    pitch: 1
+  - audioName: door-slam
+    clip: {fileID: 8300000, guid: 627ff6cdd24ae8941a8cefe8cfe8f038, type: 3}
+    maxVolume: 1
+    spread: 0
+    minDistance: 1
+    maxDistance: 1.1
+    pitch: 1

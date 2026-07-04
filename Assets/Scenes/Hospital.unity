@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.06666667, g: 0.07058824, b: 0.09803922, a: 1}
+  m_AmbientSkyColor: {r: 0.7421007, g: 0.7440147, b: 0.7574123, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -16991,7 +16991,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1764218847462955253, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.28
+      value: 16.71
       objectReference: {fileID: 0}
     - target: {fileID: 1764218847462955253, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16999,7 +16999,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1764218847462955253, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 73.4
+      value: 73.39
       objectReference: {fileID: 0}
     - target: {fileID: 1764218847462955253, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17033,9 +17033,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: DesktopPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 5572369875170210663, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: defaultPlayerPushForce
-      value: 25
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 7108342355306565287, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: Loop
@@ -181203,6 +181207,10 @@ PrefabInstance:
     - target: {fileID: 5490441778112505539, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
       propertyPath: m_AngularSpeed
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588432794541370761, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
+      propertyPath: slowDownMultiplier
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7809537281170813354, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
       propertyPath: m_Name

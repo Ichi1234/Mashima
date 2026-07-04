@@ -8,6 +8,9 @@ public class Pursuer : Entity
     [SerializeField] private float moveSpeed = 4.6f;
     [SerializeField] private float chaseSpeedMultiplier = 1.25f;
     [SerializeField] private float runSpeedMultiplier = 1.5f;
+    [SerializeField] private float slowDownMultiplier = 0.55f;
+    [SerializeField] private float partialSlowDownMultiplier = 0.85f;
+    [SerializeField] private float slowDownDuration = 2;
 
     [Header("Pursuer Eyes")]
     [SerializeField] private float playerDetectionRange;
@@ -31,6 +34,8 @@ public class Pursuer : Entity
 
     public bool IsSeeingPlayer = false;
 
+    private float slowdownTimer;
+    private bool isSlowing = false;
 
     public Pursuer_IdleState IdleState { get; private set; }
     public Pursuer_PatrolState PatrolState { get; private set; }
@@ -88,6 +93,8 @@ public class Pursuer : Entity
 
         SlamTheDoorOpen();
 
+        RecoverFromSlowdown();
+
         agent.speed = moveSpeed * moveSpeedMultiplier;
 
         if (!agent.pathPending && agent.remainingDistance <= 0.02f)
@@ -109,14 +116,64 @@ public class Pursuer : Entity
 
     }
 
+    private void RecoverFromSlowdown()
+    {
+        if (isSlowing && slowdownTimer <= 0)
+        {
+            switch (stateMachine.currentState)
+            {
+                case Pursuer_PatrolState:
+                    ResetMoveSpeedMultiplier();
+                    break;
+                case Pursuer_ChaseState:
+                    SetMoveSpeedMultiplier(ChaseSpeedMultiplier);
+                    break;
+                case Pursuer_LosePlayerState:
+                    ResetMoveSpeedMultiplier();
+                    break;
+                default:
+                    ResetMoveSpeedMultiplier();
+                    break;
+            }
+
+            isSlowing = false;
+        }
+
+        slowdownTimer -= Time.deltaTime;
+    }
+
     private void SlamTheDoorOpen()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1.5f))
+        if (Physics.SphereCast(transform.position, 0.3f, transform.forward, out RaycastHit hit, 1.5f))
         {
             Door door = hit.transform.GetComponent<Door>();
-            if (door != null && !door.IsOpen)
+            if (door == null) return;
+
+            bool wasFullyShut = !door.IsOpen && !door.IsPartiallyOpen;
+            bool wasPartiallyOpen = door.IsPartiallyOpen;
+            bool needToOpen = !door.IsOpen || door.IsPartiallyOpen;
+
+            if (needToOpen)
             {
                 door.OpenWithForce(GameManager.Instance.DoorSlamForce);
+
+
+                if (!isSlowing)
+                {
+                    if (wasFullyShut)
+                    {
+                        SetMoveSpeedMultiplier(slowDownMultiplier);
+                       
+                    }
+                    else if (wasPartiallyOpen)
+                    {
+                        SetMoveSpeedMultiplier(partialSlowDownMultiplier); 
+                        
+                    }
+
+                    slowdownTimer = slowDownDuration;
+                    isSlowing = true;
+                }
             }
         }
     }

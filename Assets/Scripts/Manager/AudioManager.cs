@@ -26,4 +26,24 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(data.clip, data.maxVolume);
     }
 
+    public void PlaySFXLoop(string soundName, AudioSource sfxSource)
+    {
+        AudioClipData data = audioDB.GetAudio(soundName);
+        if (data == null || data.clip == null) return;
+        if (sfxSource.isPlaying && sfxSource.clip == data.clip) return;
+
+        sfxSource.clip = data.clip;
+        sfxSource.loop = true;
+        sfxSource.volume = data.maxVolume;
+        sfxSource.spread = data.spread;
+        sfxSource.maxDistance = data.maxDistance;
+        sfxSource.minDistance = data.minDistance;
+        sfxSource.Play();
+    }
+
+    public void StopSFX(AudioSource sfxSource)
+    {
+        sfxSource.Stop();
+        sfxSource.loop = false;
+    }
 }
