@@ -98,6 +98,8 @@ public class WakeUpVfx : MonoBehaviour
 
         blurEffect.weight = 0;
 
+        gameObject.SetActive(false);
+
     }
 
 
