@@ -27,7 +27,7 @@ public class Player : Entity
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
     [SerializeField] private LayerMask interactLayer;
-    [SerializeField] private LayerMask indicatorLayer;
+    [SerializeField] private LayerMask itemLayer;
     [SerializeField] private float sphereRadius = 0.3f;
     public bool isInteractabled { get; private set; }
     private Indicator curIndicator;
@@ -101,6 +101,12 @@ public class Player : Entity
     {
         RaycastHit hit = CameraInteractRaycast();
 
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
+        }
+
+
         if (!isInteractabled)
         {
             curIndicator?.SetInteractable(false);
@@ -128,6 +134,22 @@ public class Player : Entity
 
     private RaycastHit CameraInteractRaycast()
     {
+        bool hitItem = Physics.SphereCast(
+            cameraOffset.transform.position,
+            sphereRadius,
+            cameraOffset.transform.forward,
+            out RaycastHit itemHit,
+            interactDistance,
+            itemLayer
+        );
+
+        if (hitItem)
+        {
+            isInteractabled = true;
+            UpdateIndicator(itemHit);
+            return itemHit;
+        }
+
         isInteractabled = Physics.SphereCast(
             cameraOffset.transform.position,
             sphereRadius,
@@ -137,9 +159,15 @@ public class Player : Entity
             interactLayer 
         );
 
+        UpdateIndicator(isInteractabled ? hit : default);
+        return hit;
+    }
+
+    private void UpdateIndicator(RaycastHit hit)
+    {
         Indicator indicator = isInteractabled
-            ? hit.collider.GetComponentInChildren<Indicator>()
-            : null;
+           ? hit.collider.GetComponentInChildren<Indicator>()
+           : null;
 
         if (indicator != curIndicator)
         {
@@ -148,8 +176,6 @@ public class Player : Entity
         }
 
         curIndicator?.SetInteractable(indicator != null);
-
-        return hit;
     }
 
     private void OnDisable()

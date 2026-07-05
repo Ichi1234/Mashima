@@ -17,7 +17,9 @@ public class Item : MonoBehaviour, IInteractable
 
         ItemManager.Instance.StoreItem(itemData);
 
-        Destroy(gameObject);
+        transform.position = new Vector3(999, 999, 999);
+
+        Destroy(gameObject, 0.8f);
     }
 
     public void EnableInteract()

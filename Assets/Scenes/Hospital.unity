@@ -6733,7 +6733,6 @@ MonoBehaviour:
     requiredAmount: 1
     requirementMet: 0
   indicator: {fileID: 1124089226}
-  col: {fileID: 139620326}
 --- !u!135 &139620326
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -17061,6 +17060,10 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1177768422}
+    - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: itemLayer.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 6199080006645217704, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
       propertyPath: fovChangeDuration
       value: 0.2
@@ -70815,6 +70818,14 @@ PrefabInstance:
     - target: {fileID: 54242179167976644, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: m_UseGravity
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54242179167976644, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: m_Constraints
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 54242179167976644, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: m_AngularDamping
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 54605693366737884, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: m_UseGravity
@@ -130938,7 +130949,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.04
+  m_Radius: 0.005
   m_Center: {x: 0.0000076293945, y: 0.0000038146973, z: -0.0000076293945}
 --- !u!4 &1540424494769674777
 Transform:
@@ -135920,7 +135931,8 @@ GameObject:
   - component: {fileID: 2501863202394177724}
   - component: {fileID: 2512084418056934032}
   - component: {fileID: 2521325625254900216}
-  m_Layer: 0
+  - component: {fileID: 2521325625254900217}
+  m_Layer: 10
   m_Name: JarLid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136044,6 +136056,7 @@ MonoBehaviour:
   baby: {fileID: 2520578773324215587}
   maskRB: {fileID: 7380092942948137797}
   mask: {fileID: 5478079164922823004}
+  maskCollider: {fileID: 6959479561136073336}
 --- !u!82 &2499345934195211079
 AudioSource:
   m_ObjectHideFlags: 0
@@ -136152,6 +136165,7 @@ GameObject:
   - component: {fileID: 2502126850535669674}
   - component: {fileID: 2512825659069522754}
   - component: {fileID: 2521197095547709580}
+  - component: {fileID: 2521197095547709581}
   m_Layer: 0
   m_Name: JarLid (2)
   m_TagString: Untagged
@@ -136539,7 +136553,6 @@ MonoBehaviour:
     requiredAmount: 0
     requirementMet: 0
   indicator: {fileID: 1804684989}
-  col: {fileID: 2520626213758382558}
 --- !u!64 &2520626213758382558
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -136611,6 +136624,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2521197095547709581
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2499430874747042448}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 8f28708aab45e9c48a951b5c627f55cd, type: 3}
 --- !u!23 &2521325625254900216
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -136660,6 +136695,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2521325625254900217
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2498582133156737924}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: 8f28708aab45e9c48a951b5c627f55cd, type: 3}
 --- !u!23 &2521379473918609036
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -203643,7 +203700,7 @@ GameObject:
   - component: {fileID: 7057561343350071474}
   - component: {fileID: 6959479561136073336}
   - component: {fileID: 7380092942948137797}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Mask
   m_TagString: Item
   m_Icon: {fileID: 0}

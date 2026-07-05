@@ -7,7 +7,6 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
 
     [SerializeField] private Indicator indicator;
-    [SerializeField] private Collider col;
 
     private IPuzzleReactable puzzleReactor;
     private Dictionary<ItemData, int> itemsCurAmount;
@@ -32,6 +31,39 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         CheckShowIndicator();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (GameManager.Instance.CurPlayerMode != PlayerMode.VR) return;
+        if (!other.CompareTag("Item")) return;
+
+        Item droppedItem = other.GetComponent<Item>();
+        if (droppedItem == null) return;
+
+        foreach (PuzzleItemRequirement requireItem in requiredItems)
+        {
+            if (requireItem.itemData != droppedItem.ItemData) continue;
+            if (requireItem.requirementMet) continue;
+
+            DepositItem(requireItem);
+            break;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Item goneItem = other.GetComponent<Item>();
+        if (goneItem == null) return;
+
+        foreach (var item in requiredItems)
+        {
+            if (goneItem.ItemData != item.itemData) continue;
+
+            itemsCurAmount[item.itemData] = Mathf.Max(0, itemsCurAmount[item.itemData] - 1);
+            item.requirementMet = itemsCurAmount[item.itemData] >= item.requiredAmount;
+            break;
+        }
+    }
+
     private void CheckShowIndicator()
     {
         bool hasRelevantItem = false;
@@ -47,11 +79,6 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         if (hasRelevantItem != indicator.IsShowable)
         {
             indicator.SetShowable(hasRelevantItem);
-        }
-
-        if (GameManager.Instance.CurPlayerMode == PlayerMode.Desktop && col.enabled != hasRelevantItem)
-        {
-            col.enabled = hasRelevantItem;
         }
     }
 
@@ -77,24 +104,6 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
             ItemManager.Instance.RemoveItem(item.itemData, Mathf.Min(item.requiredAmount, 1));
             DepositItem(item);
-            break;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (GameManager.Instance.CurPlayerMode != PlayerMode.VR) return;
-        if (!other.CompareTag("Item")) return;
-
-        Item droppedItem = other.GetComponent<Item>();
-        if (droppedItem == null) return;
-
-        foreach (PuzzleItemRequirement requireItem in requiredItems)
-        {
-            if (requireItem.itemData != droppedItem.ItemData) continue;
-            if (requireItem.requirementMet) continue;
-
-            DepositItem(requireItem);
             break;
         }
     }
