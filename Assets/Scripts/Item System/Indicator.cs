@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class Indicator : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private Sprite interactableSprite;
+
+    public bool IsShowable { get; private set; } = true;
+
     private Camera mainCamera;
 
     private Transform player;
@@ -14,34 +19,55 @@ public class Indicator : MonoBehaviour
 
     public void Show()
     {
-        sprite.enabled = true;
+        if (IsShowable)
+        {
+            sr.enabled = true;
+        }
     }
 
     public void Hide()
     {
-        sprite.enabled = false;
+        sr.enabled = false;
     }
 
     private void Awake()
     {
         mainCamera = Camera.main;
+
+        sr.sprite = defaultSprite;
     }
 
     private void Update()
     {
-        if (player == null || !sprite.enabled)
+        if (sr.enabled == true && !IsShowable) sr.enabled = false;
+
+        if (player == null || !sr.enabled)
             return;
 
-        float distance =
-            Vector3.Distance(player.position, transform.position);
-
+        Vector3 parentScale = transform.parent.lossyScale;
+        transform.localScale = new Vector3(
+            1f / parentScale.x,
+            1f / parentScale.y,
+            1f / parentScale.z
+        );
     }
 
     private void LateUpdate()
     {
-        if (mainCamera == null || !sprite.enabled)
+        if (mainCamera == null || !sr.enabled)
             return;
 
         transform.forward = mainCamera.transform.forward;
     }
+
+    public void SetInteractable(bool interactable)
+    {
+        if (sr == null) return;
+
+        sr.sprite = interactable
+            ? interactableSprite
+            : defaultSprite;
+    }
+
+    public void SetShowable(bool isInteractable) => IsShowable = isInteractable;
 }

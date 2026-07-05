@@ -6,6 +6,9 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
     [SerializeField] private MonoBehaviour puzzleReactorObject;
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
 
+    [SerializeField] private Indicator indicator;
+    [SerializeField] private Collider col;
+
     private IPuzzleReactable puzzleReactor;
     private Dictionary<ItemData, int> itemsCurAmount;
     private bool isPuzzleCompleted = false;
@@ -17,6 +20,38 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         foreach (PuzzleItemRequirement item in requiredItems)
         {
             itemsCurAmount.Add(item.itemData, 0);
+        }
+
+        indicator.SetShowable(false);
+    }
+
+    private void Update()
+    {
+        if (isPuzzleCompleted) return;
+
+        CheckShowIndicator();
+    }
+
+    private void CheckShowIndicator()
+    {
+        bool hasRelevantItem = false;
+
+        foreach (PuzzleItemRequirement item in requiredItems)
+        {
+            if (item.requirementMet) continue;
+            if (ItemManager.Instance.GetItem(item.itemData) <= 0) continue;
+            hasRelevantItem = true;
+            break;
+        }
+
+        if (hasRelevantItem != indicator.IsShowable)
+        {
+            indicator.SetShowable(hasRelevantItem);
+        }
+
+        if (GameManager.Instance.CurPlayerMode == PlayerMode.Desktop && col.enabled != hasRelevantItem)
+        {
+            col.enabled = hasRelevantItem;
         }
     }
 

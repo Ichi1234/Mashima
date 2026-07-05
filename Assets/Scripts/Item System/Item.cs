@@ -6,6 +6,8 @@ public class Item : MonoBehaviour, IInteractable
 
     [SerializeField] private bool isInteractable = true;
 
+    [SerializeField] private Indicator indicator;
+
     public ItemData ItemData => itemData;
 
 
@@ -18,6 +20,17 @@ public class Item : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    public void EnableInteract() => isInteractable = true;
-    public void DisableInteract() => isInteractable = false;
+    public void EnableInteract()
+    {
+        isInteractable = true;
+
+        indicator.SetShowable(isInteractable);
+    }
+
+    public void DisableInteract()
+    {
+        isInteractable = false;
+        indicator.SetShowable(isInteractable);
+
+    }
 }

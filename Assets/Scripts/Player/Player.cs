@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.XR;
@@ -26,8 +27,10 @@ public class Player : Entity
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
     [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private LayerMask indicatorLayer;
     [SerializeField] private float sphereRadius = 0.3f;
     public bool isInteractabled { get; private set; }
+    private Indicator curIndicator;
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -83,6 +86,7 @@ public class Player : Entity
         playerPushForce = defaultPlayerPushForce;
 
         DefaultFov = playerCamera.fieldOfView;
+
     }
 
     private void OnEnable()
@@ -96,6 +100,11 @@ public class Player : Entity
     protected override void Update()
     {
         RaycastHit hit = CameraInteractRaycast();
+
+        if (!isInteractabled)
+        {
+            curIndicator?.SetInteractable(false);
+        }
 
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
         {
@@ -119,15 +128,26 @@ public class Player : Entity
 
     private RaycastHit CameraInteractRaycast()
     {
-        isInteractabled = Physics.SphereCast
-(
+        isInteractabled = Physics.SphereCast(
             cameraOffset.transform.position,
             sphereRadius,
             cameraOffset.transform.forward,
             out RaycastHit hit,
             interactDistance,
-            interactLayer
+            interactLayer 
         );
+
+        Indicator indicator = isInteractabled
+            ? hit.collider.GetComponentInChildren<Indicator>()
+            : null;
+
+        if (indicator != curIndicator)
+        {
+            curIndicator?.SetInteractable(false);
+            curIndicator = indicator;
+        }
+
+        curIndicator?.SetInteractable(indicator != null);
 
         return hit;
     }

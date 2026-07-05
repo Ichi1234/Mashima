@@ -7,7 +7,13 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Indicator indicator))
+        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        {
+            return;
+        }
+
+        Indicator indicator = other.GetComponentInParent<Indicator>();
+        if (indicator != null)
         {
 
             nearbyIndicators.Add(indicator);
@@ -19,7 +25,9 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out Indicator indicator))
+        Indicator indicator = other.GetComponentInParent<Indicator>();
+
+        if (indicator != null)
         {
             nearbyIndicators.Remove(indicator);
 

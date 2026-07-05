@@ -7,7 +7,6 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
     [SerializeField] private Rigidbody baby;
     [SerializeField] private Rigidbody maskRB;
     [SerializeField] private Item mask;
-    [SerializeField] private Rigidbody tearBottle;
 
     private void Awake()
     {
