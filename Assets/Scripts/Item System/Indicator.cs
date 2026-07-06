@@ -5,6 +5,7 @@ public class Indicator : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite interactableSprite;
+    [SerializeField] private bool isAdjustScale = true;
 
     public bool IsShowable { get; private set; } = true;
 
@@ -37,19 +38,26 @@ public class Indicator : MonoBehaviour
         sr.sprite = defaultSprite;
     }
 
+    private void Start()
+    {
+        if (isAdjustScale)
+        {
+            Vector3 parentScale = transform.parent.lossyScale;
+            transform.localScale = new Vector3(
+                1f / parentScale.x,
+                1f / parentScale.y,
+                1f / parentScale.z
+            );
+        }
+    }
+
     private void Update()
     {
         if (sr.enabled == true && !IsShowable) sr.enabled = false;
 
         if (player == null || !sr.enabled)
             return;
-
-        Vector3 parentScale = transform.parent.lossyScale;
-        transform.localScale = new Vector3(
-            1f / parentScale.x,
-            1f / parentScale.y,
-            1f / parentScale.z
-        );
+       
     }
 
     private void LateUpdate()

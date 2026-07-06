@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4801423338586296645}
   - component: {fileID: 6739158395485760624}
   - component: {fileID: 4241720988638993956}
-  - component: {fileID: 1380984297326769503}
   m_Layer: 7
   m_Name: Interactable Indicator
   m_TagString: Indicator
@@ -109,6 +108,7 @@ MonoBehaviour:
   sr: {fileID: 4801423338586296645}
   defaultSprite: {fileID: 21300000, guid: 17ab31d21baff4346b82aaa0ee2ba62a, type: 3}
   interactableSprite: {fileID: 21300000, guid: 840bcc834b3ed5d4a8439a275b1c36c4, type: 3}
+  isAdjustScale: 1
 --- !u!135 &4241720988638993956
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -130,21 +130,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.04
   m_Center: {x: 0.0000076293945, y: 0.0000038146973, z: -0.0000076293945}
---- !u!1818360610 &1380984297326769503
-ScaleConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9189983107564376175}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_ScaleAtRest: {x: 0.026999999, y: 0.026999999, z: 0.026999999}
-  m_ScaleOffset: {x: 1, y: 1, z: 1}
-  m_AffectScalingX: 1
-  m_AffectScalingY: 1
-  m_AffectScalingZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources: []

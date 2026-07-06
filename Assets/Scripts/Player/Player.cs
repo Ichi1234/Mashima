@@ -106,10 +106,23 @@ public class Player : Entity
             Debug.Log(hit.collider.name);
         }
 
+        PlayerInteraction(hit);
 
+        ApplyGravity();
+
+        base.Update();
+    }
+
+    private void PlayerInteraction(RaycastHit hit)
+    {
         if (!isInteractabled)
         {
             curIndicator?.SetInteractable(false);
+        }
+
+        if (Input.Player.NPCInteraction.WasPerformedThisFrame() && isInteractabled)
+        {
+            hit.transform.GetComponent<INPCInteractable>()?.Interact();
         }
 
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
@@ -121,10 +134,6 @@ public class Player : Entity
         {
             flashLight.enabled = !flashLight.enabled;
         }
-
-        ApplyGravity();
-
-        base.Update();
     }
 
     private void ApplyGravity()
@@ -134,14 +143,7 @@ public class Player : Entity
 
     private RaycastHit CameraInteractRaycast()
     {
-        bool hitItem = Physics.SphereCast(
-            cameraOffset.transform.position,
-            sphereRadius,
-            cameraOffset.transform.forward,
-            out RaycastHit itemHit,
-            interactDistance,
-            itemLayer
-        );
+        bool hitItem = SphereRayCast(itemLayer, out RaycastHit itemHit);
 
         if (hitItem)
         {
@@ -150,24 +152,41 @@ public class Player : Entity
             return itemHit;
         }
 
-        isInteractabled = Physics.SphereCast(
-            cameraOffset.transform.position,
-            sphereRadius,
-            cameraOffset.transform.forward,
-            out RaycastHit hit,
-            interactDistance,
-            interactLayer 
-        );
+        bool hitInteraction = SphereRayCast(interactLayer, out RaycastHit interactHit);
 
-        UpdateIndicator(isInteractabled ? hit : default);
-        return hit;
+
+        if (hitInteraction)
+        {
+            isInteractabled = true;
+            UpdateIndicator(interactHit);
+            return interactHit;
+        }
+
+        isInteractabled = false;
+        UpdateIndicator(default);
+        return default;
+    }
+
+    private bool SphereRayCast(LayerMask targetedLayer, out RaycastHit hit)
+    {
+        return Physics.SphereCast(
+            cameraOffset.position,
+            sphereRadius,
+            cameraOffset.forward,
+            out hit,
+            interactDistance,
+            targetedLayer
+        );
     }
 
     private void UpdateIndicator(RaycastHit hit)
     {
+        if (hit.collider == null) return;
+
+
         Indicator indicator = isInteractabled
-           ? hit.collider.GetComponentInChildren<Indicator>()
-           : null;
+            ? hit.collider.GetComponentInChildren<Indicator>()
+            : null;
 
         if (indicator != curIndicator)
         {
