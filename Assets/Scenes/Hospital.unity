@@ -55251,7 +55251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &846046891
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63477,7 +63477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &907625804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -89235,6 +89235,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 420930, guid: 0ecb5f922be3e4845ba974a138e30196, type: 3}
   m_PrefabInstance: {fileID: 1430154229}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1432307633
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1432307635}
+  - component: {fileID: 1432307634}
+  m_Layer: 0
+  m_Name: DialogManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1432307634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432307633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e18bb1b6825d24e43b501726e07520ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogManager
+  npcName: {fileID: 0}
+  message: {fileID: 0}
+  msgLists: []
+--- !u!4 &1432307635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432307633}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.07853, y: -0, z: -17.48137}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1433204951
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -111305,7 +111352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   defaultAppoximateNoise: 20
-  eyeVfx: {fileID: 0}
+  eyeVfx: {fileID: 907625806}
   doorSlamForce: 300
 --- !u!4 &1772023254
 Transform:
@@ -204376,8 +204423,9 @@ SceneRoots:
   - {fileID: 3288160405354836240}
   - {fileID: 8868764187155271377}
   - {fileID: 1736526914}
+  - {fileID: 1680665479}
   - {fileID: 696813950}
   - {fileID: 1772023254}
+  - {fileID: 1432307635}
   - {fileID: 2007913120}
   - {fileID: 1160883349}
-  - {fileID: 1680665479}
