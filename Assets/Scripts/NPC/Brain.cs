@@ -12,7 +12,7 @@ public class Brain : MonoBehaviour, INPCInteractable
     [SerializeField] private string npcName;
     [SerializeField] private List<SpeechGroup> msgList;
 
-    private float talkCooldownDuration = 1f;
+    private float talkCooldownDuration = 0.5f;
     private float lastTalkedTime = 0;
 
     private enum BrianStage { FirstMeet, TalkSecondTime }

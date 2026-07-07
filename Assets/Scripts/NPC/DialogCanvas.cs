@@ -7,7 +7,8 @@ public class DialogCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI npcName;
     [SerializeField] private TextMeshProUGUI message;
 
-    public Coroutine TypeWriterCo { get; private set; }
+    private Coroutine typeWriterCo;
+    public bool IsTypingAnimFinished { get; private set; }
 
     private void OnEnable()
     {
@@ -21,12 +22,12 @@ public class DialogCanvas : MonoBehaviour
 
     public void PlayTypeWriterTextAnimation()
     {
-        if (TypeWriterCo != null)
+        if (typeWriterCo != null)
         {
-            StopCoroutine(TypeWriterCo);
+            StopCoroutine(typeWriterCo);
         }
 
-        StartCoroutine(TypeWriterTextCO());
+        typeWriterCo = StartCoroutine(TypeWriterTextCO());
     }
 
     private IEnumerator TypeWriterTextCO()
@@ -36,6 +37,8 @@ public class DialogCanvas : MonoBehaviour
 
         float timer = 0f;
         float charRate = 0.03f;
+
+        IsTypingAnimFinished = false;
 
         while (current < target)
         {
@@ -52,9 +55,22 @@ public class DialogCanvas : MonoBehaviour
         }
 
         message.maxVisibleCharacters = message.text.Length;
-        TypeWriterCo = null;
+        IsTypingAnimFinished = true;
+        typeWriterCo = null;
     }
     public void SetNpcName(string name) => npcName.text = name;
 
     public void SetMsg(string newMsg) => message.text = newMsg;
+
+    public void SkipAnimation()
+    {
+        if (typeWriterCo != null)
+        {
+            StopCoroutine(typeWriterCo);
+        }
+
+        IsTypingAnimFinished = true;
+
+        message.maxVisibleCharacters = message.text.Length;
+    }
 }

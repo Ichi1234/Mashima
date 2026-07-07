@@ -43,6 +43,12 @@ public class DialogManager : MonoBehaviour
 
     public void NextMsg()
     {
+        if (!dialogCanvas.IsTypingAnimFinished)
+        {
+            dialogCanvas.SkipAnimation();
+            return;
+        }
+
         index++;
 
         if (index >= msgLists.Count)
@@ -51,6 +57,8 @@ public class DialogManager : MonoBehaviour
             CloseDialogBox();
             return;
         }
+
+       
 
         dialogCanvas.SetMsg(msgLists[index].speechText);
         dialogCanvas.PlayTypeWriterTextAnimation();
