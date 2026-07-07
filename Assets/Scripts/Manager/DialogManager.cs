@@ -1,74 +1,73 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] private Canvas dialogCanvas;
-    [SerializeField] private TextMeshProUGUI npcName;
-    [SerializeField] private TextMeshProUGUI message;
-    [SerializeField] private float textDuration = 20;
-    private Coroutine typeWriterCo;
+    [SerializeField] private DialogCanvas dialogCanvas;
+    private List<SpeechDataSO> msgLists;
+    private Player player;
+    private int index = 0;
 
-    [SerializeField] private List<SpeechDataSO> msgLists;
-
-    public DialogManager Instance { get; private set; }
+    public static DialogManager Instance { get; private set; }
+    public Action OnNpcInteract;
+    public Action OnFinishedTalking;
 
     private void Awake()
     {
         dialogCanvas.gameObject.SetActive(false);
 
         Instance = this;
+
     }
 
-    private void OnEnable()
+    private void OnEnable() => OnNpcInteract += NextMsg;
+
+    private void Update()
     {
-        TypeWriterTextAnim();
+        if (player != null &&
+            player.Input.Player.NPCInteraction.WasPerformedThisFrame()
+            && dialogCanvas.isActiveAndEnabled)
+        {
+            NextMsg();
+        }
     }
 
     private void OnDisable()
     {
-        message.maxVisibleCharacters = 0;
+        OnNpcInteract -= NextMsg;
     }
 
-    private void TypeWriterTextAnim()
+    public void InitializePlayer(Player player) => this.player = player;
+
+    public void NextMsg()
     {
-        if (typeWriterCo != null)
+        index++;
+
+        if (index >= msgLists.Count)
         {
-            StopCoroutine(typeWriterCo);
+            OnFinishedTalking?.Invoke();
+            CloseDialogBox();
+            return;
         }
 
-        StartCoroutine(TypeWriterTextCO());
+        dialogCanvas.SetMsg(msgLists[index].speechText);
+        dialogCanvas.PlayTypeWriterTextAnimation();
     }
 
-    private IEnumerator TypeWriterTextCO()
+    public void OpenDialogBox(string npcName, List<SpeechDataSO> msgData)
     {
-        int target = message.text.Length;
-        int current = 0;
+        msgLists = msgData;
 
-        float timer = 0f;
-        float charRate = 0.03f; 
-
-        while (current < target)
-        {
-            timer += Time.deltaTime;
-
-            if (timer >= charRate)
-            {
-                timer -= charRate;
-                current++;
-                message.maxVisibleCharacters = current;
-            }
-
-            yield return null;
-        }
-
-        message.maxVisibleCharacters = message.text.Length;
-        typeWriterCo = null;
+        dialogCanvas.SetNpcName(npcName);
+        dialogCanvas.SetMsg(msgLists[index].speechText);
+        dialogCanvas.gameObject.SetActive(true);
     }
 
-    public void SetNpcName(string name) => npcName.text = name;
-
-    public void SetMsg(string newMsg) => message.text = newMsg;
+    public void CloseDialogBox()
+    {
+        index = 0;
+        dialogCanvas.gameObject.SetActive(false);
+    }
 }

@@ -80,6 +80,7 @@ public class Player : Entity
         stateMachine.Initialize(IdleState);
 
         GameManager.Instance.InitializePlayer(this);
+        DialogManager.Instance.InitializePlayer(this);
 
         initialCameraPos = cameraOffset.localPosition;
 
