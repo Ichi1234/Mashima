@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 1
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'HELLO FELLOW DREAMER!!! '
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: 7d82bdd02187e514293dbb8322399992, type: 3}
