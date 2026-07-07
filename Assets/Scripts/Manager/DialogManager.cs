@@ -11,7 +11,8 @@ public class DialogManager : MonoBehaviour
     private int index = 0;
 
     public static DialogManager Instance { get; private set; }
-    public Action OnNpcInteract;
+
+    public Action<AudioClip> OnNextMsg;
     public Action OnFinishedTalking;
 
     private void Awake()
@@ -22,7 +23,6 @@ public class DialogManager : MonoBehaviour
 
     }
 
-    private void OnEnable() => OnNpcInteract += NextMsg;
 
     private void Update()
     {
@@ -32,11 +32,6 @@ public class DialogManager : MonoBehaviour
         {
             NextMsg();
         }
-    }
-
-    private void OnDisable()
-    {
-        OnNpcInteract -= NextMsg;
     }
 
     public void InitializePlayer(Player player) => this.player = player;
@@ -58,14 +53,16 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
-       
 
+        OnNextMsg?.Invoke(msgLists[index].speechSound);
         dialogCanvas.SetMsg(msgLists[index].speechText);
         dialogCanvas.PlayTypeWriterTextAnimation();
     }
 
     public void OpenDialogBox(string npcName, List<SpeechDataSO> msgData)
     {
+        if (dialogCanvas.isActiveAndEnabled) return;
+
         msgLists = msgData;
 
         dialogCanvas.SetNpcName(npcName);

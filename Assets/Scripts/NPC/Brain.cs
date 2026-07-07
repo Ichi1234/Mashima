@@ -11,6 +11,7 @@ public class Brain : MonoBehaviour, INPCInteractable
 
     [SerializeField] private string npcName;
     [SerializeField] private List<SpeechGroup> msgList;
+    [SerializeField] private AudioSource audioSource;
 
     private float talkCooldownDuration = 0.5f;
     private float lastTalkedTime = 0;
@@ -33,12 +34,13 @@ public class Brain : MonoBehaviour, INPCInteractable
         isInteractable = false;
         isFinishedTalking = false;
 
-        DialogManager.Instance.OpenDialogBox(npcName, GetSpeechList());
-    }
-
-    private void OnEnable()
-    {
         DialogManager.Instance.OnFinishedTalking += FinishedTalking;
+        DialogManager.Instance.OnNextMsg += PlaySound;
+
+        List<SpeechDataSO> speechList = GetSpeechList();
+
+        DialogManager.Instance.OpenDialogBox(npcName, speechList);
+        PlaySound(speechList[0].speechSound);
     }
 
     private void Start()
@@ -59,23 +61,35 @@ public class Brain : MonoBehaviour, INPCInteractable
         }
     }
 
-    private void OnDisable()
-    {
-        DialogManager.Instance.OnFinishedTalking -= FinishedTalking;
-    }
-
     private void FinishedTalking()
     {
         if (currentStage < BrianStage.TalkSecondTime)
         {
             currentStage++;
         }
+
+        DialogManager.Instance.OnFinishedTalking -= FinishedTalking;
+        DialogManager.Instance.OnNextMsg -= PlaySound;
+
         lastTalkedTime = Time.time;
         isFinishedTalking = true;
     }
 
     private List<SpeechDataSO> GetSpeechList() => msgList[(int)currentStage].SpeechList;
 
+    private void PlaySound(AudioClip clip)
+    {
+        if (audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        if (clip == null) return;
+       
+        audioSource.clip = clip;
+        audioSource.Play();
+        
+    }
 }
 
 
