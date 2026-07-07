@@ -6,6 +6,8 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
     [SerializeField] private MonoBehaviour puzzleReactorObject;
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
 
+    [SerializeField] private Indicator indicator;
+
     private IPuzzleReactable puzzleReactor;
     private Dictionary<ItemData, int> itemsCurAmount;
     private bool isPuzzleCompleted = false;
@@ -17,6 +19,66 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         foreach (PuzzleItemRequirement item in requiredItems)
         {
             itemsCurAmount.Add(item.itemData, 0);
+        }
+
+        indicator.SetShowable(false);
+    }
+
+    private void Update()
+    {
+        if (isPuzzleCompleted) return;
+
+        CheckShowIndicator();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (GameManager.Instance.CurPlayerMode != PlayerMode.VR) return;
+        if (!other.CompareTag("Item")) return;
+
+        Item droppedItem = other.GetComponent<Item>();
+        if (droppedItem == null) return;
+
+        foreach (PuzzleItemRequirement requireItem in requiredItems)
+        {
+            if (requireItem.itemData != droppedItem.ItemData) continue;
+            if (requireItem.requirementMet) continue;
+
+            DepositItem(requireItem);
+            break;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Item goneItem = other.GetComponent<Item>();
+        if (goneItem == null) return;
+
+        foreach (var item in requiredItems)
+        {
+            if (goneItem.ItemData != item.itemData) continue;
+
+            itemsCurAmount[item.itemData] = Mathf.Max(0, itemsCurAmount[item.itemData] - 1);
+            item.requirementMet = itemsCurAmount[item.itemData] >= item.requiredAmount;
+            break;
+        }
+    }
+
+    private void CheckShowIndicator()
+    {
+        bool hasRelevantItem = false;
+
+        foreach (PuzzleItemRequirement item in requiredItems)
+        {
+            if (item.requirementMet) continue;
+            if (ItemManager.Instance.GetItem(item.itemData) <= 0) continue;
+            hasRelevantItem = true;
+            break;
+        }
+
+        if (hasRelevantItem != indicator.IsShowable)
+        {
+            indicator.SetShowable(hasRelevantItem);
         }
     }
 
@@ -42,24 +104,6 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
             ItemManager.Instance.RemoveItem(item.itemData, Mathf.Min(item.requiredAmount, 1));
             DepositItem(item);
-            break;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (GameManager.Instance.CurPlayerMode != PlayerMode.VR) return;
-        if (!other.CompareTag("Item")) return;
-
-        Item droppedItem = other.GetComponent<Item>();
-        if (droppedItem == null) return;
-
-        foreach (PuzzleItemRequirement requireItem in requiredItems)
-        {
-            if (requireItem.itemData != droppedItem.ItemData) continue;
-            if (requireItem.requirementMet) continue;
-
-            DepositItem(requireItem);
             break;
         }
     }

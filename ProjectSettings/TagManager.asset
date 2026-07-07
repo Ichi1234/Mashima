@@ -18,8 +18,8 @@ TagManager:
   - PlayerDetectionHitbox
   - CollisionOnlyPlayer
   - Ground
-  - 
-  - 
+  - Item
+  - NPC
   - 
   - 
   - 

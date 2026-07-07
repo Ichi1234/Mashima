@@ -7,11 +7,12 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
     [SerializeField] private Rigidbody baby;
     [SerializeField] private Rigidbody maskRB;
     [SerializeField] private Item mask;
-    [SerializeField] private Rigidbody tearBottle;
+    [SerializeField] private Collider maskCollider;
 
     private void Awake()
     {
         mask.DisableInteract();
+        maskCollider.enabled = false;    
     }
 
     public void OnItemDeposited(GameObject itemPrefab)
@@ -27,6 +28,7 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
         baby.useGravity = true;
 
         mask.EnableInteract();
+        maskCollider.enabled = true;
         maskRB.isKinematic = false;
         maskRB.useGravity = true;
     }

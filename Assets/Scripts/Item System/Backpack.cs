@@ -44,7 +44,7 @@ public class Backpack : MonoBehaviour
 
         backpack[removeItem.name] -= amount;
 
-        Debug.Log("OH Nyo we lost some item " + backpack[removeItem.name]);
+        Debug.Log("OH Nyo we lost some item " + removeItem.name + " Cur amount rn: " + backpack[removeItem.name]);
     }
 }
 

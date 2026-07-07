@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
 using UnityEngine.XR;
@@ -26,8 +27,10 @@ public class Player : Entity
     [Header("Interact Details")]
     [SerializeField] private float interactDistance;
     [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private LayerMask itemLayer;
     [SerializeField] private float sphereRadius = 0.3f;
     public bool isInteractabled { get; private set; }
+    private Indicator curIndicator;
 
     [Header("Movement Details")]
     [SerializeField] private float moveSpeed = 4.4f;
@@ -77,12 +80,14 @@ public class Player : Entity
         stateMachine.Initialize(IdleState);
 
         GameManager.Instance.InitializePlayer(this);
+        DialogManager.Instance.InitializePlayer(this);
 
         initialCameraPos = cameraOffset.localPosition;
 
         playerPushForce = defaultPlayerPushForce;
 
         DefaultFov = playerCamera.fieldOfView;
+
     }
 
     private void OnEnable()
@@ -97,6 +102,30 @@ public class Player : Entity
     {
         RaycastHit hit = CameraInteractRaycast();
 
+        if (hit.collider != null)
+        {
+            Debug.Log(hit.collider.name);
+        }
+
+        PlayerInteraction(hit);
+
+        ApplyGravity();
+
+        base.Update();
+    }
+
+    private void PlayerInteraction(RaycastHit hit)
+    {
+        if (!isInteractabled)
+        {
+            curIndicator?.SetInteractable(false);
+        }
+
+        if (Input.Player.NPCInteraction.WasPerformedThisFrame() && isInteractabled)
+        {
+            hit.transform.GetComponent<INPCInteractable>()?.Interact();
+        }
+
         if (Input.Player.Interact.WasPerformedThisFrame() && isInteractabled)
         {
             hit.transform.GetComponent<IInteractable>()?.Interact();
@@ -106,10 +135,6 @@ public class Player : Entity
         {
             flashLight.enabled = !flashLight.enabled;
         }
-
-        ApplyGravity();
-
-        base.Update();
     }
 
     private void ApplyGravity()
@@ -119,17 +144,58 @@ public class Player : Entity
 
     private RaycastHit CameraInteractRaycast()
     {
-        isInteractabled = Physics.SphereCast
-(
-            cameraOffset.transform.position,
-            sphereRadius,
-            cameraOffset.transform.forward,
-            out RaycastHit hit,
-            interactDistance,
-            interactLayer
-        );
+        bool hitItem = SphereRayCast(itemLayer, out RaycastHit itemHit);
 
-        return hit;
+        if (hitItem)
+        {
+            isInteractabled = true;
+            UpdateIndicator(itemHit);
+            return itemHit;
+        }
+
+        bool hitInteraction = SphereRayCast(interactLayer, out RaycastHit interactHit);
+
+
+        if (hitInteraction)
+        {
+            isInteractabled = true;
+            UpdateIndicator(interactHit);
+            return interactHit;
+        }
+
+        isInteractabled = false;
+        UpdateIndicator(default);
+        return default;
+    }
+
+    private bool SphereRayCast(LayerMask targetedLayer, out RaycastHit hit)
+    {
+        return Physics.SphereCast(
+            cameraOffset.position,
+            sphereRadius,
+            cameraOffset.forward,
+            out hit,
+            interactDistance,
+            targetedLayer
+        );
+    }
+
+    private void UpdateIndicator(RaycastHit hit)
+    {
+        if (hit.collider == null) return;
+
+
+        Indicator indicator = isInteractabled
+            ? hit.collider.GetComponentInChildren<Indicator>()
+            : null;
+
+        if (indicator != curIndicator)
+        {
+            curIndicator?.SetInteractable(false);
+            curIndicator = indicator;
+        }
+
+        curIndicator?.SetInteractable(indicator != null);
     }
 
     private void OnDisable()

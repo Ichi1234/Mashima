@@ -1,11 +1,15 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Cauldron : MonoBehaviour, IPuzzleReactable
 {
+    private List<GameObject> itemLists = new List<GameObject>();
+
     public void OnItemDeposited(GameObject itemPrefab)
     {
         if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
         {
+            itemLists.Add(itemPrefab);
             return;
         }
 
@@ -16,10 +20,20 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
         );
 
         Item item = itemPrefab.GetComponent<Item>();
-        item.DisableInteract();
 
-        Instantiate(item, dropPoint, Quaternion.identity);
+        Item newItem = Instantiate(item, dropPoint, Quaternion.identity);
+
+        itemLists.Add(newItem.gameObject);
     }
 
-    public void OnPuzzleCompleted() => GameManager.Instance.OnElectricRepaired?.Invoke();
+    public void OnPuzzleCompleted()
+    {
+        foreach (var item in itemLists)
+        {
+            Destroy(item);    
+        }
+
+        GameManager.Instance.OnElectricRepaired?.Invoke();
+        
+    }
 }
