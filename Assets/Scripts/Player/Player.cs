@@ -171,9 +171,9 @@ public class Player : Entity
     private bool SphereRayCast(LayerMask targetedLayer, out RaycastHit hit)
     {
         return Physics.SphereCast(
-            cameraOffset.position,
+            playerCamera.transform.position,
             sphereRadius,
-            cameraOffset.forward,
+            playerCamera.transform.forward,
             out hit,
             interactDistance,
             targetedLayer
@@ -206,8 +206,8 @@ public class Player : Entity
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Vector3 start = cameraOffset.transform.position;
-        Vector3 end = start + cameraOffset.transform.forward * interactDistance;
+        Vector3 start = playerCamera.transform.position;
+        Vector3 end = start + playerCamera.transform.forward * interactDistance;
 
         Gizmos.DrawLine(start, end);
         Gizmos.DrawWireSphere(start, sphereRadius);
@@ -254,14 +254,14 @@ public class Player : Entity
 
     public Vector3 HMDForwardFlat()
     {
-        Vector3 forward = cameraOffset.transform.forward;
+        Vector3 forward = playerCamera.transform.forward;
         forward.y = 0;
         return forward.normalized;
     }
 
     public Vector3 HMDRightFlat()
     {
-        Vector3 right = cameraOffset.transform.right;
+        Vector3 right = playerCamera.transform.right;
         right.y = 0;
         return right.normalized;
     }
@@ -272,6 +272,7 @@ public class Player : Entity
 
     public void SetFOV(float targetFov)
     {
+        return;
         if (fovCoroutine != null)
             StopCoroutine(fovCoroutine);
 
