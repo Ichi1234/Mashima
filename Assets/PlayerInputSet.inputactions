@@ -216,6 +216,17 @@
                 },
                 {
                     "name": "",
+                    "id": "061fad0f-a88b-46c6-a650-d3bf19fc74fe",
+                    "path": "<XRController>/secondaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";VR Controller",
+                    "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "ad6649fa-cf36-4142-b9b0-874e3b507e1a",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -232,6 +243,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard & Mouse",
+                    "action": "NPCInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b9421740-78fa-4b23-b750-583152ea5c2d",
+                    "path": "<XRController>{RightHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";VR Controller",
                     "action": "NPCInteraction",
                     "isComposite": false,
                     "isPartOfComposite": false
