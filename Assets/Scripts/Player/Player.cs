@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Player : Entity
 {
@@ -96,7 +93,14 @@ public class Player : Entity
 
         Input.Player.Move.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
+    
+        if (playerMode == PlayerMode.VR)
+        {
+            UpdateVRHitboxToMatchHeadHeight();
+        }
     }
+
+    
 
     protected override void Update()
     {
@@ -302,5 +306,12 @@ public class Player : Entity
     public void ResetFOV()
     {
         SetFOV(DefaultFov);
+    }
+
+    private void UpdateVRHitboxToMatchHeadHeight()
+    {
+        float trackedHeight = playerCamera.transform.localPosition.y;
+        charController.height = trackedHeight;
+        charController.center = new Vector3(0, trackedHeight / 2f, 0);
     }
 }
