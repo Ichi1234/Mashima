@@ -272,7 +272,6 @@ public class Player : Entity
 
     public void SetFOV(float targetFov)
     {
-        return;
         if (fovCoroutine != null)
             StopCoroutine(fovCoroutine);
 
