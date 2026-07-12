@@ -56,7 +56,7 @@ public class Player_MoveState : PlayerState
 
     private void ChangeFovToRunning(bool isRunning)
     {
-        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        if (GameManager.Instance.IsInVR)
         {
             return;
         }

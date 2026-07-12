@@ -110194,7 +110194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.XR.Interaction.Toolkit::UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable
   m_InteractionManager: {fileID: 0}
-  m_Colliders: []
+  m_Colliders:
+  - {fileID: 1736526918}
   m_InteractionLayers:
     m_Bits: 2
   m_DistanceCalculationMode: 1
@@ -110310,6 +110311,11 @@ MonoBehaviour:
   m_LimitAngularVelocity: 0
   m_MaxLinearVelocityDelta: 10
   m_MaxAngularVelocityDelta: 20
+--- !u!64 &1736526918 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 3825818467783052526, guid: c0a4b24e9c3105c4488a008910a2acc3, type: 3}
+  m_PrefabInstance: {fileID: 1736526914}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1738845526
 Mesh:
   m_ObjectHideFlags: 0

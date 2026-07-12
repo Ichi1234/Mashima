@@ -34,6 +34,7 @@ public class Player : Entity
     [SerializeField] private float runSpeedMultiplier = 1.25f;
     
     [Header("Crouch Details")]
+    [SerializeField] private float vrCrouchHeightThreshold = 1.2f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
     [SerializeField] private float crouchHitboxRadius = 0.2f;
@@ -62,6 +63,8 @@ public class Player : Entity
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
     public PlayerMode CurPlayerMode => playerMode;
+    public bool IsCrouching => stateMachine.currentState == CrouchState;
+
 
 
     protected override void Awake()
@@ -94,13 +97,8 @@ public class Player : Entity
         Input.Player.Move.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
     
-        if (playerMode == PlayerMode.VR)
-        {
-            UpdateVRHitboxToMatchHeadHeight();
-        }
     }
 
-    
 
     protected override void Update()
     {
@@ -114,6 +112,11 @@ public class Player : Entity
         PlayerInteraction(hit);
 
         ApplyGravity();
+
+        if (playerMode == PlayerMode.VR)
+        {
+            UpdateVRHitboxToMatchHeadHeight();
+        }
 
         base.Update();
     }
@@ -233,14 +236,26 @@ public class Player : Entity
 
     public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
 
-    public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
+    public void MoveCamera(Vector2 newPosition)
+    {
+        if (IsPlayerPhysicallyCrouch()) return;
 
-    public void ResetCameraPos() => cameraOffset.localPosition = initialCameraPos;
+        cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
+    }
+
+    public void ResetCameraPos()
+    {
+        if (IsPlayerPhysicallyCrouch()) return;
+
+        cameraOffset.localPosition = initialCameraPos;
+    }
 
     public void RotateCamera(Quaternion newAngle) => cameraOffset.transform.localRotation = newAngle;
 
     public void SetCrouchHitbox()
     {
+        if (GameManager.Instance.IsInVR) return;
+
         charController.height = crouchHitboxHeight;
         charController.radius = crouchHitboxRadius;
         charController.center = new Vector3(0, crouchHitboxCenter, 0);
@@ -249,8 +264,10 @@ public class Player : Entity
         detectionCollider.center = new Vector3(0, crouchDetectionHitboxPos, 0);
     }
 
-    public void SetDefaultHitbox()
+    public void ReverseCrouchHitbox()
     {
+        if (GameManager.Instance.IsInVR) return;
+
         charController.height = defaultHitboxHeight;
         charController.radius = defaultHitboxRadius;
         charController.center = new Vector3(0, 0, 0);
@@ -308,9 +325,12 @@ public class Player : Entity
         SetFOV(DefaultFov);
     }
 
+    public bool IsPlayerPhysicallyCrouch() => (playerCamera.transform.position.y - transform.position.y) <= vrCrouchHeightThreshold;
+
+
     private void UpdateVRHitboxToMatchHeadHeight()
     {
-        float trackedHeight = playerCamera.transform.localPosition.y;
+        float trackedHeight = playerCamera.transform.position.y - transform.position.y;
         charController.height = trackedHeight;
         charController.center = new Vector3(0, trackedHeight / 2f, 0);
     }

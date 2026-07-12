@@ -33,7 +33,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.CurPlayerMode != PlayerMode.VR) return;
+        if (GameManager.Instance.IsInVR) return;
         if (!other.CompareTag("Item")) return;
 
         Item droppedItem = other.GetComponent<Item>();

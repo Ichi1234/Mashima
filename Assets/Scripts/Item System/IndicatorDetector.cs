@@ -7,7 +7,7 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        if (GameManager.Instance.IsInVR)
         {
             return;
         }
