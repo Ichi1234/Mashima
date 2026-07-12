@@ -121,6 +121,11 @@ public class Player : Entity
         base.Update();
     }
 
+    private void LateUpdate()
+    {
+        SyncBodyToHeadXZ();
+    }
+
     private void PlayerInteraction(RaycastHit hit)
     {
         if (!isInteractabled)
@@ -333,5 +338,24 @@ public class Player : Entity
         float trackedHeight = playerCamera.transform.position.y - transform.position.y;
         charController.height = trackedHeight;
         charController.center = new Vector3(0, trackedHeight / 2f, 0);
+    }
+
+    private void SyncBodyToHeadXZ()
+    {
+        if (CurPlayerMode != PlayerMode.VR) return;
+
+        Vector3 deltaXZ = new Vector3(
+            playerCamera.transform.position.x - transform.position.x,
+            0f,
+            playerCamera.transform.position.z - transform.position.z
+        );
+
+        if (deltaXZ.sqrMagnitude < 0.0001f) return;
+
+        Vector3 beforeMove = transform.position;
+        charController.Move(deltaXZ);
+        Vector3 actualMoveDelta = transform.position - beforeMove; 
+
+        cameraOffset.localPosition -= transform.InverseTransformDirection(actualMoveDelta);
     }
 }
