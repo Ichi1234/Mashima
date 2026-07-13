@@ -303,7 +303,7 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""061fad0f-a88b-46c6-a650-d3bf19fc74fe"",
-                    ""path"": ""<XRController>/secondaryButton"",
+                    ""path"": ""<XRController>{LeftHand}/{SecondaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";VR Controller"",
