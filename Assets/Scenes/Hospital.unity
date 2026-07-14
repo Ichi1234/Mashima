@@ -28762,6 +28762,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 380203454}
   m_Mesh: {fileID: 4300000, guid: 85b59df0269edf049bb12af19513ed7e, type: 3}
+--- !u!82 &379805390 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3421121070636473618, guid: c97a5405372e98240928b877d218ed15, type: 3}
+  m_PrefabInstance: {fileID: 1054213945}
+  m_PrefabAsset: {fileID: 0}
 --- !u!23 &380026566
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68571,6 +68576,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VR Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8676145747744937642, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -70702,6 +70711,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4077343442214838, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 379805390}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[0].SpeechList.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 852b7f68a43036942bf03984c7e9978b, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: dd19c2e4304f91c4db0fa79f6bd52e54, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 481b01533ce32704792865309113d4cc, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 27c4a41c51303304ba5fabae22fa07b3, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c17b7e33f2fb1f34ea7175860d7570c2, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c85d53187ac33a4697161fac629cee3, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0be48ca0b0b9b094c9f7a561be0f6d1b, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a28f17e69039888499a0ec7bfff017e3, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 8fb9634919dc7f444a667aca7660df38, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fd7e9e9676ef49b4898650311591e507, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 24ae2f75921537f46815d7b807c672a7, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: e78f60edc50699f42af900fa7c1265cf, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[12]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5925acec7d66214439a3c7d77831ca08, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[13]'
+      value: 
+      objectReference: {fileID: 11400000, guid: fdb1d1e89c3113e4a9f1f3dad7ebdb60, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[14]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bffaf8f784e334547901ad5ca885ffab, type: 2}
+    - target: {fileID: 3421121070636473618, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: Priority
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

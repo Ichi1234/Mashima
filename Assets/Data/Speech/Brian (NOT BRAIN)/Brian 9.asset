@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 9
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Come back to this room and drop these 3 items into my cauldron, and
-    I'll fix the generator for you.
-  speechSound: {fileID: 0}
+  speechText: 'Second, free the crying baby. '
+  speechSound: {fileID: 8300000, guid: f19bbe58fce81b44583412c842562a7e, type: 3}

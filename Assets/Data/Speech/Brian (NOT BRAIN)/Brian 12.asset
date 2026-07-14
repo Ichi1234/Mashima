@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
-  m_Name: Brian 11
+  m_Name: Brian 12
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Huh!?, WHO WROTE THAT LINE!?
-  speechSound: {fileID: 8300000, guid: 8824c798aa0e3514db5c9f6d08c0dc87, type: 3}
+  speechText: Then, receive the tear from a depressing skeleton.
+  speechSound: {fileID: 8300000, guid: 0014dd0e792a29748b484e1963ebb1dc, type: 3}

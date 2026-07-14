@@ -330,7 +330,9 @@ public class Player : Entity
         SetFOV(DefaultFov);
     }
 
-    public bool IsPlayerPhysicallyCrouch() => (playerCamera.transform.position.y - transform.position.y) <= vrCrouchHeightThreshold;
+    public bool IsPlayerPhysicallyCrouch() => 
+        GameManager.Instance.IsInVR &&
+        playerCamera.transform.localPosition.y <= vrCrouchHeightThreshold;
 
 
     private void UpdateVRHitboxToMatchHeadHeight()
