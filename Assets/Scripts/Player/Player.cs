@@ -63,8 +63,6 @@ public class Player : Entity
     public float CrouchSpeedMultiplier => crouchSpeedMultiplier;
     public float CrouchCameraPosition => crouchCameraPosition;
     public PlayerMode CurPlayerMode => playerMode;
-    public bool IsCrouching => stateMachine.currentState == CrouchState;
-
 
 
     protected override void Awake()

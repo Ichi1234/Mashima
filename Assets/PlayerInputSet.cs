@@ -269,17 +269,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8cc6eeb5-7d77-4372-a991-34489b1a0c4d"",
-                    ""path"": ""<XRController>{RightHand}/thumbstickClicked"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";VR Controller"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fff1e85d-7d6c-43ff-9971-ec2a698bd7e6"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
