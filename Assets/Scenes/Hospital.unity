@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.88140154, g: 0.88140154, b: 0.88140154, a: 1}
+  m_AmbientSkyColor: {r: 0.79514813, g: 0.79514813, b: 0.79514813, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -24506,6 +24506,73 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2710985865238486717, guid: 2a7e5f1e8f4da1441bc2fb655d610a98, type: 3}
+--- !u!1 &298116849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4525582394577728889, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+  m_PrefabInstance: {fileID: 1010198322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &298116853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298116849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95caf98df61d084e930654626311a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VRHand
+  handPushForce: 5
+--- !u!54 &298116854
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298116849}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &298116855
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 298116849}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 2048
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 6143
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: d0c255d07fd68f14b94e55d388e7e6bb, type: 3}
 --- !u!4 &300636456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2066829898030677703, guid: 4ab8f51719b877341852f9a0296e49d2, type: 3}
@@ -68572,6 +68639,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1001774555322239214, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 6143
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001774555322239214, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 8676145747744937642, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
       propertyPath: m_Name
       value: VR Player
@@ -68583,7 +68658,16 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4525582394577728889, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298116855}
+    - targetCorrespondingSourceObject: {fileID: 4525582394577728889, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298116854}
+    - targetCorrespondingSourceObject: {fileID: 4525582394577728889, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 298116853}
   m_SourcePrefab: {fileID: 100100000, guid: 87a2e18736a3bd549bd331805b5afe78, type: 3}
 --- !u!1001 &1010403648
 PrefabInstance:
@@ -70719,7 +70803,7 @@ PrefabInstance:
       objectReference: {fileID: 379805390}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: msgList.Array.data[0].SpeechList.Array.size
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[0]'

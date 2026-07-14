@@ -226,9 +226,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorHandleGrab
   doorHinge: {fileID: 6438717905243415131}
+  doorRb: {fileID: 3549055856639197817}
   hingeAxisTransform: {fileID: 2891563132444455974}
-  followSpeed: 10
-  motorForce: 5000
+  doorTransform: {fileID: 2891563132444455974}
+  maxGrabDistance: 0.5
+  door: {fileID: 2259095154541984600}
 --- !u!1 &1638674960675390277
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,9 +936,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorHandleGrab
   doorHinge: {fileID: 6438717905243415131}
+  doorRb: {fileID: 3549055856639197817}
   hingeAxisTransform: {fileID: 2891563132444455974}
-  followSpeed: 10
-  motorForce: 5000
+  doorTransform: {fileID: 2891563132444455974}
+  maxGrabDistance: 0.5
+  door: {fileID: 2259095154541984600}
 --- !u!1001 &8382548369781625248
 PrefabInstance:
   m_ObjectHideFlags: 0

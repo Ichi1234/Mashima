@@ -25,6 +25,8 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
     [Header("Slam Cooldown")]
     [SerializeField] private float slamCooldown = 1f;
 
+    public bool IsBeingGrabbed { get; set; } = false;
+
     private bool motorActive;
     private float targetAngle;
     private float lastAngle;
@@ -71,6 +73,8 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
 
     public void ReceiveImpact(bool wasRunning)
     {
+        if (IsBeingGrabbed) return;
+
         if (wasRunning && !InSlamCooldown)
         {
             PlaySlam();
