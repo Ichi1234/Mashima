@@ -8,6 +8,7 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
     [SerializeField] private float openThreshold = 10f;
     [SerializeField] private float angleTolerance = 2f;
     [SerializeField] private float fullyOpenAngle = 90f;
+    
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource loopSource;  

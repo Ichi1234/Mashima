@@ -33,7 +33,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.IsInVR) return;
+        if (!GameManager.Instance.IsInVR) return;
         if (!other.CompareTag("Item")) return;
 
         Item droppedItem = other.GetComponent<Item>();
@@ -44,7 +44,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
             if (requireItem.itemData != droppedItem.ItemData) continue;
             if (requireItem.requirementMet) continue;
 
-            DepositItem(requireItem);
+            DepositItem(requireItem, other.gameObject);
             break;
         }
     }
@@ -108,7 +108,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         }
     }
 
-    private void DepositItem(PuzzleItemRequirement item)
+    private void DepositItem(PuzzleItemRequirement item, GameObject vrItem = null)
     {
         itemsCurAmount[item.itemData] += 1;
         Debug.Log($"Placed 1x {item.itemData.name} ({itemsCurAmount[item.itemData]}/{item.requiredAmount})");
@@ -118,8 +118,15 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
             item.requirementMet = true;
         }
 
-        puzzleReactor?.OnItemDeposited(item.itemData.itemPrefab);
-
+        if (GameManager.Instance.IsInVR)
+        {
+            puzzleReactor?.OnItemDeposited(vrItem);
+        }
+        else
+        {
+            puzzleReactor?.OnItemDeposited(item.itemData.itemPrefab);
+        }
+        
         isPuzzleCompleted = CheckedIsCompleted();
         if (isPuzzleCompleted) puzzleReactor?.OnPuzzleCompleted();
         if (isPuzzleCompleted) Debug.Log("Owatta!!!!");

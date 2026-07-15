@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 11
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Huh!?, WHO WROTE THAT LINE!?
+  speechText: Huh!?
   speechSound: {fileID: 8300000, guid: 8824c798aa0e3514db5c9f6d08c0dc87, type: 3}
