@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class DialogCanvas : MonoBehaviour
+public class DialogueCanvas : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI npcName;
     [SerializeField] private TextMeshProUGUI message;

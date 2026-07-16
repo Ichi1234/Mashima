@@ -13,6 +13,8 @@ public class Brain : MonoBehaviour, INPCInteractable
     [SerializeField] private List<SpeechGroup> msgList;
     [SerializeField] private AudioSource audioSource;
 
+    [SerializeField] private DialogueCanvas vrDialogueBox;
+
     private float talkCooldownDuration = 0.5f;
     private float lastTalkedTime = 0;
 
@@ -39,6 +41,7 @@ public class Brain : MonoBehaviour, INPCInteractable
 
         List<SpeechDataSO> speechList = GetSpeechList();
 
+        DialogManager.Instance.SetCanvas(vrDialogueBox);
         DialogManager.Instance.OpenDialogBox(npcName, speechList);
         PlaySound(speechList[0].speechSound);
     }

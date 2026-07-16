@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-100)]
+[DefaultExecutionOrder(-80)]
 public class DialogManager : MonoBehaviour
 {
-    [SerializeField] private DialogCanvas dialogCanvas;
+    [SerializeField] private DialogueCanvas desktopDialogCanvas;
+    private DialogueCanvas curCanvas;
+
     private List<SpeechDataSO> msgLists;
     private Player player;
     private int index = 0;
@@ -17,10 +19,16 @@ public class DialogManager : MonoBehaviour
 
     private void Awake()
     {
-        dialogCanvas.gameObject.SetActive(false);
+        desktopDialogCanvas.gameObject.SetActive(false);
+
 
         Instance = this;
 
+    }
+
+    private void Start()
+    {
+        if (!GameManager.Instance.IsInVR) curCanvas = desktopDialogCanvas;
     }
 
 
@@ -28,7 +36,7 @@ public class DialogManager : MonoBehaviour
     {
         if (player != null &&
             player.Input.Player.NPCInteraction.WasPerformedThisFrame()
-            && dialogCanvas.isActiveAndEnabled)
+            && curCanvas.isActiveAndEnabled)
         {
             NextMsg();
         }
@@ -38,9 +46,9 @@ public class DialogManager : MonoBehaviour
 
     public void NextMsg()
     {
-        if (!dialogCanvas.IsTypingAnimFinished)
+        if (!curCanvas.IsTypingAnimFinished)
         {
-            dialogCanvas.SkipAnimation();
+            curCanvas.SkipAnimation();
             return;
         }
 
@@ -55,24 +63,26 @@ public class DialogManager : MonoBehaviour
 
 
         OnNextMsg?.Invoke(msgLists[index].speechSound);
-        dialogCanvas.SetMsg(msgLists[index].speechText);
-        dialogCanvas.PlayTypeWriterTextAnimation();
+        curCanvas.SetMsg(msgLists[index].speechText);
+        curCanvas.PlayTypeWriterTextAnimation();
     }
 
     public void OpenDialogBox(string npcName, List<SpeechDataSO> msgData)
     {
-        if (dialogCanvas.isActiveAndEnabled) return;
+        if (curCanvas.isActiveAndEnabled) return;
 
         msgLists = msgData;
 
-        dialogCanvas.SetNpcName(npcName);
-        dialogCanvas.SetMsg(msgLists[index].speechText);
-        dialogCanvas.gameObject.SetActive(true);
+        curCanvas.SetNpcName(npcName);
+        curCanvas.SetMsg(msgLists[index].speechText);
+        curCanvas.gameObject.SetActive(true);
     }
 
     public void CloseDialogBox()
     {
         index = 0;
-        dialogCanvas.gameObject.SetActive(false);
+        curCanvas.gameObject.SetActive(false);
     }
+
+    public void SetCanvas(DialogueCanvas newCanvas) => curCanvas = newCanvas;
 }
