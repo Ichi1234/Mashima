@@ -7,11 +7,6 @@ public class InteractionDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (GameManager.Instance.IsInVR)
-        {
-            return;
-        }
-
         Indicator indicator = other.GetComponentInParent<Indicator>();
         if (indicator != null)
         {

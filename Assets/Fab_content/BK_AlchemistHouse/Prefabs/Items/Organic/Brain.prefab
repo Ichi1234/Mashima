@@ -575,7 +575,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3198425087961961144}
   m_Father: {fileID: 4077343442214838}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33784324305553516
@@ -720,7 +721,6 @@ Transform:
   - {fileID: 4924102179748862}
   - {fileID: 4167374674223846}
   - {fileID: 4374737673040854}
-  - {fileID: 3198425087961961144}
   - {fileID: 6855043349586370937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -756,6 +756,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fdb1d1e89c3113e4a9f1f3dad7ebdb60, type: 2}
   - SpeechList:
     - {fileID: 11400000, guid: 0e9c2471402389f418323f250e19d159, type: 2}
+  audioSource: {fileID: 0}
 --- !u!136 &1178598468224122265
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -972,12 +973,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3296304800236297819}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.0008, y: -0.0829, z: 0.0119}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0.00079997384, y: -0.0829, z: 0.011899981}
+  m_LocalScale: {x: 0.19999999, y: 0.20000002, z: 0.19999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 4077343442214838}
+  m_Father: {fileID: 4124921320047922}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!212 &3697592452181586313
 SpriteRenderer:
@@ -1053,6 +1054,9 @@ MonoBehaviour:
   sr: {fileID: 3697592452181586313}
   defaultSprite: {fileID: 21300000, guid: b6f9d1ffb49276b4681364e2af96c1d6, type: 3}
   interactableSprite: {fileID: 21300000, guid: b75621af189e9d94f8fe4ddcd5051a46, type: 3}
+  isShowInVR: 0
+  defaultVRSprite: {fileID: 0}
+  interactableVRSprite: {fileID: 0}
   isAdjustScale: 0
 --- !u!135 &3179323271366208280
 SphereCollider:
@@ -1073,7 +1077,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.26
+  m_Radius: 0.52
   m_Center: {x: 0.0000076293945, y: 0.0000038146973, z: -0.0000076293945}
 --- !u!1818360610 &902499404517773876
 ScaleConstraint:

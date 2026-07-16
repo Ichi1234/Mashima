@@ -5,6 +5,10 @@ public class Indicator : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite interactableSprite;
+
+    [SerializeField] private bool isShowInVR = false;
+    [SerializeField] private Sprite defaultVRSprite;
+    [SerializeField] private Sprite interactableVRSprite;
     [SerializeField] private bool isAdjustScale = true;
 
     public bool IsShowable { get; private set; } = true;
@@ -22,7 +26,10 @@ public class Indicator : MonoBehaviour
     {
         if (IsShowable)
         {
+            if (GameManager.Instance.IsInVR && !isShowInVR) return;
+
             sr.enabled = true;
+
         }
     }
 
@@ -40,6 +47,8 @@ public class Indicator : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance.IsInVR && isShowInVR) sr.sprite = defaultVRSprite;
+
         if (isAdjustScale)
         {
             Vector3 parentScale = transform.parent.lossyScale;
@@ -72,9 +81,15 @@ public class Indicator : MonoBehaviour
     {
         if (sr == null) return;
 
-        sr.sprite = interactable
-            ? interactableSprite
-            : defaultSprite;
+        if (interactable)
+        {
+            sr.sprite = GameManager.Instance.IsInVR ? interactableVRSprite : interactableSprite;
+        }
+
+        else
+        {
+            sr.sprite = GameManager.Instance.IsInVR ? defaultVRSprite : defaultSprite;
+        }
     }
 
     public void SetShowable(bool isInteractable) => IsShowable = isInteractable;
