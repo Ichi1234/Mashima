@@ -35,6 +35,7 @@ public class DialogManager : MonoBehaviour
     private void Update()
     {
         if (player != null &&
+            curCanvas != null &&
             player.Input.Player.NPCInteraction.WasPerformedThisFrame()
             && curCanvas.isActiveAndEnabled)
         {

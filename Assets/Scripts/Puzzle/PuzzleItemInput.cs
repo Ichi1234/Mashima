@@ -88,6 +88,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         {
             if (!item.requirementMet) return false;
         }
+
         return true;
     }
 
@@ -126,9 +127,13 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         {
             puzzleReactor?.OnItemDeposited(item.itemData.itemPrefab);
         }
-        
+
         isPuzzleCompleted = CheckedIsCompleted();
-        if (isPuzzleCompleted) puzzleReactor?.OnPuzzleCompleted();
-        if (isPuzzleCompleted) Debug.Log("Owatta!!!!");
+        
+        if (isPuzzleCompleted)
+        {
+            puzzleReactor?.OnPuzzleCompleted();
+            indicator.SetShowable(false);
+        }
     }
 }
