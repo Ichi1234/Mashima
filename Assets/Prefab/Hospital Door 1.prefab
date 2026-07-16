@@ -180,8 +180,6 @@ MonoBehaviour:
   openThreshold: 10
   angleTolerance: 2
   fullyOpenAngle: 90
-  doorCollider: {fileID: 6263312588315356025}
-  frameCollider: {fileID: 0}
   loopSource: {fileID: -2432677290923615756}
   sfxSource: {fileID: 8238248696542242793}
   creakSfxName: door-open
@@ -203,7 +201,7 @@ MeshCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -673,7 +671,7 @@ MeshCollider:
     m_Bits: 8127
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 1088
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0

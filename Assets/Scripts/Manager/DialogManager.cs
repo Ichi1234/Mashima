@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[DefaultExecutionOrder(-80)]
+[DefaultExecutionOrder(-100)]
 public class DialogManager : MonoBehaviour
 {
     [SerializeField] private DialogueCanvas desktopDialogCanvas;

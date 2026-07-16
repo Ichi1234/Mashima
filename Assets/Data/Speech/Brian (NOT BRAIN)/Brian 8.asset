@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 8
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'First, seek the flame. '
-  speechSound: {fileID: 8300000, guid: 1e5dc367c0c55c1458d4c16d30143640, type: 3}
+  speechSound: {fileID: 0}

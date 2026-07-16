@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 6
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'If you want to escape from this dream.  '
-  speechSound: {fileID: 8300000, guid: 7a3888df3a24402498957e3fcd334bcb, type: 3}
+  speechSound: {fileID: 0}

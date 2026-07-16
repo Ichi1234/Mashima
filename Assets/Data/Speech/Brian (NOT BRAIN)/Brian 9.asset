@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 9
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'Second, free the crying baby. '
-  speechSound: {fileID: 8300000, guid: f19bbe58fce81b44583412c842562a7e, type: 3}
+  speechSound: {fileID: 0}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 7
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'You need to do three things. '
-  speechSound: {fileID: 8300000, guid: 07b3f8a50d161304187952b3a411f34e, type: 3}
+  speechSound: {fileID: 0}

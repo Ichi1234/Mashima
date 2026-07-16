@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 12
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: Then, receive the tear from a depressing skeleton.
-  speechSound: {fileID: 8300000, guid: 0014dd0e792a29748b484e1963ebb1dc, type: 3}
+  speechSound: {fileID: 0}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 5
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'I AM GOING TO TELL YOU A USEFUL THING. '
-  speechSound: {fileID: 8300000, guid: 4c82f1cc11d8a724c8becc4d58f48a5b, type: 3}
+  speechSound: {fileID: 0}

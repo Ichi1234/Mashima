@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brain 3
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'B-R-I-A-N not B-R-A-I-N '
-  speechSound: {fileID: 8300000, guid: ce157875fa76ad64a8fb8b416f65e0bb, type: 3}
+  speechSound: {fileID: 0}
