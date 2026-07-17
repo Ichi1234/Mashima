@@ -110204,6 +110204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Flame of Freedom '
       objectReference: {fileID: 0}
+    - target: {fileID: 5580935070998998534, guid: c0a4b24e9c3105c4488a008910a2acc3, type: 3}
+      propertyPath: isShowInVR
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6571790521680902939, guid: c0a4b24e9c3105c4488a008910a2acc3, type: 3}
       propertyPath: m_MovementType
       value: 2
@@ -206436,9 +206440,9 @@ MonoBehaviour:
   sr: {fileID: 7883804111449285668}
   defaultSprite: {fileID: 21300000, guid: 17ab31d21baff4346b82aaa0ee2ba62a, type: 3}
   interactableSprite: {fileID: 21300000, guid: 840bcc834b3ed5d4a8439a275b1c36c4, type: 3}
-  isShowInVR: 0
-  defaultVRSprite: {fileID: 0}
-  interactableVRSprite: {fileID: 0}
+  isShowInVR: 1
+  defaultVRSprite: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
+  interactableVRSprite: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
   isAdjustScale: 1
 --- !u!23 &8281424043125196290
 MeshRenderer:

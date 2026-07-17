@@ -302,6 +302,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6739158395485760624, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
+      propertyPath: isShowInVR
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739158395485760624, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
       propertyPath: isAdjustScale
       value: 1
       objectReference: {fileID: 0}
