@@ -1,8 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.XR.LegacyInputHelpers;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Player : Entity
 {
@@ -37,6 +34,7 @@ public class Player : Entity
     [SerializeField] private float runSpeedMultiplier = 1.25f;
     
     [Header("Crouch Details")]
+    [SerializeField] private float vrCrouchHeightThreshold = 1.2f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
     [SerializeField] private float crouchHitboxRadius = 0.2f;
@@ -96,7 +94,9 @@ public class Player : Entity
 
         Input.Player.Move.performed += ctx => MoveInput = ctx.ReadValue<Vector2>();
         Input.Player.Move.canceled += ctx => MoveInput = Vector2.zero;
+    
     }
+
 
     protected override void Update()
     {
@@ -111,7 +111,17 @@ public class Player : Entity
 
         ApplyGravity();
 
+        if (playerMode == PlayerMode.VR)
+        {
+            UpdateVRHitboxToMatchHeadHeight();
+        }
+
         base.Update();
+    }
+
+    private void LateUpdate()
+    {
+        SyncBodyToHeadXZ();
     }
 
     private void PlayerInteraction(RaycastHit hit)
@@ -171,9 +181,9 @@ public class Player : Entity
     private bool SphereRayCast(LayerMask targetedLayer, out RaycastHit hit)
     {
         return Physics.SphereCast(
-            cameraOffset.position,
+            playerCamera.transform.position,
             sphereRadius,
-            cameraOffset.forward,
+            playerCamera.transform.forward,
             out hit,
             interactDistance,
             targetedLayer
@@ -206,8 +216,8 @@ public class Player : Entity
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;
-        Vector3 start = cameraOffset.transform.position;
-        Vector3 end = start + cameraOffset.transform.forward * interactDistance;
+        Vector3 start = playerCamera.transform.position;
+        Vector3 end = start + playerCamera.transform.forward * interactDistance;
 
         Gizmos.DrawLine(start, end);
         Gizmos.DrawWireSphere(start, sphereRadius);
@@ -229,14 +239,26 @@ public class Player : Entity
 
     public void MoveCharacter(Vector3 moveDir) => charController.Move(moveDir * moveSpeedMultiplier * Time.deltaTime);
 
-    public void MoveCamera(Vector2 newPosition) => cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
+    public void MoveCamera(Vector2 newPosition)
+    {
+        if (IsPlayerPhysicallyCrouch()) return;
 
-    public void ResetCameraPos() => cameraOffset.localPosition = initialCameraPos;
+        cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
+    }
+
+    public void ResetCameraPos()
+    {
+        if (IsPlayerPhysicallyCrouch()) return;
+
+        cameraOffset.localPosition = initialCameraPos;
+    }
 
     public void RotateCamera(Quaternion newAngle) => cameraOffset.transform.localRotation = newAngle;
 
     public void SetCrouchHitbox()
     {
+        if (GameManager.Instance.IsInVR) return;
+
         charController.height = crouchHitboxHeight;
         charController.radius = crouchHitboxRadius;
         charController.center = new Vector3(0, crouchHitboxCenter, 0);
@@ -245,8 +267,10 @@ public class Player : Entity
         detectionCollider.center = new Vector3(0, crouchDetectionHitboxPos, 0);
     }
 
-    public void SetDefaultHitbox()
+    public void ReverseCrouchHitbox()
     {
+        if (GameManager.Instance.IsInVR) return;
+
         charController.height = defaultHitboxHeight;
         charController.radius = defaultHitboxRadius;
         charController.center = new Vector3(0, 0, 0);
@@ -254,14 +278,14 @@ public class Player : Entity
 
     public Vector3 HMDForwardFlat()
     {
-        Vector3 forward = cameraOffset.transform.forward;
+        Vector3 forward = playerCamera.transform.forward;
         forward.y = 0;
         return forward.normalized;
     }
 
     public Vector3 HMDRightFlat()
     {
-        Vector3 right = cameraOffset.transform.right;
+        Vector3 right = playerCamera.transform.right;
         right.y = 0;
         return right.normalized;
     }
@@ -302,5 +326,36 @@ public class Player : Entity
     public void ResetFOV()
     {
         SetFOV(DefaultFov);
+    }
+
+    public bool IsPlayerPhysicallyCrouch() => 
+        GameManager.Instance.IsInVR &&
+        playerCamera.transform.localPosition.y <= vrCrouchHeightThreshold;
+
+
+    private void UpdateVRHitboxToMatchHeadHeight()
+    {
+        float trackedHeight = playerCamera.transform.position.y - transform.position.y;
+        charController.height = trackedHeight;
+        charController.center = new Vector3(0, trackedHeight / 2f, 0);
+    }
+
+    private void SyncBodyToHeadXZ()
+    {
+        if (CurPlayerMode != PlayerMode.VR) return;
+
+        Vector3 deltaXZ = new Vector3(
+            playerCamera.transform.position.x - transform.position.x,
+            0f,
+            playerCamera.transform.position.z - transform.position.z
+        );
+
+        if (deltaXZ.sqrMagnitude < 0.0001f) return;
+
+        Vector3 beforeMove = transform.position;
+        charController.Move(deltaXZ);
+        Vector3 actualMoveDelta = transform.position - beforeMove; 
+
+        cameraOffset.localPosition -= transform.InverseTransformDirection(actualMoveDelta);
     }
 }

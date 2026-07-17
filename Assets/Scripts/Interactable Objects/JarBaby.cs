@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class JarBaby : MonoBehaviour, IPuzzleReactable
 {
@@ -8,6 +9,7 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
     [SerializeField] private Rigidbody maskRB;
     [SerializeField] private Item mask;
     [SerializeField] private Collider maskCollider;
+    [SerializeField] private XRGrabInteractable xRGrab;
 
     private void Awake()
     {
@@ -31,5 +33,7 @@ public class JarBaby : MonoBehaviour, IPuzzleReactable
         maskCollider.enabled = true;
         maskRB.isKinematic = false;
         maskRB.useGravity = true;
+
+        xRGrab.enabled = true;
     }
 }

@@ -269,17 +269,6 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8cc6eeb5-7d77-4372-a991-34489b1a0c4d"",
-                    ""path"": ""<XRController>{RightHand}/thumbstickClicked"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";VR Controller"",
-                    ""action"": ""Crouch"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fff1e85d-7d6c-43ff-9971-ec2a698bd7e6"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
@@ -302,6 +291,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""061fad0f-a88b-46c6-a650-d3bf19fc74fe"",
+                    ""path"": ""<XRController>{LeftHand}/{SecondaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";VR Controller"",
+                    ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""ad6649fa-cf36-4142-b9b0-874e3b507e1a"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -318,6 +318,17 @@ public partial class @PlayerInputSet: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard & Mouse"",
+                    ""action"": ""NPCInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b9421740-78fa-4b23-b750-583152ea5c2d"",
+                    ""path"": ""<XRController>{RightHand}/primaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";VR Controller"",
                     ""action"": ""NPCInteraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

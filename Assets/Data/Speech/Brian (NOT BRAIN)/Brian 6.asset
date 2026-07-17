@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 6
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'First, seek the flame. '
+  speechText: 'If you want to escape from this dream.  '
   speechSound: {fileID: 0}

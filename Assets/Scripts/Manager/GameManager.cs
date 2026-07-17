@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
 
     public float DefaultNoise => defaultAppoximateNoise;
     public PlayerMode CurPlayerMode => player.CurPlayerMode;
+    public bool IsInVR => player.CurPlayerMode == PlayerMode.VR;
 
     private void Awake()
     {

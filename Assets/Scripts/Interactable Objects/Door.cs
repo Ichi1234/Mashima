@@ -8,6 +8,7 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
     [SerializeField] private float openThreshold = 10f;
     [SerializeField] private float angleTolerance = 2f;
     [SerializeField] private float fullyOpenAngle = 90f;
+    
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource loopSource;  
@@ -24,6 +25,8 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
 
     [Header("Slam Cooldown")]
     [SerializeField] private float slamCooldown = 1f;
+
+    public bool IsBeingGrabbed { get; set; } = false;
 
     private bool motorActive;
     private float targetAngle;
@@ -71,6 +74,8 @@ public class Door : MonoBehaviour, IInteractable, IImpactReceiver
 
     public void ReceiveImpact(bool wasRunning)
     {
+        if (IsBeingGrabbed) return;
+
         if (wasRunning && !InSlamCooldown)
         {
             PlaySlam();

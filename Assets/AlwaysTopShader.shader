@@ -5,7 +5,6 @@ Shader "Custom/AlwaysTopShader"
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
     }
-
     SubShader
     {
         Tags
@@ -14,33 +13,34 @@ Shader "Custom/AlwaysTopShader"
             "Queue" = "Transparent+100"
             "RenderPipeline" = "UniversalPipeline"
         }
-
         Pass
         {
             Name "Forward"
-
             Blend SrcAlpha OneMinusSrcAlpha
             Cull Off
             ZWrite Off
             ZTest Always
 
             HLSLPROGRAM
-
             #pragma vertex vert
             #pragma fragment frag
-
+            #pragma multi_compile_instancing
+            #pragma instancing_options renderinglayer
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             struct Attributes
             {
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID // <-- needed for instancing
             };
 
             struct Varyings
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                UNITY_VERTEX_INPUT_INSTANCE_ID // <-- carries instance ID to fragment
+                UNITY_VERTEX_OUTPUT_STEREO     // <-- stereo eye index
             };
 
             TEXTURE2D(_BaseMap);
@@ -54,6 +54,10 @@ Shader "Custom/AlwaysTopShader"
             Varyings vert(Attributes IN)
             {
                 Varyings OUT;
+                UNITY_SETUP_INSTANCE_ID(IN);
+                UNITY_TRANSFER_INSTANCE_ID(IN, OUT);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT); // <-- sets up correct eye
+
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
                 return OUT;
@@ -61,9 +65,9 @@ Shader "Custom/AlwaysTopShader"
 
             half4 frag(Varyings IN) : SV_Target
             {
+                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN); // <-- fragment needs this too
                 return SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
             }
-
             ENDHLSL
         }
     }

@@ -5,6 +5,7 @@ public class Player_MoveState : PlayerState
 {
     private float walkInterval = 0.5f;
     private float runInterval = 0.3f;
+    private float crouchInterval = 1;
     private float footStepTimer = 0;
     private bool wasRunning = false;
 
@@ -22,6 +23,7 @@ public class Player_MoveState : PlayerState
         }
 
         bool isRunning = player.Input.Player.Run.IsPressed() && stateMachine.CanChangeState;
+        bool isCrouching = stateMachine.currentState == player.CrouchState && stateMachine.CanChangeState;
         ChangeFovToRunning(isRunning);
 
         Vector2 moveInputWithSpeed = player.MoveInput * player.MoveSpeed;
@@ -50,13 +52,16 @@ public class Player_MoveState : PlayerState
 
         player.MoveCharacter(moveVertical + moveHorizontal);
 
-        PlayFootStepSound(isRunning);
+        if (player.Input.Player.Move.IsPressed())
+        {
+            PlayFootStepSound(isRunning, isCrouching);
+        }
 
     }
 
     private void ChangeFovToRunning(bool isRunning)
     {
-        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        if (GameManager.Instance.IsInVR)
         {
             return;
         }
@@ -72,13 +77,28 @@ public class Player_MoveState : PlayerState
         }
     }
 
-    private void PlayFootStepSound(bool isRunning)
+    private void PlayFootStepSound(bool isRunning, bool isCrouching)
     {
         if (footStepTimer <= 0)
         {
             player.PlayFootStepSound();
 
             footStepTimer = isRunning ? runInterval : walkInterval;
+
+            if (isRunning)
+            {
+                footStepTimer = runInterval;
+            }
+
+            else if (isCrouching)
+            {
+                footStepTimer = crouchInterval;
+            }
+
+            else
+            {
+                footStepTimer = walkInterval;
+            }
         }
 
         footStepTimer -= Time.deltaTime;

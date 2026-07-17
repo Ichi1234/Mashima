@@ -12,6 +12,7 @@ public class Player_CrouchState : Player_MoveState
         base.Enter();
 
         stateMachine.lockedState();
+
         player.SetCrouchHitbox();
         player.SetMoveSpeedMultiplier(player.CrouchSpeedMultiplier);
 
@@ -22,7 +23,11 @@ public class Player_CrouchState : Player_MoveState
     {
         base.Update();
 
-        if (player.Input.Player.Crouch.WasPerformedThisFrame())
+        if 
+        (
+            player.Input.Player.Crouch.WasPerformedThisFrame() ||
+            (GameManager.Instance.IsInVR && !player.IsPlayerPhysicallyCrouch())
+        )
         {
             stateMachine.unLockedState();
             stateMachine.ChangeState(player.IdleState);
@@ -33,7 +38,7 @@ public class Player_CrouchState : Player_MoveState
     {
         base.Exit();
 
-        player.SetDefaultHitbox();
+        player.ReverseCrouchHitbox();
         player.ResetMoveSpeedMultiplier();
 
         player.ResetCameraPos();

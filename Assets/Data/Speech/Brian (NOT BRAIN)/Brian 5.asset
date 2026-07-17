@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 5
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'If you want to escape from this dream.  You need to do 3 things. '
+  speechText: 'I AM GOING TO TELL YOU A USEFUL THING. '
   speechSound: {fileID: 0}

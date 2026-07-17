@@ -7,7 +7,7 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
 
     public void OnItemDeposited(GameObject itemPrefab)
     {
-        if (GameManager.Instance.CurPlayerMode == PlayerMode.VR)
+        if (GameManager.Instance.IsInVR)
         {
             itemLists.Add(itemPrefab);
             return;
