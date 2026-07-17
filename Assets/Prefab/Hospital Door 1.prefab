@@ -741,6 +741,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2891563132444455974}
     m_Modifications:
+    - target: {fileID: 4801423338586296645, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
+    - target: {fileID: 4801423338586296645, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6739158395485760624, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
+      propertyPath: defaultVRSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
+    - target: {fileID: 6739158395485760624, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
+      propertyPath: interactableVRSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2f8349570a152884fb6cf7ebdc8c18b3, type: 3}
     - target: {fileID: 6970348019885045207, guid: fece0aa3610ccbd4da0cac3abdcd0ded, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.065
