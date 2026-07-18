@@ -32,6 +32,7 @@ Shader "Custom/AlwaysTopShader"
             {
                 float4 positionOS : POSITION;
                 float2 uv : TEXCOORD0;
+                float4 color : COLOR;    
                 UNITY_VERTEX_INPUT_INSTANCE_ID // <-- needed for instancing
             };
 
@@ -39,6 +40,7 @@ Shader "Custom/AlwaysTopShader"
             {
                 float4 positionHCS : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                half4 color : COLOR; 
                 UNITY_VERTEX_INPUT_INSTANCE_ID // <-- carries instance ID to fragment
                 UNITY_VERTEX_OUTPUT_STEREO     // <-- stereo eye index
             };
@@ -60,6 +62,7 @@ Shader "Custom/AlwaysTopShader"
 
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.color = IN.color;
                 return OUT;
             }
 

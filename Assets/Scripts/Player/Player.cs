@@ -17,8 +17,11 @@ public class Player : Entity
     [Header("Camera")]
     [SerializeField] private Transform cameraOffset;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private EyeVfx eyeVfx;
     [SerializeField] private float fovChangeDuration = 2;
     private Coroutine fovCoroutine;
+    public EyeVfx EyeVfx => eyeVfx;
+
     public float DefaultFov { get; private set; }
 
     [Header("Interact Details")]

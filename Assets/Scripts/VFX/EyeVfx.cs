@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-public class WakeUpVfx : MonoBehaviour
+public class EyeVfx : MonoBehaviour
 {
     [SerializeField] private RectTransform eyeTop;
     [SerializeField] private RectTransform eyeBottom;
@@ -15,10 +15,6 @@ public class WakeUpVfx : MonoBehaviour
     [SerializeField] private float targetFocusDistance = 50f;
 
     private DepthOfField depthOfField;
-
-
-
-    private Coroutine deathCo;
 
     private Vector3 defaultTopPos;
     private Vector3 defaultBottomPos;
@@ -42,10 +38,6 @@ public class WakeUpVfx : MonoBehaviour
         eyeTop.anchoredPosition = new Vector3(0, curTopEyePos, 0);
         eyeBottom.anchoredPosition = new Vector3(0, curBottomEyePos, 0);
 
-        if (curTopEyePos == defaultTopPos.y)
-        {
-            //blurEffect.weight = 0;
-        }
     }
 
     [ContextMenu("PlayDeathEffect")]
@@ -57,7 +49,7 @@ public class WakeUpVfx : MonoBehaviour
         curTopEyePos = 0;
         curBottomEyePos = 0;
 
-        deathCo = StartCoroutine(PlayWakeUpAnimationCo());
+        StartCoroutine(PlayWakeUpAnimationCo());
     }
 
     private IEnumerator BlurFocusCo()

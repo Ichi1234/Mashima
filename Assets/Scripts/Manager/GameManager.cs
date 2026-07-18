@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
-    [SerializeField] private WakeUpVfx eyeVfx;
     [SerializeField] private float doorSlamForce = 300;
 
     private float appoximateNoise;
@@ -48,10 +47,9 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDeath()
     {
-        eyeVfx.gameObject.SetActive(true);
-        eyeVfx.Play();
+        player.EyeVfx.gameObject.SetActive(true);
+        player.EyeVfx.Play();
         player.ResetPlayer(playerSpawnPos);
-
         ResetAppoximateNoise();
     }
 
