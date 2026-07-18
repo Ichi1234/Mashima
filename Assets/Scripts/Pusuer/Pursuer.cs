@@ -87,6 +87,8 @@ public class Pursuer : Entity
 
     protected override void Update()
     {
+        IsSeeingPlayer = PlayerDetection(out RaycastHit hit);
+
         base.Update();
 
         SlamTheDoorOpen();
@@ -100,7 +102,6 @@ public class Pursuer : Entity
             OnReachedTheDesitnation?.Invoke();
         }
 
-        IsSeeingPlayer = PlayerDetection(out RaycastHit hit);
 
         Debug.Log(IsSeeingPlayer);
 
@@ -180,8 +181,14 @@ public class Pursuer : Entity
 
     private void PlayerDeath()
     {
+
+        animController.ResetAllAnimation();
+
         stateMachine.ChangeState(IdleState);
-        agent.Warp(initialPos);
+
+        bool warped = agent.Warp(initialPos);
+
+        ResumeMovement();
     }
 
     private bool PlayerDetection(out RaycastHit hit)

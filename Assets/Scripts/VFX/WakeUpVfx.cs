@@ -51,10 +51,8 @@ public class WakeUpVfx : MonoBehaviour
     [ContextMenu("PlayDeathEffect")]
     public void Play()
     {
-        if (deathCo != null)
-        {
-            StopCoroutine(deathCo);
-        }
+        StopAllCoroutines();
+
 
         curTopEyePos = 0;
         curBottomEyePos = 0;

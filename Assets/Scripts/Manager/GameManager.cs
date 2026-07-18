@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         eyeVfx.gameObject.SetActive(true);
         eyeVfx.Play();
-        player.transform.position = playerSpawnPos;
+        player.ResetPlayer(playerSpawnPos);
 
         ResetAppoximateNoise();
     }

@@ -358,4 +358,11 @@ public class Player : Entity
 
         cameraOffset.localPosition -= transform.InverseTransformDirection(actualMoveDelta);
     }
+
+    public void ResetPlayer(Vector3 spawnPoint)
+    {
+        charController.enabled = false;
+        transform.position = spawnPoint;
+        charController.enabled = true;
+    }
 }
