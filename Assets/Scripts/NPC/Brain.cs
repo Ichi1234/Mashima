@@ -43,7 +43,8 @@ public class Brain : MonoBehaviour, INPCInteractable
         List<SpeechDataSO> speechList = GetSpeechList();
 
         interactionIndicator.SetShowable(false);
-        DialogManager.Instance.SetCanvas(vrDialogueBox);
+
+        if (GameManager.Instance.IsInVR) DialogManager.Instance.SetCanvas(vrDialogueBox);
         DialogManager.Instance.OpenDialogBox(npcName, speechList);
         PlaySound(speechList[0].speechSound);
     }
