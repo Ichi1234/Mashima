@@ -10,7 +10,7 @@ Shader "Custom/UI_AlwaysTop"
         Tags
         {
             "RenderType" = "Transparent"
-            "Queue" = "Transparent+100"
+            "Queue" = "Transparent+200"
             "RenderPipeline" = "UniversalPipeline"
         }
         Pass
