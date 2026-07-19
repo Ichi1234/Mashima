@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 7560047361994948787}
   - component: {fileID: 804922159753122404}
   m_Layer: 5
-  m_Name: eyeVFXCanvas (1)
+  m_Name: Player Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -40,11 +40,9 @@ public class EyeVfx : MonoBehaviour
 
     }
 
-    [ContextMenu("PlayDeathEffect")]
-    public void Play()
+    public void PlayWakeupEffect()
     {
         StopAllCoroutines();
-
 
         curTopEyePos = 0;
         curBottomEyePos = 0;
@@ -115,7 +113,7 @@ public class EyeVfx : MonoBehaviour
         curBottomEyePos = targetBottomPos;
     }
 
-    private IEnumerator CloseEyeCo()
+    public IEnumerator CloseEyeCo()
     {
         yield return EyeAnimation(0, 0);
 
@@ -126,7 +124,7 @@ public class EyeVfx : MonoBehaviour
         yield return EyeAnimation(defaultTopPos.y / 2, defaultBottomPos.y / 2);
 
     }
-    private IEnumerator OpenEyeCo()
+    public IEnumerator OpenEyeCo()
     {
         yield return EyeAnimation(defaultTopPos.y, defaultBottomPos.y);
     }

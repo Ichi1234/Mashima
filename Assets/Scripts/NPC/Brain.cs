@@ -55,6 +55,8 @@ public class Brain : MonoBehaviour, INPCInteractable
 
     private void Update()
     {
+        if (GameManager.Instance.IsGameEnded) return;
+
         float offsetX = Mathf.Sin(Time.time * speedX) * magnitudeX;
         float offsetY = Mathf.Sin(Time.time * speedY) * magnitudeY;
 

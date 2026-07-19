@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public System.Action OnPlayerDeath;
 
     public System.Action OnElectricRepaired;
+    public bool IsGameEnded { get; private set; } = false;
 
     public bool PlayerIsRunning => player.IsRunning();
     public float DoorSlamForce => doorSlamForce;
@@ -43,12 +44,14 @@ public class GameManager : MonoBehaviour
         this.player = player;
 
         playerSpawnPos = player.transform.position;
+
+        player.PlayerCanvas.PlayWakeUpEffect();
     }
 
     public void PlayerDeath()
     {
-        player.EyeVfx.gameObject.SetActive(true);
-        player.EyeVfx.Play();
+        player.PlayerCanvas.PlayWakeUpEffect();
+
         player.ResetPlayer(playerSpawnPos);
         ResetAppoximateNoise();
     }
@@ -91,4 +94,11 @@ public class GameManager : MonoBehaviour
     public void SetAppoximateNoise(float noise) => appoximateNoise = noise;
 
     public void ResetAppoximateNoise() => appoximateNoise = defaultAppoximateNoise;
+
+    public void SetGameEnd()
+    {
+        player.PlayerCanvas.PlayEndingScene();
+
+        IsGameEnded = true;
+    }
 } 

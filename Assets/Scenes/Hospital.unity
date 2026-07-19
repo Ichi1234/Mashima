@@ -16925,6 +16925,18 @@ PrefabInstance:
       propertyPath: blurEffect
       value: 
       objectReference: {fileID: 481201723}
+    - target: {fileID: 3024354981438841527, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: m_fontColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024354981438841527, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 16777215
+      objectReference: {fileID: 0}
+    - target: {fileID: 7287362022342567392, guid: 95bd6dbb5d1bde74c99dfda2ea23e50a, type: 3}
+      propertyPath: fadingTextDuration
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108484,6 +108496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1708094253}
   - component: {fileID: 1708094254}
+  - component: {fileID: 1708094255}
   m_Layer: 9
   m_Name: End of Demo
   m_TagString: Untagged
@@ -108527,6 +108540,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.08
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1708094255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708094252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 155698ba21b5dfb4e844272e07095f0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EndingTrigger
 --- !u!1001 &1708460015
 PrefabInstance:
   m_ObjectHideFlags: 0
