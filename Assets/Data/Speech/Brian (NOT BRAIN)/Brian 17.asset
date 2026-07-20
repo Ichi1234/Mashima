@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 17
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: WHO WROTE THAT LINE!? I'M GOING TO KILL THEM!!
+  speechText: THAT'S ALL!!
   speechSound: {fileID: 0}

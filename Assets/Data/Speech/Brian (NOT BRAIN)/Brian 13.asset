@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 13
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Once you have these three items, return to this room and drop them
-    into my cauldron, and I'll fix the generator for you~~.
+  speechText: I'M GOING TO KILL THEM
   speechSound: {fileID: 0}

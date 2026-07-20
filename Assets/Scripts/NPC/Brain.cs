@@ -33,14 +33,18 @@ public class Brain : MonoBehaviour, INPCInteractable
     public void Interact()
     {
         if (!isInteractable) return;
+        Speak();
+    }
 
+    private void Speak()
+    {
         isInteractable = false;
         isFinishedTalking = false;
 
         DialogManager.Instance.OnFinishedTalking += FinishedTalking;
         DialogManager.Instance.OnNextMsg += PlaySound;
 
-        List<SpeechDataSO> speechList = GetSpeechList();
+        List<SpeechDataSO> speechList = GetSpeechGroup().SpeechList;
 
         interactionIndicator.SetShowable(false);
 
@@ -71,7 +75,7 @@ public class Brain : MonoBehaviour, INPCInteractable
 
     private void FinishedTalking()
     {
-        if (currentStage < BrianStage.TalkSecondTime)
+        if (currentStage < BrianStage.TalkSecondTime && !GetSpeechGroup().loop)
         {
             currentStage++;
         }
@@ -84,7 +88,13 @@ public class Brain : MonoBehaviour, INPCInteractable
         isFinishedTalking = true;
     }
 
-    private List<SpeechDataSO> GetSpeechList() => msgList[(int)currentStage].SpeechList;
+    private SpeechGroup GetSpeechGroup() => msgList[(int)currentStage];
+
+    public void StopSpeechGroupLoop()
+    {
+        msgList[(int)currentStage].loop = false;
+        currentStage++;
+    }
 
     private void PlaySound(AudioClip clip)
     {

@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour, IPuzzleReactable
 {
+    [SerializeField] private ParticleSystem doneEffect;
+
     private List<GameObject> itemLists = new List<GameObject>();
 
     public void OnItemDeposited(GameObject itemPrefab)
@@ -33,6 +35,7 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
             Destroy(item);    
         }
 
+        doneEffect.gameObject.SetActive(true);
         GameManager.Instance.OnElectricRepaired?.Invoke();
         
     }
