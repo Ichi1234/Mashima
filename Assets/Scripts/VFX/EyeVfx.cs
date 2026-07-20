@@ -122,6 +122,8 @@ public class EyeVfx : MonoBehaviour
     private IEnumerator BrieftlyOpenEyeCo()
     {
         yield return EyeAnimation(defaultTopPos.y / 2, defaultBottomPos.y / 2);
+        if (!GameManager.Instance.IsGameStarted) GameManager.Instance.BeginTheGame();
+
 
     }
     public IEnumerator OpenEyeCo()

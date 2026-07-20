@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public System.Action OnPlayerDeath;
 
     public System.Action OnElectricRepaired;
+    public bool IsGameStarted { get; private set; } = false;
     public bool IsGameEnded { get; private set; } = false;
 
     public bool PlayerIsRunning => player.IsRunning();
@@ -101,4 +102,6 @@ public class GameManager : MonoBehaviour
 
         IsGameEnded = true;
     }
+
+    public void BeginTheGame() => IsGameStarted = true;
 } 

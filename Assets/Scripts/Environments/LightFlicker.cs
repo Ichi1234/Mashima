@@ -5,6 +5,7 @@ public class LightFlicker : MonoBehaviour
 {
     [SerializeField] private Light lightSource;
     [SerializeField] private Renderer meshRenderer;
+    [SerializeField] private float intensity = 5;
 
     private Material mat;
 
@@ -24,23 +25,23 @@ public class LightFlicker : MonoBehaviour
     {
         while (true)
         {
-            lightSource.intensity = 1.0f;
+            lightSource.intensity = intensity;
             mat.SetColor("_EmissionColor", Color.white * 1f);
             yield return new WaitForSeconds(0.05f);
 
-            lightSource.intensity = 0.7f;
+            lightSource.intensity = intensity - 0.7f;
             mat.SetColor("_EmissionColor", Color.white * 0.7f);
             yield return new WaitForSeconds(0.03f);
 
-            lightSource.intensity = 1.0f;
+            lightSource.intensity = intensity;
             mat.SetColor("_EmissionColor", Color.white * 1f);
             yield return new WaitForSeconds(0.04f);
 
-            lightSource.intensity = 0.3f;
+            lightSource.intensity = intensity - 1.3f;
             mat.SetColor("_EmissionColor", Color.white * 0.3f);
             yield return new WaitForSeconds(0.02f);
 
-            lightSource.intensity = 1.0f;
+            lightSource.intensity = intensity;
             mat.SetColor("_EmissionColor", Color.white * 1f);
 
             yield return new WaitForSeconds(Random.Range(2f, 8f));

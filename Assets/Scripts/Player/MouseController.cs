@@ -9,13 +9,16 @@ public class MouseController : MonoBehaviour
     private float pitch = 0;
     private float yaw = 0;
 
+
     private void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        pitch = 0;
-        playerCameraOffset.localRotation = Quaternion.Euler(0, 0, 0);
+        yaw = player.transform.localEulerAngles.y;
+
+        pitch = player.transform.localEulerAngles.x;
+
 
     }
 
@@ -25,6 +28,8 @@ public class MouseController : MonoBehaviour
         {
             ToggleMouseCursor();
         }
+
+        if (!GameManager.Instance.IsGameStarted) return;
 
         RotationByMouse();
     }
