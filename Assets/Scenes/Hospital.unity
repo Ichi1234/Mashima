@@ -72069,20 +72069,36 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: interactionIndicator
       value: 
       objectReference: {fileID: 274910868}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: msgList.Array.data[0].loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: msgList.Array.data[1].loop
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[2].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: msgList.Array.data[0].SpeechList.Array.size
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[1].SpeechList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[2].SpeechList.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[5]'
@@ -72096,6 +72112,14 @@ PrefabInstance:
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[9]'
       value: 
       objectReference: {fileID: 11400000, guid: bffaf8f784e334547901ad5ca885ffab, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[1].SpeechList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9c2471402389f418323f250e19d159, type: 2}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: 'msgList.Array.data[2].SpeechList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e9c2471402389f418323f250e19d159, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[11]'
       value: 

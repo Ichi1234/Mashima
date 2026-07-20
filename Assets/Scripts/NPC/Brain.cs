@@ -19,7 +19,7 @@ public class Brain : MonoBehaviour, INPCInteractable
     private float talkCooldownDuration = 0.5f;
     private float lastTalkedTime = 0;
 
-    private enum BrianStage { FirstMeet, TalkSecondTime }
+    private enum BrianStage { FirstMeet, TalkSecondTime, PuzzleFinished }
 
     private bool isInteractable = true;
 
@@ -28,6 +28,9 @@ public class Brain : MonoBehaviour, INPCInteractable
     private Vector3 startPos;
     
     private BrianStage currentStage = BrianStage.FirstMeet;
+
+    private BrianStage LastStage =>
+    (BrianStage)(Enum.GetValues(typeof(BrianStage)).Length - 1);
 
 
     public void Interact()
@@ -75,9 +78,13 @@ public class Brain : MonoBehaviour, INPCInteractable
 
     private void FinishedTalking()
     {
-        if (currentStage < BrianStage.TalkSecondTime && !GetSpeechGroup().loop)
+        if (currentStage < LastStage && !GetSpeechGroup().loop)
         {
             currentStage++;
+        }
+        else if (currentStage >= LastStage && !GetSpeechGroup().loop)
+        {
+            isInteractable = false;
         }
 
         DialogManager.Instance.OnFinishedTalking -= FinishedTalking;

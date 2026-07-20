@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
-  m_Name: Flame, Mask, Tear
+  m_Name: 24_See yaaa
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Remember!! Flame, Mask, Tear
+  speechText: SEE YOU IN THE FULL VERSION!!!
   speechSound: {fileID: 0}
