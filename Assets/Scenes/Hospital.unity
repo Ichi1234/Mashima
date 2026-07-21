@@ -218674,6 +218674,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7588432794541370761, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
+      propertyPath: horizontalAngle
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588432794541370761, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
       propertyPath: slowDownMultiplier
       value: 0.5
       objectReference: {fileID: 0}
@@ -218683,7 +218687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7809537281170813354, guid: 44a020387adae2a448f1ee02e01e2ec0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
