@@ -2,14 +2,19 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NPCStage { FirstMeet, TalkSecondTime, PuzzleFinished }
+public enum NPCID { Brian }
+
 public class Brain : MonoBehaviour, INPCInteractable
 {
+    [SerializeField] private NPCID npcID;
+    [SerializeField] private string npcName;
+
     [SerializeField] private float speedX = 1f;
     [SerializeField] private float speedY = 1.3f;
     [SerializeField] private float magnitudeX = 0.1f;
     [SerializeField] private float magnitudeY = 0.15f;
 
-    [SerializeField] private string npcName;
     [SerializeField] private List<SpeechGroup> msgList;
     [SerializeField] private AudioSource audioSource;
 
@@ -19,18 +24,16 @@ public class Brain : MonoBehaviour, INPCInteractable
     private float talkCooldownDuration = 0.5f;
     private float lastTalkedTime = 0;
 
-    private enum BrianStage { FirstMeet, TalkSecondTime, PuzzleFinished }
-
     private bool isInteractable = true;
 
     private bool isFinishedTalking = false;
 
     private Vector3 startPos;
     
-    private BrianStage currentStage = BrianStage.FirstMeet;
+    private NPCStage currentStage = NPCStage.FirstMeet;
 
-    private BrianStage LastStage =>
-    (BrianStage)(Enum.GetValues(typeof(BrianStage)).Length - 1);
+    private NPCStage LastStage =>
+    (NPCStage)(Enum.GetValues(typeof(NPCStage)).Length - 1);
 
 
     public void Interact()
@@ -47,13 +50,13 @@ public class Brain : MonoBehaviour, INPCInteractable
         DialogManager.Instance.OnFinishedTalking += FinishedTalking;
         DialogManager.Instance.OnNextMsg += PlaySound;
 
-        List<SpeechDataSO> speechList = GetSpeechGroup().SpeechList;
+        SpeechGroup speechGroup = GetSpeechGroup();
 
         interactionIndicator.SetShowable(false);
 
         if (GameManager.Instance.IsInVR) DialogManager.Instance.SetCanvas(vrDialogueBox);
-        DialogManager.Instance.OpenDialogBox(npcName, speechList);
-        PlaySound(speechList[0].speechSound);
+        DialogManager.Instance.OpenDialogBox(npcID, npcName, currentStage, speechGroup.SpeechList);
+        PlaySound(speechGroup.SpeechList[0].speechSound);
     }
 
     private void Start()
@@ -86,13 +89,15 @@ public class Brain : MonoBehaviour, INPCInteractable
         if (puzzleID != PuzzleID.Cauldron) return;
         if (puzzleState != PuzzleState.Completed) return;
 
-        StopSpeechGroupLoop();
+        currentStage = NPCStage.PuzzleFinished;
 
         Speak();
     }
 
-    private void FinishedTalking()
+    private void FinishedTalking(NPCID npcName, NPCStage npcStage)
     {
+        if (npcName != this.npcID) return;
+
         if (currentStage < LastStage && !GetSpeechGroup().loop)
         {
             currentStage++;

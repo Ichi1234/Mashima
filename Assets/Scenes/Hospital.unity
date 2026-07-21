@@ -7540,8 +7540,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -17757,8 +17757,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -42928,6 +42928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 649867387}
+  - component: {fileID: 649867388}
   m_Layer: 0
   m_Name: PuzzleManager
   m_TagString: Untagged
@@ -42950,6 +42951,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &649867388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649867386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7593fc72eae6b3945904021c87273b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PuzzleManager
 --- !u!1 &650283112 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 2a7e5f1e8f4da1441bc2fb655d610a98, type: 3}
@@ -45973,8 +45986,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -59260,8 +59273,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -72045,6 +72058,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[1].NPCStage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
+      propertyPath: msgList.Array.data[2].NPCStage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: msgList.Array.data[0].SpeechList.Array.size
       value: 19
       objectReference: {fileID: 0}
@@ -72095,35 +72116,35 @@ PrefabInstance:
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[11]'
       value: 
-      objectReference: {fileID: 11400000, guid: 25160ab9cc4285744829541c766db5e2, type: 2}
+      objectReference: {fileID: 11400000, guid: fc65c7a98bc01ec44a3ebbd9640a7904, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[12]'
       value: 
-      objectReference: {fileID: 11400000, guid: e78f60edc50699f42af900fa7c1265cf, type: 2}
+      objectReference: {fileID: 11400000, guid: 1f84c50cf467a2a498581d22468c9e28, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[13]'
       value: 
-      objectReference: {fileID: 11400000, guid: 5925acec7d66214439a3c7d77831ca08, type: 2}
+      objectReference: {fileID: 11400000, guid: 25160ab9cc4285744829541c766db5e2, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[14]'
       value: 
-      objectReference: {fileID: 11400000, guid: fdb1d1e89c3113e4a9f1f3dad7ebdb60, type: 2}
+      objectReference: {fileID: 11400000, guid: e78f60edc50699f42af900fa7c1265cf, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[15]'
       value: 
-      objectReference: {fileID: 11400000, guid: 8d46ea481ae17384287fa855d16a881d, type: 2}
+      objectReference: {fileID: 11400000, guid: 5925acec7d66214439a3c7d77831ca08, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[16]'
       value: 
-      objectReference: {fileID: 11400000, guid: 9b97b77e6c8626f4c9a4972c70329dcf, type: 2}
+      objectReference: {fileID: 11400000, guid: fdb1d1e89c3113e4a9f1f3dad7ebdb60, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[17]'
       value: 
-      objectReference: {fileID: 11400000, guid: fc65c7a98bc01ec44a3ebbd9640a7904, type: 2}
+      objectReference: {fileID: 11400000, guid: 8d46ea481ae17384287fa855d16a881d, type: 2}
     - target: {fileID: 1578990353714079263, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: 'msgList.Array.data[0].SpeechList.Array.data[18]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1f84c50cf467a2a498581d22468c9e28, type: 2}
+      objectReference: {fileID: 11400000, guid: 9b97b77e6c8626f4c9a4972c70329dcf, type: 2}
     - target: {fileID: 1625967412207080433, guid: c97a5405372e98240928b877d218ed15, type: 3}
       propertyPath: m_text
       value: Today I am going to eat the crosant. QUASO?Today I am going to eat the
@@ -102788,8 +102809,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -129147,8 +129168,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 1, g: 1, b: 1, a: 0.007843138}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.011764706}
+      minColor: {r: 1, g: 1, b: 1, a: 0.039215688}
+      maxColor: {r: 1, g: 1, b: 1, a: 0.023529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

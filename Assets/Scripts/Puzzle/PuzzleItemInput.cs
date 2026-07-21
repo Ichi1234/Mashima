@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class PuzzleItemInput : MonoBehaviour, IInteractable
 {
     [SerializeField] private PuzzleID puzzleID;

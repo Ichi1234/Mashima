@@ -15,7 +15,11 @@ public class DialogManager : MonoBehaviour
     public static DialogManager Instance { get; private set; }
 
     public Action<AudioClip> OnNextMsg;
-    public Action OnFinishedTalking;
+    public Action<NPCID, NPCStage> OnFinishedTalking;
+
+    private NPCID curNpcID;
+    private string curNpcName;
+    private NPCStage curNpcStage;
 
     private void Awake()
     {
@@ -57,7 +61,7 @@ public class DialogManager : MonoBehaviour
 
         if (index >= msgLists.Count)
         {
-            OnFinishedTalking?.Invoke();
+            OnFinishedTalking?.Invoke(curNpcID, curNpcStage);
             CloseDialogBox();
             return;
         }
@@ -68,13 +72,16 @@ public class DialogManager : MonoBehaviour
         curCanvas.PlayTypeWriterTextAnimation();
     }
 
-    public void OpenDialogBox(string npcName, List<SpeechDataSO> msgData)
+    public void OpenDialogBox(NPCID npcID, string npcName, NPCStage npcState, List<SpeechDataSO> msgData)
     {
         if (curCanvas.isActiveAndEnabled) return;
 
         msgLists = msgData;
-
-        curCanvas.SetNpcName(npcName);
+        curNpcID = npcID;
+        curNpcName = npcName;
+        curNpcStage = npcState;
+        
+        curCanvas.SetNpcName(curNpcName);
         curCanvas.SetMsg(msgLists[index].speechText);
         curCanvas.gameObject.SetActive(true);
     }

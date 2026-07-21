@@ -7,6 +7,18 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
 
     private List<GameObject> itemLists = new List<GameObject>();
 
+    private bool isPuzzleCompleted = false;
+
+    private void OnEnable()
+    {
+        DialogManager.Instance.OnFinishedTalking += HandleNPCTalkingAndPuzzleFinished;
+    }
+
+    private void OnDisable()
+    {
+        DialogManager.Instance.OnFinishedTalking -= HandleNPCTalkingAndPuzzleFinished;
+    }
+
     public void OnItemDeposited(GameObject itemPrefab)
     {
         if (GameManager.Instance.IsInVR)
@@ -37,6 +49,19 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
 
         doneEffect.gameObject.SetActive(true);
         GameManager.Instance.OnElectricRepaired?.Invoke();
+
+        isPuzzleCompleted = true;
         
+    }
+
+    public void HandleNPCTalkingAndPuzzleFinished(NPCID npcID, NPCStage npcStage)
+    {
+        if (!isPuzzleCompleted) return;
+
+        if (npcID == NPCID.Brian && npcStage == NPCStage.PuzzleFinished)
+        {
+            doneEffect.Stop();
+            Debug.Log("OIII!");
+        }
     }
 }
