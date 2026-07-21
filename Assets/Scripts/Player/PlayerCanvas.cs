@@ -27,6 +27,7 @@ public class PlayerCanvas : MonoBehaviour
     private IEnumerator PlayEndingSceneCo()
     {
         eyeVfx.gameObject.SetActive(true);
+        endingText.gameObject.SetActive(true);
 
         yield return StartCoroutine(eyeVfx.CloseEyeCo());
         yield return StartCoroutine(SlowyIncreaseTextAlpha());

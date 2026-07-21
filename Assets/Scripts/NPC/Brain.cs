@@ -61,6 +61,11 @@ public class Brain : MonoBehaviour, INPCInteractable
         startPos = transform.position;
     }
 
+    private void OnEnable()
+    {
+        PuzzleManager.Instance.OnPuzzleStateChanged += HandlePuzzleStateChanged;
+    }
+
     private void Update()
     {
         if (GameManager.Instance.IsGameEnded) return;
@@ -74,6 +79,16 @@ public class Brain : MonoBehaviour, INPCInteractable
         {
             isInteractable = true;
         }
+    }
+
+    public void HandlePuzzleStateChanged(PuzzleID puzzleID, PuzzleState puzzleState)
+    {
+        if (puzzleID != PuzzleID.Cauldron) return;
+        if (puzzleState != PuzzleState.Completed) return;
+
+        StopSpeechGroupLoop();
+
+        Speak();
     }
 
     private void FinishedTalking()
