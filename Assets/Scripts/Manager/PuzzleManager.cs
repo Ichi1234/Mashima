@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class PuzzleManager : MonoBehaviour
 {
     public static PuzzleManager Instance;

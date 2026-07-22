@@ -11,8 +11,12 @@ public class LightFlicker : MonoBehaviour
 
     private void Awake()
     {
-        mat = meshRenderer.materials[1];
-        mat.EnableKeyword("_EMISSION");
+        if (meshRenderer != null)
+        {
+            mat = meshRenderer.materials[1];
+            mat.EnableKeyword("_EMISSION");
+        }
+
 
     }
 
@@ -25,26 +29,35 @@ public class LightFlicker : MonoBehaviour
     {
         while (true)
         {
-            lightSource.intensity = intensity;
-            mat.SetColor("_EmissionColor", Color.white * 1f);
+            FlickerLight(0);
             yield return new WaitForSeconds(0.05f);
 
-            lightSource.intensity = intensity - 0.7f;
-            mat.SetColor("_EmissionColor", Color.white * 0.7f);
+            FlickerLight(0.7f);
+
             yield return new WaitForSeconds(0.03f);
 
-            lightSource.intensity = intensity;
-            mat.SetColor("_EmissionColor", Color.white * 1f);
+            FlickerLight(0);
+
             yield return new WaitForSeconds(0.04f);
 
-            lightSource.intensity = intensity - 1.3f;
-            mat.SetColor("_EmissionColor", Color.white * 0.3f);
+            FlickerLight(1.3f);
+
             yield return new WaitForSeconds(0.02f);
 
-            lightSource.intensity = intensity;
-            mat.SetColor("_EmissionColor", Color.white * 1f);
+            FlickerLight(0);
 
             yield return new WaitForSeconds(Random.Range(2f, 8f));
         }
+    }
+
+    private void FlickerLight(float flickerVal)
+    {
+        if (meshRenderer != null)
+        {
+            mat.SetColor("_EmissionColor", Color.white * Mathf.Clamp(flickerVal, 1, 100));
+        }
+
+        lightSource.intensity = intensity - flickerVal;
+
     }
 }
