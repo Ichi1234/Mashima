@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         player.PlayerCanvas.PlayWakeUpEffect();
 
+        ResearchLogger.Log("Player death");
         player.ResetPlayer(playerSpawnPos);
         ResetAppoximateNoise();
     }
@@ -103,5 +104,9 @@ public class GameManager : MonoBehaviour
         IsGameEnded = true;
     }
 
-    public void BeginTheGame() => IsGameStarted = true;
+    public void BeginTheGame()
+    {
+        ResearchLogger.Log("Game starto!");
+        IsGameStarted = true;
+    }
 } 

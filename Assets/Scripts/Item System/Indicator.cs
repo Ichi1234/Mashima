@@ -1,3 +1,4 @@
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -55,7 +56,13 @@ public class Indicator : MonoBehaviour
             grabInteractable.selectExited.RemoveListener(OnReleased);
         }
     }
-    private void OnGrabbed(SelectEnterEventArgs args) => SetShowable(false);
+    private void OnGrabbed(SelectEnterEventArgs args)
+    {
+        ResearchLogger.Log(gameObject.transform.parent.name + " got picked up");
+
+        SetShowable(false);
+    }
+
     private void OnReleased(SelectExitEventArgs args) => SetShowable(true);
 
     private void Start()
