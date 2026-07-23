@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brain 1
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'HELLO FELLOW DREAMER!!! '
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: 641050d27426f6e4e8668fd28a77a0ba, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 10
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'And then, receive the tear from a depresas#@##!!!pjctahhhh '
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: 323dbe36b5029c2428d9bd6ed0b984f5, type: 3}

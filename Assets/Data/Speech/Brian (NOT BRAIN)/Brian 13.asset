@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 13
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: I'M GOING TO KILL THEM
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: cda6dead94fecfa4b88ca4ccd170bbbc, type: 3}

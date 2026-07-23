@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brain 2
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'My name is Brian! '
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: d8c1955835490464d9e69876a25c1592, type: 3}

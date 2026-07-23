@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 18
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: 'GOOD LUCK, HUMAN. '
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: a62de59de14d670459d4404775b727d6, type: 3}

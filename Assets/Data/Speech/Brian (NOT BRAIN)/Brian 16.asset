@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: Once you have these three items, return to this room and drop them
     into my cauldron, and I'll fix the generator for you~~.
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: 354c9ccb39f1eaa4386fdfed75b1228c, type: 3}

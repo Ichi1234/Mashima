@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 12
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: WHO WROTE THAT LINE!?
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: 69db789016ef2e74c91f94cc479d2896, type: 3}

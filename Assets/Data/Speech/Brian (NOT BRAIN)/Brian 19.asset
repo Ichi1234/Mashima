@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 19
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: DON'T DIE!
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: b40e5708a0d39054dbddbeb6d21cc3a3, type: 3}

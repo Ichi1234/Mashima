@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Brian 11
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
   speechText: Huh!?
-  speechSound: {fileID: 0}
+  speechSound: {fileID: 8300000, guid: f757debc3bac26745ab2b738edecc9fc, type: 3}
