@@ -61,7 +61,6 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
         if (npcID == NPCID.Brian && npcStage == NPCStage.PuzzleFinished)
         {
             doneEffect.Stop();
-            Debug.Log("OIII!");
         }
     }
 }

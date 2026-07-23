@@ -106,11 +106,6 @@ public class Player : Entity
     {
         RaycastHit hit = CameraInteractRaycast();
 
-        if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
-        }
-
         PlayerInteraction(hit);
 
         ApplyGravity();
