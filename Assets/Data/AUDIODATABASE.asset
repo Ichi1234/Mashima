@@ -30,7 +30,7 @@ MonoBehaviour:
     pitch: 1
   - audioName: pursuer-screech
     clip: {fileID: 8300000, guid: 161b7083d65df134cb19404611a9c731, type: 3}
-    maxVolume: 1
+    maxVolume: 0.6
     spread: 120
     minDistance: 50
     maxDistance: 100
