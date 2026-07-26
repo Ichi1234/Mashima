@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 19
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: DON'T DIE!
+  speechEnglishText: DON'T DIE!
+  speechJapaneseText: "\u6B7B\u306C\u306A\u3088\uFF01\uFF01\uFF01 "
   speechSound: {fileID: 8300000, guid: b40e5708a0d39054dbddbeb6d21cc3a3, type: 3}

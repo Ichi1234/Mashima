@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: 20_Flame, Mask, Tear
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Remember!! Flame, Mask, Tear
+  speechEnglishText: Remember!! Flame, Mask, Tear
+  speechJapaneseText: "\u899A\u3048\u3066\u304A\u3051\uFF01\uFF01 \u708E\u3001\u4EEE\u9762\u3001\u6D99\u3060\uFF01\uFF01 "
   speechSound: {fileID: 0}

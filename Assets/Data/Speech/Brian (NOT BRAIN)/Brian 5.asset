@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 5
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'I AM GOING TO TELL YOU A USEFUL THING. '
+  speechEnglishText: I AM GOING TO TELL YOU A USEFUL THING.
+  speechJapaneseText: "\u4FFA\u306F\u5F79\u306B\u7ACB\u3064\u60C5\u5831\u3092\u6559\u3048\u3066\u3084\u308B\u305E\uFF01 "
   speechSound: {fileID: 8300000, guid: 555fec7d60816bd449f2f61eb0756ae4, type: 3}

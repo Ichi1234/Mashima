@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 18
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'GOOD LUCK, HUMAN. '
+  speechEnglishText: GOOD LUCK, HUMAN.
+  speechJapaneseText: "\u5E78\u904B\u3092\u7948\u308B\u305E\u3001\u4EBA\u9593\uFF01 "
   speechSound: {fileID: 8300000, guid: a62de59de14d670459d4404775b727d6, type: 3}

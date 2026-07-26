@@ -5,6 +5,8 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class DialogManager : MonoBehaviour
 {
+    [SerializeField] private bool isJapaneseText = false;
+
     [SerializeField] private DialogueCanvas desktopDialogCanvas;
     private DialogueCanvas curCanvas;
 
@@ -68,7 +70,17 @@ public class DialogManager : MonoBehaviour
 
 
         OnNextMsg?.Invoke(msgLists[index].speechSound);
-        curCanvas.SetMsg(msgLists[index].speechText);
+
+        if (isJapaneseText)
+        {
+            curCanvas.SetMsg(msgLists[index].speechJapaneseText);
+        }
+
+        else
+        {
+            curCanvas.SetMsg(msgLists[index].speechEnglishText);
+
+        }
         curCanvas.PlayTypeWriterTextAnimation();
     }
 
@@ -82,7 +94,18 @@ public class DialogManager : MonoBehaviour
         curNpcStage = npcState;
         
         curCanvas.SetNpcName(curNpcName);
-        curCanvas.SetMsg(msgLists[index].speechText);
+
+        if (isJapaneseText)
+        {
+            curCanvas.SetMsg(msgLists[index].speechJapaneseText);
+        }
+
+        else
+        {
+            curCanvas.SetMsg(msgLists[index].speechEnglishText);
+
+        }
+
         curCanvas.gameObject.SetActive(true);
     }
 

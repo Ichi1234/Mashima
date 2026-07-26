@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: 25_bye
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: BYEEEEE
+  speechEnglishText: BYEEEEE
+  speechJapaneseText: "\u30D0\u30A4\u30D0\uFF5E\uFF5E\u30A4\uFF01\uFF01"
   speechSound: {fileID: 0}

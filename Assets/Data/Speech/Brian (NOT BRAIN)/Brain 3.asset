@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brain 3
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'B-R-I-A-N not B-R-A-I-N '
+  speechEnglishText: B-R-I-A-N not B-R-A-I-N
+  speechJapaneseText: "B-R-I-A-N \u3060\u305E\uFF01 B-R-A-I-N\u3058\u3083\u306A\u3044\u304B\u3089\u306A\uFF01"
   speechSound: {fileID: 8300000, guid: 71c39f8a6196fdb448d5153cb7adbd19, type: 3}

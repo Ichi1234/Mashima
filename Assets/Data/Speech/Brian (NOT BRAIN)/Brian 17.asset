@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 17
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: THAT'S ALL!!
+  speechEnglishText: THAT'S ALL!!
+  speechJapaneseText: "\u4EE5\u4E0A\uFF01\uFF01 "
   speechSound: {fileID: 8300000, guid: ecd078f62b7b356488a4b3174b964320, type: 3}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: 21_IT'S DONE!!!
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: IT IS DONE!!!
+  speechEnglishText: IT IS DONE!!!
+  speechJapaneseText: "\u5B8C\u6210\u3060\uFF01\uFF01\uFF01 "
   speechSound: {fileID: 0}

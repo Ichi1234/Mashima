@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 10
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'And then, receive the tear from a depresas#@##!!!pjctahhhh '
+  speechEnglishText: And then, receive the tear from a depresas#@##!!!pjctahhhh
+  speechJapaneseText: "\u305D\u3057\u3066\u6700\u5F8C\u306B\uFF01\u843D\u3061\u8FBC\u3093\u3060\u30B9\u30B1\u2026\u2026\u30B9\u30B1\u30EB\u2026\u2026\u30C7\u30D7\u30EC\u2026\u2026\u30B9\u30B1\u30E9\u30A1\uFF01\uFF1F\uFF03\uFF20\uFF05\u3042\u3042\u3042\uFF01\uFF01\u304B\u3089\u6D99\u3092\u53D7\u3051\u53D6\u308C\uFF01"
   speechSound: {fileID: 8300000, guid: 323dbe36b5029c2428d9bd6ed0b984f5, type: 3}
