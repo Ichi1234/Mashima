@@ -35,6 +35,13 @@ MonoBehaviour:
     minDistance: 50
     maxDistance: 100
     pitch: 1
+  - audioName: pursuer-chase-start-notify
+    clip: {fileID: 8300000, guid: 84509861677131642a6e8736b3455f43, type: 3}
+    maxVolume: 0.6
+    spread: 120
+    minDistance: 50
+    maxDistance: 100
+    pitch: 1
   env:
   - audioName: door-open
     clip: {fileID: 8300000, guid: 59fe452a139f5b04c8a5a72263f5dc05, type: 3}

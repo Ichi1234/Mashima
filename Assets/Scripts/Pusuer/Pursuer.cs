@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class Pursuer : Entity
 {
+    [SerializeField] private AudioSource oneShotAudio;
     [Header("Pursuer MoveSpeed")]
     [SerializeField] private float moveSpeed = 4.6f;
     [SerializeField] private float chaseSpeedMultiplier = 1.25f;
@@ -27,6 +28,7 @@ public class Pursuer : Entity
 
     [Header("General")]
     [SerializeField] private string screechName = "pursuer-screech";
+    [SerializeField] private string chaseAlertName = "pursuer-chase-start-notify";
 
     public Action OnReachedTheDesitnation;
 
@@ -55,7 +57,7 @@ public class Pursuer : Entity
         base.Awake();
 
         agent.speed = moveSpeed;
-       
+
         IdleState = new Pursuer_IdleState(this, stateMachine);
         PatrolState = new Pursuer_PatrolState(this, stateMachine);
         ChaseState = new Pursuer_ChaseState(this, stateMachine);
@@ -162,12 +164,12 @@ public class Pursuer : Entity
                     if (wasFullyShut)
                     {
                         SetMoveSpeedMultiplier(slowDownMultiplier);
-                       
+
                     }
                     else if (wasPartiallyOpen)
                     {
-                        SetMoveSpeedMultiplier(partialSlowDownMultiplier); 
-                        
+                        SetMoveSpeedMultiplier(partialSlowDownMultiplier);
+
                     }
 
                     slowdownTimer = slowDownDuration;
@@ -198,9 +200,9 @@ public class Pursuer : Entity
         Vector3 playerHead =
             playerDetectionCollider.bounds.center +
             Vector3.up * playerDetectionCollider.bounds.extents.y;
-        
+
         Vector3 directionToPlayer = (playerHead - pursuerEyes.position).normalized;
-        
+
         float distanceToPlayer = Vector3.Distance(pursuerEyes.position, playerHead);
 
         if (distanceToPlayer > playerDetectionRange)
@@ -219,7 +221,7 @@ public class Pursuer : Entity
         }
 
         // Vertical angle check
-        Vector3 forwardVertical = 
+        Vector3 forwardVertical =
             Vector3.ProjectOnPlane(pursuerEyes.forward, pursuerEyes.right).normalized;
 
         Vector3 dirToPlayerVertical =
@@ -227,8 +229,8 @@ public class Pursuer : Entity
 
         float verticalAngleToPlayer =
             Vector3.Angle(forwardVertical, dirToPlayerVertical);
-        
-        
+
+
         if (verticalAngleToPlayer > verticalAngle / 2f)
         {
             return false;
@@ -313,4 +315,5 @@ public class Pursuer : Entity
     public void StopMovement() => agent.isStopped = true;
     public void ResumeMovement() => agent.isStopped = false;
     public void PlayScreechSound() => AudioManager.Instance.PlaySFX(screechName, audioSource);
+    public void PlayChaseStartSound() => AudioManager.Instance.PlaySFX(chaseAlertName, audioSource);
 }

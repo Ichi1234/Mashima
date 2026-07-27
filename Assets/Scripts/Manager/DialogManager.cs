@@ -59,6 +59,11 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
+        if (curNpcStage > NPCStage.FirstMeet || index == 2) //TODO remove this hardcode in full version
+        {
+            curCanvas.SetNpcName("Brian");
+        }
+
         index++;
 
         if (index >= msgLists.Count)
@@ -94,6 +99,12 @@ public class DialogManager : MonoBehaviour
         curNpcStage = npcState;
         
         curCanvas.SetNpcName(curNpcName);
+
+        if (curNpcStage > NPCStage.FirstMeet) //TODO remove this hardcode in full version
+        {
+            curCanvas.SetNpcName("Brian");
+        }
+
 
         if (isJapaneseText)
         {
