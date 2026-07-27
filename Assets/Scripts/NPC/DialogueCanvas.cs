@@ -38,6 +38,8 @@ public class DialogueCanvas : MonoBehaviour
         float timer = 0f;
         float charRate = 0.03f;
 
+        message.maxVisibleCharacters = current;
+
         IsTypingAnimFinished = false;
 
         while (current < target)
