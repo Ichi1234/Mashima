@@ -5,6 +5,8 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class DialogManager : MonoBehaviour
 {
+    [SerializeField] private bool isJapaneseText = false;
+
     [SerializeField] private DialogueCanvas desktopDialogCanvas;
     private DialogueCanvas curCanvas;
 
@@ -15,7 +17,11 @@ public class DialogManager : MonoBehaviour
     public static DialogManager Instance { get; private set; }
 
     public Action<AudioClip> OnNextMsg;
-    public Action OnFinishedTalking;
+    public Action<NPCID, NPCStage> OnFinishedTalking;
+
+    private NPCID curNpcID;
+    private string curNpcName;
+    private NPCStage curNpcStage;
 
     private void Awake()
     {
@@ -53,29 +59,64 @@ public class DialogManager : MonoBehaviour
             return;
         }
 
+        if (curNpcStage > NPCStage.FirstMeet || index == 2) //TODO remove this hardcode in full version
+        {
+            curCanvas.SetNpcName("Brian");
+        }
+
         index++;
 
         if (index >= msgLists.Count)
         {
-            OnFinishedTalking?.Invoke();
+            OnFinishedTalking?.Invoke(curNpcID, curNpcStage);
             CloseDialogBox();
             return;
         }
 
 
         OnNextMsg?.Invoke(msgLists[index].speechSound);
-        curCanvas.SetMsg(msgLists[index].speechText);
+
+        if (isJapaneseText)
+        {
+            curCanvas.SetMsg(msgLists[index].speechJapaneseText);
+        }
+
+        else
+        {
+            curCanvas.SetMsg(msgLists[index].speechEnglishText);
+
+        }
         curCanvas.PlayTypeWriterTextAnimation();
     }
 
-    public void OpenDialogBox(string npcName, List<SpeechDataSO> msgData)
+    public void OpenDialogBox(NPCID npcID, string npcName, NPCStage npcState, List<SpeechDataSO> msgData)
     {
         if (curCanvas.isActiveAndEnabled) return;
 
         msgLists = msgData;
+        curNpcID = npcID;
+        curNpcName = npcName;
+        curNpcStage = npcState;
+        
+        curCanvas.SetNpcName(curNpcName);
 
-        curCanvas.SetNpcName(npcName);
-        curCanvas.SetMsg(msgLists[index].speechText);
+        if (curNpcStage > NPCStage.FirstMeet) //TODO remove this hardcode in full version
+        {
+            curCanvas.SetNpcName("Brian");
+        }
+
+
+        if (isJapaneseText)
+        {
+            curCanvas.SetMsg(msgLists[index].speechJapaneseText);
+        }
+
+        else
+        {
+            curCanvas.SetMsg(msgLists[index].speechEnglishText);
+
+        }
+
         curCanvas.gameObject.SetActive(true);
     }
 

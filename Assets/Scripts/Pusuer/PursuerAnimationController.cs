@@ -55,5 +55,15 @@ public class PursuerAnimationController : MonoBehaviour
         animator.SetTrigger(roar);
     }
 
+    public void ResetAllAnimation()
+    {
+        animator.SetBool(isIdleParam, false);
+        animator.SetBool(isRunningParam, false);
+        animator.SetBool(isWalkingParam, false);
+        animator.SetFloat(walkHeadDir, 0.5f);
+        animator.ResetTrigger(attackParam);
+        animator.ResetTrigger(nextAttackParam);
+        animator.ResetTrigger(roar);
+    }
     
 }

@@ -717,6 +717,7 @@ MonoBehaviour:
   doorAnimator: {fileID: 6938478618470188742}
   slideDuration: 1
   openValueParam: openValue
+  hasElectricity: 0
 --- !u!136 &781535894144158826
 CapsuleCollider:
   m_ObjectHideFlags: 0

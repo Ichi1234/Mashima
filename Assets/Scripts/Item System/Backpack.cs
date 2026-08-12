@@ -32,7 +32,7 @@ public class Backpack : MonoBehaviour
             backpack[newItem.name] += 1;
         }
 
-        Debug.Log("Amount of " + newItem.name + " are " + backpack[newItem.name]);
+        ResearchLogger.Log(newItem.name + " got picked up");
 
     }
     public void RemoveItem(ItemData removeItem, int amount = 1)

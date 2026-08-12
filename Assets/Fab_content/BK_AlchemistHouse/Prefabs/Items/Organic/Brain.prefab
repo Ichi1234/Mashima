@@ -737,11 +737,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 063227c3c12548d40bf8a6431e1c1186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Brain
+  npcID: 0
+  npcName: Brain
   speedX: 2
   speedY: 1.3
   magnitudeX: 0.1
   magnitudeY: 0.15
-  npcName: Brain
   msgList:
   - SpeechList:
     - {fileID: 11400000, guid: 852b7f68a43036942bf03984c7e9978b, type: 2}
@@ -749,20 +750,34 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 481b01533ce32704792865309113d4cc, type: 2}
     - {fileID: 11400000, guid: 27c4a41c51303304ba5fabae22fa07b3, type: 2}
     - {fileID: 11400000, guid: c17b7e33f2fb1f34ea7175860d7570c2, type: 2}
-    - {fileID: 11400000, guid: 0c85d53187ac33a4697161fac629cee3, type: 2}
+    - {fileID: 11400000, guid: 1bcb641f40a320a48b713debbc6839f4, type: 2}
     - {fileID: 11400000, guid: 0be48ca0b0b9b094c9f7a561be0f6d1b, type: 2}
     - {fileID: 11400000, guid: a28f17e69039888499a0ec7bfff017e3, type: 2}
-    - {fileID: 11400000, guid: 8fb9634919dc7f444a667aca7660df38, type: 2}
-    - {fileID: 11400000, guid: fd7e9e9676ef49b4898650311591e507, type: 2}
+    - {fileID: 11400000, guid: cf9633ca88e6dc842ab416ccb790c930, type: 2}
+    - {fileID: 11400000, guid: bffaf8f784e334547901ad5ca885ffab, type: 2}
     - {fileID: 11400000, guid: 24ae2f75921537f46815d7b807c672a7, type: 2}
+    - {fileID: 11400000, guid: fc65c7a98bc01ec44a3ebbd9640a7904, type: 2}
+    - {fileID: 11400000, guid: 1f84c50cf467a2a498581d22468c9e28, type: 2}
+    - {fileID: 11400000, guid: 25160ab9cc4285744829541c766db5e2, type: 2}
     - {fileID: 11400000, guid: e78f60edc50699f42af900fa7c1265cf, type: 2}
     - {fileID: 11400000, guid: 5925acec7d66214439a3c7d77831ca08, type: 2}
     - {fileID: 11400000, guid: fdb1d1e89c3113e4a9f1f3dad7ebdb60, type: 2}
+    - {fileID: 11400000, guid: 8d46ea481ae17384287fa855d16a881d, type: 2}
+    - {fileID: 11400000, guid: 9b97b77e6c8626f4c9a4972c70329dcf, type: 2}
+    loop: 0
   - SpeechList:
     - {fileID: 11400000, guid: 0e9c2471402389f418323f250e19d159, type: 2}
+    loop: 1
+  - SpeechList:
+    - {fileID: 11400000, guid: 1c6794abe50770e42bb237ce9fdade51, type: 2}
+    - {fileID: 11400000, guid: 9cb02053799ab3c4c9ca70b8e65da975, type: 2}
+    - {fileID: 11400000, guid: 0a7edeb869a226d469a3645e6666c74d, type: 2}
+    - {fileID: 11400000, guid: 9bde114f15faa4a46ba373d417e9f326, type: 2}
+    - {fileID: 11400000, guid: 16a386851a688be4a879908c765b84de, type: 2}
+    loop: 0
   audioSource: {fileID: 3421121070636473618}
   vrDialogueBox: {fileID: 6602145162683391142}
-  interactionIndicator: {fileID: 0}
+  interactionIndicator: {fileID: 2922971269716116250}
 --- !u!136 &1178598468224122265
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -962,7 +977,6 @@ GameObject:
   - component: {fileID: 6804628179890214273}
   - component: {fileID: 6638944857051958995}
   - component: {fileID: 1625967412207080433}
-  - component: {fileID: 7652734409345333605}
   m_Layer: 5
   m_Name: NPC Dialogue
   m_TagString: Untagged
@@ -986,8 +1000,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.16, y: 0}
   m_AnchorMax: {x: 0.84, y: 0}
-  m_AnchoredPosition: {x: -1.5000305, y: 18}
-  m_SizeDelta: {x: 623, y: 205.81}
+  m_AnchoredPosition: {x: -1.500061, y: -18.1}
+  m_SizeDelta: {x: 623, y: 229.8}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &6638944857051958995
 CanvasRenderer:
@@ -1084,26 +1098,12 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 309.02826, y: 0, z: 304.78595, w: 0}
+  m_margin: {x: 309.02826, y: 7.908493, z: 304.78595, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7652734409345333605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1812411087301956631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &2899748041325804407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1130,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2899748041325804407}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00057742}
   m_LocalScale: {x: 1, y: 2.47, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1138,8 +1138,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 130.77}
+  m_AnchoredPosition: {x: -0.00033569336, y: -44}
+  m_SizeDelta: {x: 0, y: 147.9}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &3225229702599313407
 CanvasRenderer:
@@ -1344,7 +1344,6 @@ GameObject:
   - component: {fileID: 3099670623053724914}
   - component: {fileID: 5441688728917596171}
   - component: {fileID: 6602145162683391142}
-  - component: {fileID: 6106701692039194441}
   m_Layer: 5
   m_Name: 'VRDialogueCanvas '
   m_TagString: Untagged
@@ -1360,7 +1359,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7283568386181585340}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0488}
+  m_LocalPosition: {x: 0, y: 0, z: 0.049}
   m_LocalScale: {x: 0.0002, y: 0.0002, z: 0.0002}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -1371,8 +1370,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0509, y: -0.1093}
-  m_SizeDelta: {x: 800, y: 0}
+  m_AnchoredPosition: {x: 0.0784, y: -0.11494}
+  m_SizeDelta: {x: 800, y: 321.36346}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &2415542601266976007
 Canvas:
@@ -1451,20 +1450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogCanvas
   npcName: {fileID: 714463179865102795}
   message: {fileID: 1625967412207080433}
---- !u!114 &6106701692039194441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7283568386181585340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
-  m_HorizontalFit: 0
-  m_VerticalFit: 2
 --- !u!1 &8521734201326075475
 GameObject:
   m_ObjectHideFlags: 0

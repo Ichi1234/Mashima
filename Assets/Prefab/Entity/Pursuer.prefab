@@ -1510,7 +1510,7 @@ GameObject:
   - component: {fileID: 5490441778112505539}
   - component: {fileID: 3584172597373306407}
   - component: {fileID: 5684198168268010953}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Pursuer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,9 +1546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d324a84090135845b1ddc4984c8e92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pursuer
+  audioSource: {fileID: 5684198168268010953}
+  footStepName: pursuer-footstep
   moveSpeed: 4.6
   chaseSpeedMultiplier: 1.25
   runSpeedMultiplier: 1.5
+  slowDownMultiplier: 0.55
+  partialSlowDownMultiplier: 0.85
+  slowDownDuration: 2
   playerDetectionRange: 12.58
   detectionRaycastMask:
     serializedVersion: 2
@@ -1559,8 +1564,7 @@ MonoBehaviour:
   verticalAngle: 34.1
   agent: {fileID: 5490441778112505539}
   animController: {fileID: 1681792800538055688}
-  audioSource: {fileID: 5684198168268010953}
-  footStepName: pursuer-footstep
+  screechName: pursuer-screech
   IsSeeingPlayer: 0
 --- !u!195 &5490441778112505539
 NavMeshAgent:

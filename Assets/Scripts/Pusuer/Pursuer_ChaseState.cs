@@ -16,6 +16,7 @@ public class Pursuer_ChaseState : PursuerState
         GameManager.Instance.SetAppoximateNoise(0);
 
         pursuer.Animation.SetRunning(true);
+        pursuer.PlayChaseStartSound();
 
     }
 

@@ -12,7 +12,6 @@ public class PursuerState : EntityState
     public override void Update()
     {
         base.Update();
-        Debug.Log(stateMachine.currentState);
 
         if (pursuer.IsSeeingPlayer)
         {

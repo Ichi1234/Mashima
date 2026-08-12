@@ -25,15 +25,22 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: a16a0c1520fdb454c8ce9697a2615612, type: 3}
     maxVolume: 0.5
     spread: 0
-    minDistance: 1
-    maxDistance: 20
+    minDistance: 10
+    maxDistance: 50
     pitch: 1
   - audioName: pursuer-screech
     clip: {fileID: 8300000, guid: 161b7083d65df134cb19404611a9c731, type: 3}
-    maxVolume: 1
+    maxVolume: 0.6
     spread: 120
-    minDistance: 1
-    maxDistance: 40
+    minDistance: 50
+    maxDistance: 100
+    pitch: 1
+  - audioName: pursuer-chase-start-notify
+    clip: {fileID: 8300000, guid: 84509861677131642a6e8736b3455f43, type: 3}
+    maxVolume: 0.6
+    spread: 120
+    minDistance: 50
+    maxDistance: 100
     pitch: 1
   env:
   - audioName: door-open

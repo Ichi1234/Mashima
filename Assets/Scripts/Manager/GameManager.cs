@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float defaultAppoximateNoise = 8f;
-    [SerializeField] private WakeUpVfx eyeVfx;
     [SerializeField] private float doorSlamForce = 300;
 
     private float appoximateNoise;
@@ -20,6 +19,8 @@ public class GameManager : MonoBehaviour
     public System.Action OnPlayerDeath;
 
     public System.Action OnElectricRepaired;
+    public bool IsGameStarted { get; private set; } = false;
+    public bool IsGameEnded { get; private set; } = false;
 
     public bool PlayerIsRunning => player.IsRunning();
     public float DoorSlamForce => doorSlamForce;
@@ -44,14 +45,16 @@ public class GameManager : MonoBehaviour
         this.player = player;
 
         playerSpawnPos = player.transform.position;
+
+        player.PlayerCanvas.PlayWakeUpEffect();
     }
 
     public void PlayerDeath()
     {
-        eyeVfx.gameObject.SetActive(true);
-        eyeVfx.Play();
-        player.transform.position = playerSpawnPos;
+        player.PlayerCanvas.PlayWakeUpEffect();
 
+        ResearchLogger.Log("Player death");
+        player.ResetPlayer(playerSpawnPos);
         ResetAppoximateNoise();
     }
 
@@ -93,4 +96,17 @@ public class GameManager : MonoBehaviour
     public void SetAppoximateNoise(float noise) => appoximateNoise = noise;
 
     public void ResetAppoximateNoise() => appoximateNoise = defaultAppoximateNoise;
+
+    public void SetGameEnd()
+    {
+        player.PlayerCanvas.PlayEndingScene();
+
+        IsGameEnded = true;
+    }
+
+    public void BeginTheGame()
+    {
+        ResearchLogger.Log("Game starto!");
+        IsGameStarted = true;
+    }
 } 

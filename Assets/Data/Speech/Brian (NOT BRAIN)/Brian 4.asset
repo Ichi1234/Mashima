@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 4
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'HAHAHAHAHA, that''s a lot better '
-  speechSound: {fileID: 0}
+  speechEnglishText: HAHAHAHAHA, that's a lot better
+  speechJapaneseText: "\u30CF\u30CF\u30CF\u30CF\u30CF\uFF01\uFF01 \u3053\u3063\u3061\u306E\u307B\u3046\u304C\u305A\u3063\u3068\u3044\u3044\u306A\uFF01 "
+  speechSound: {fileID: 8300000, guid: 580e0c5bf73585f4e8e4d46bb619aebd, type: 3}

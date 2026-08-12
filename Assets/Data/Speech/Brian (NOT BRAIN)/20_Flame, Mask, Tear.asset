@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
+  m_Name: 20_Flame, Mask, Tear
+  m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
+  speechEnglishText: Remember!! Flame, Mask, Tear
+  speechJapaneseText: "\u899A\u3048\u3066\u304A\u3051\uFF01\uFF01 \u708E\u3001\u4EEE\u9762\u3001\u6D99\u3060\uFF01\uFF01 "
+  speechSound: {fileID: 0}

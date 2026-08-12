@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brain 1
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'HELLO FELLOW DREAMER!!! '
-  speechSound: {fileID: 0}
+  speechEnglishText: HELLO FELLOW DREAMER!!!
+  speechJapaneseText: "\u5922\u898B\u308B\u4EF2\u9593\u3088\u3001\u3053\u3093\u306B\u3061\u306F\u30FC\u30FC\uFF01\uFF01\uFF01 "
+  speechSound: {fileID: 8300000, guid: 641050d27426f6e4e8668fd28a77a0ba, type: 3}

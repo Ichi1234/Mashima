@@ -3,7 +3,21 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour, IPuzzleReactable
 {
+    [SerializeField] private ParticleSystem doneEffect;
+
     private List<GameObject> itemLists = new List<GameObject>();
+
+    private bool isPuzzleCompleted = false;
+
+    private void OnEnable()
+    {
+        DialogManager.Instance.OnFinishedTalking += HandleNPCTalkingAndPuzzleFinished;
+    }
+
+    private void OnDisable()
+    {
+        DialogManager.Instance.OnFinishedTalking -= HandleNPCTalkingAndPuzzleFinished;
+    }
 
     public void OnItemDeposited(GameObject itemPrefab)
     {
@@ -33,7 +47,20 @@ public class Cauldron : MonoBehaviour, IPuzzleReactable
             Destroy(item);    
         }
 
+        doneEffect.gameObject.SetActive(true);
         GameManager.Instance.OnElectricRepaired?.Invoke();
+
+        isPuzzleCompleted = true;
         
+    }
+
+    public void HandleNPCTalkingAndPuzzleFinished(NPCID npcID, NPCStage npcStage)
+    {
+        if (!isPuzzleCompleted) return;
+
+        if (npcID == NPCID.Brian && npcStage == NPCStage.PuzzleFinished)
+        {
+            doneEffect.Stop();
+        }
     }
 }

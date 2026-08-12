@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 8
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'First, seek the flame. '
-  speechSound: {fileID: 0}
+  speechEnglishText: First, seek the flame.
+  speechJapaneseText: "\u307E\u305A1\u3064\u76EE\uFF01\u708E\u3092\u63A2\u305B\uFF01 "
+  speechSound: {fileID: 8300000, guid: 88c2a10a7598bf5489ff091f0c840fa8, type: 3}

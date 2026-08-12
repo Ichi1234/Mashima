@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 12
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Then, receive the tear from a depressing skeleton.
-  speechSound: {fileID: 0}
+  speechEnglishText: WHO WROTE THAT LINE!?
+  speechJapaneseText: "\u8AB0\u3060\uFF01\uFF1F \u3053\u306E\u30BB\u30EA\u30D5\u3092\u66F8\u3044\u305F\u3084\u3064\u306F\uFF01\uFF1F "
+  speechSound: {fileID: 8300000, guid: 69db789016ef2e74c91f94cc479d2896, type: 3}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 9
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'Second, free the crying baby. '
-  speechSound: {fileID: 0}
+  speechEnglishText: Second, free the crying baby.
+  speechJapaneseText: "2\u3064\u76EE\uFF01\u6CE3\u3044\u3066\u3044\u308B\u8D64\u3061\u3083\u3093\u3092\u52A9\u3051\u308D\uFF01"
+  speechSound: {fileID: 8300000, guid: 76d5f8a328f6f804283e5aa053f9a4b0, type: 3}

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brain 2
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'My name is Brian! '
-  speechSound: {fileID: 0}
+  speechEnglishText: My name is Brian!
+  speechJapaneseText: "\u4FFA\u306E\u540D\u524D\u306F\u30D6\u30E9\u30A4\u30A2\u30F3\u3060\uFF01 "
+  speechSound: {fileID: 8300000, guid: d8c1955835490464d9e69876a25c1592, type: 3}

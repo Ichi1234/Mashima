@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 13
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: Once you have these three items, return to this room and drop them
-    into my cauldron, and I'll fix the generator for you~~.
-  speechSound: {fileID: 0}
+  speechEnglishText: I'M GOING TO KILL THEM
+  speechJapaneseText: "\u4FFA\u3092\u6BBA\u3059\u6C17\u304B\uFF01\uFF1F "
+  speechSound: {fileID: 8300000, guid: cda6dead94fecfa4b88ca4ccd170bbbc, type: 3}

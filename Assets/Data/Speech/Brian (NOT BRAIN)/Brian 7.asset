@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 7
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: 'You need to do three things. '
-  speechSound: {fileID: 0}
+  speechEnglishText: You need to do three things.
+  speechJapaneseText: "\u3084\u308B\u3053\u3068\u306F3\u3064\u3060\uFF01 "
+  speechSound: {fileID: 8300000, guid: a8a22c2d204519244957e51169006d5a, type: 3}

@@ -6,4 +6,5 @@ using UnityEngine;
 public class SpeechGroup
 {
     public List<SpeechDataSO> SpeechList;
+    public bool loop = false;
 }

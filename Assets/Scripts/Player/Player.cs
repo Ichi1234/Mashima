@@ -17,8 +17,12 @@ public class Player : Entity
     [Header("Camera")]
     [SerializeField] private Transform cameraOffset;
     [SerializeField] private Camera playerCamera;
+    [SerializeField] private PlayerCanvas playerCanvas;
     [SerializeField] private float fovChangeDuration = 2;
     private Coroutine fovCoroutine;
+
+    public PlayerCanvas PlayerCanvas => playerCanvas;
+
     public float DefaultFov { get; private set; }
 
     [Header("Interact Details")]
@@ -101,11 +105,6 @@ public class Player : Entity
     protected override void Update()
     {
         RaycastHit hit = CameraInteractRaycast();
-
-        if (hit.collider != null)
-        {
-            Debug.Log(hit.collider.name);
-        }
 
         PlayerInteraction(hit);
 
@@ -357,5 +356,12 @@ public class Player : Entity
         Vector3 actualMoveDelta = transform.position - beforeMove; 
 
         cameraOffset.localPosition -= transform.InverseTransformDirection(actualMoveDelta);
+    }
+
+    public void ResetPlayer(Vector3 spawnPoint)
+    {
+        charController.enabled = false;
+        transform.position = spawnPoint;
+        charController.enabled = true;
     }
 }

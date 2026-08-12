@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class PuzzleItemInput : MonoBehaviour, IInteractable
 {
+    [SerializeField] private PuzzleID puzzleID;
     [SerializeField] private MonoBehaviour puzzleReactorObject;
     [SerializeField] private List<PuzzleItemRequirement> requiredItems;
 
@@ -132,6 +134,7 @@ public class PuzzleItemInput : MonoBehaviour, IInteractable
         
         if (isPuzzleCompleted)
         {
+            PuzzleManager.Instance.SetPuzzleState(puzzleID, PuzzleState.Completed);
             puzzleReactor?.OnPuzzleCompleted();
             indicator.SetShowable(false);
         }

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca4603a798f958488f04ca61551a7d2, type: 3}
   m_Name: Brian 14
   m_EditorClassIdentifier: Assembly-CSharp::SpeechDataSO
-  speechText: THAT'S ALL!! GOOD LUCK, HUMAN. DON'T DIE
-  speechSound: {fileID: 0}
+  speechEnglishText: ...let me try it again
+  speechJapaneseText: "\u2026\u2026\u3082\u3046\u4E00\u56DE\u8A00\u308F\u305B\u3066\u304F\u308C\u3002 "
+  speechSound: {fileID: 8300000, guid: 5e9c23b1b7415fa40af50b8e62bd3eb0, type: 3}
