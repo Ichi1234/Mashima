@@ -110,7 +110,7 @@ public class Pursuer : Entity
 
         Vector3 playerPos = playerDetectionCollider.transform.position;
 
-        if (Vector3.Distance(playerPos, transform.position) < 1.5f)
+        if (Vector3.Distance(playerPos, transform.position) < 1.5f && IsSeeingPlayer)
         {
             GameManager.Instance.OnPlayerDeath?.Invoke();
         }
