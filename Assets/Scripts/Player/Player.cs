@@ -38,7 +38,6 @@ public class Player : Entity
     [SerializeField] private float runSpeedMultiplier = 1.25f;
     
     [Header("Crouch Details")]
-    [SerializeField] private float vrCrouchHeightThreshold = 1.2f;
     [SerializeField] private float crouchSpeedMultiplier = 0.5f;
     [SerializeField] private float crouchCameraPosition = -0.82f;
     [SerializeField] private float crouchHitboxRadius = 0.2f;

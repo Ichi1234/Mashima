@@ -14,7 +14,7 @@ public abstract class PlayerState : EntityState
     {
         base.Update();
 
-        if (player.Input.Player.Crouch.WasPerformedThisFrame() || (GameManager.Instance.IsInVR && player.IsPlayerPhysicallyCrouch()))
+        if (player.Input.Player.Crouch.WasPerformedThisFrame())
         {
             stateMachine.ChangeState(player.CrouchState);
         }

@@ -25,8 +25,7 @@ public class Player_CrouchState : Player_MoveState
 
         if 
         (
-            player.Input.Player.Crouch.WasPerformedThisFrame() ||
-            (GameManager.Instance.IsInVR && !player.IsPlayerPhysicallyCrouch())
+            player.Input.Player.Crouch.WasPerformedThisFrame()
         )
         {
             stateMachine.unLockedState();
