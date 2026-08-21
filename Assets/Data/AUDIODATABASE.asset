@@ -37,7 +37,7 @@ MonoBehaviour:
     pitch: 1
   - audioName: pursuer-chase-start-notify
     clip: {fileID: 8300000, guid: 84509861677131642a6e8736b3455f43, type: 3}
-    maxVolume: 0.6
+    maxVolume: 0.8
     spread: 120
     minDistance: 50
     maxDistance: 100

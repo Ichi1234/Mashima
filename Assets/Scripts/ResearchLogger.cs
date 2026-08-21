@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class ResearchLogger
 {
+    public static bool LoggingEnabled = false;
+
     private static string filePath;
 
     private static void EnsureFile()
@@ -19,6 +21,8 @@ public static class ResearchLogger
 
     public static void Log(string eventName)
     {
+        if (!LoggingEnabled) return;
+
         EnsureFile();
         File.AppendAllText(filePath, $"{DateTime.Now:HH:mm:ss},{eventName}\n");
     }
