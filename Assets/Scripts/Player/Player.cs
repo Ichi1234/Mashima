@@ -52,6 +52,7 @@ public class Player : Entity
     [SerializeField] private float crouchDetectionHitboxHeight = 1.5f;
     [SerializeField] private float crouchDetectionHitboxPos = -0.33f;
 
+    private bool hasCalibrated = false;
     private Vector3 initialCameraPos;
 
     public PlayerInputSet Input { get; private set; }
@@ -112,7 +113,18 @@ public class Player : Entity
 
         if (playerMode == PlayerMode.VR)
         {
-            UpdateVRHitboxToMatchHeadHeight();
+            if (!hasCalibrated)
+            {
+                if (playerCamera.transform.localPosition.y > 0.1f) 
+                {
+                    hasCalibrated = true;
+                }
+            }
+
+            if (hasCalibrated)
+            {
+                UpdateVRHitboxToMatchHeadHeight();
+            }
         }
 
         base.Update();
@@ -240,15 +252,11 @@ public class Player : Entity
 
     public void MoveCamera(Vector2 newPosition)
     {
-        if (IsPlayerPhysicallyCrouch()) return;
-
         cameraOffset.localPosition = new Vector3(0, newPosition.y, 0);
     }
 
     public void ResetCameraPos()
     {
-        if (IsPlayerPhysicallyCrouch()) return;
-
         cameraOffset.localPosition = initialCameraPos;
     }
 
@@ -327,14 +335,9 @@ public class Player : Entity
         SetFOV(DefaultFov);
     }
 
-    public bool IsPlayerPhysicallyCrouch() => 
-        GameManager.Instance.IsInVR &&
-        playerCamera.transform.localPosition.y <= vrCrouchHeightThreshold;
-
-
     private void UpdateVRHitboxToMatchHeadHeight()
     {
-        float trackedHeight = playerCamera.transform.position.y - transform.position.y;
+        float trackedHeight = playerCamera.transform.localPosition.y;
         charController.height = trackedHeight;
         charController.center = new Vector3(0, trackedHeight / 2f, 0);
     }
